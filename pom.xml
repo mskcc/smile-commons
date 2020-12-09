@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mskcc.cmo</groupId>
+  <artifactId>cmo-metadb-common</artifactId>
+  <name>CMO MetaDB Common Config Manager</name>
+  <version>1.0.0-SNAPSHOT</version>
+  <description>master maven module</description>
+  <packaging>jar</packaging>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.compiler.version>1.8</maven.compiler.version>
+    <cmo_metadb_shared_entities.groupId>com.github.mskcc</cmo_metadb_shared_entities.groupId>
+    <cmo_metadb_shared_entities.artifactId>cmo-metadb-shared-entities</cmo_metadb_shared_entities.artifactId>
+    <cmo_metadb_shared_entities.version>v1.1-alpha</cmo_metadb_shared_entities.version>
+    <cmo_messaging_java.groupId>com.github.mskcc</cmo_messaging_java.groupId>
+    <cmo_messaging_java.artifactId>cmo-messaging-java</cmo_messaging_java.artifactId>
+    <cmo_messaging_java.version>v1.0-alpha</cmo_messaging_java.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>${cmo_messaging_java.groupId}</groupId>
+      <artifactId>${cmo_messaging_java.artifactId}</artifactId>
+      <version>${cmo_messaging_java.version}</version>
+    </dependency>
+     <dependency>
+      <groupId>${cmo_metadb_shared_entities.groupId}</groupId>
+      <artifactId>${cmo_metadb_shared_entities.artifactId}</artifactId>
+      <version>${cmo_metadb_shared_entities.version}</version>
+     </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>${maven.compiler.version}</source>
+          <target>${maven.compiler.version}</target>
+          <compilerArgument>-Xlint:deprecation</compilerArgument>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>empty-javadoc-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>javadoc</classifier>
+              <classesDirectory>${basedir}/javadoc</classesDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
