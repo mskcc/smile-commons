@@ -12,9 +12,6 @@
   <properties>
     <java.version>1.8</java.version>
     <maven.compiler.version>1.8</maven.compiler.version>
-    <cmo_metadb_shared_entities.groupId>com.github.mskcc</cmo_metadb_shared_entities.groupId>
-    <cmo_metadb_shared_entities.artifactId>cmo-metadb-shared-entities</cmo_metadb_shared_entities.artifactId>
-    <cmo_metadb_shared_entities.version>v1.1-alpha</cmo_metadb_shared_entities.version>
     <cmo_messaging_java.groupId>com.github.mskcc</cmo_messaging_java.groupId>
     <cmo_messaging_java.artifactId>cmo-messaging-java</cmo_messaging_java.artifactId>
     <cmo_messaging_java.version>v1.0-alpha</cmo_messaging_java.version>
@@ -33,11 +30,6 @@
       <artifactId>${cmo_messaging_java.artifactId}</artifactId>
       <version>${cmo_messaging_java.version}</version>
     </dependency>
-     <dependency>
-      <groupId>${cmo_metadb_shared_entities.groupId}</groupId>
-      <artifactId>${cmo_metadb_shared_entities.artifactId}</artifactId>
-      <version>${cmo_metadb_shared_entities.version}</version>
-     </dependency>
   </dependencies>
 
   <build>
