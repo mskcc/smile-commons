@@ -9,12 +9,17 @@
   <description>master maven module</description>
   <packaging>jar</packaging>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.3.RELEASE</version>
+    <relativePath />
+    <!-- lookup parent from repository -->
+  </parent>
+
   <properties>
     <java.version>1.8</java.version>
     <maven.compiler.version>1.8</maven.compiler.version>
-    <cmo_messaging_java.groupId>com.github.mskcc</cmo_messaging_java.groupId>
-    <cmo_messaging_java.artifactId>cmo-messaging-java</cmo_messaging_java.artifactId>
-    <cmo_messaging_java.version>v1.0-alpha</cmo_messaging_java.version>
   </properties>
 
   <repositories>
@@ -26,9 +31,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>${cmo_messaging_java.groupId}</groupId>
-      <artifactId>${cmo_messaging_java.artifactId}</artifactId>
-      <version>${cmo_messaging_java.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
 
@@ -73,6 +77,29 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <configLocation>src/main/resources/checkstyle.xml</configLocation>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
+          <failsOnError>true</failsOnError>
+          <linkXRef>false</linkXRef>
+          <useFile>checkstyle_report.txt</useFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
 </project>
