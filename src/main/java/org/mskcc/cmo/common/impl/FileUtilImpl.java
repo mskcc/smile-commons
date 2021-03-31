@@ -40,10 +40,10 @@ public class FileUtilImpl implements FileUtil {
      * @throws IOException
      */
     @Override
-    public void writeToFile(File file, String line)
-            throws IOException {
+    public void writeToFile(File file, String line) throws IOException {
         BufferedWriter fileWriter = new BufferedWriter(new FileWriter(file, true));
         fileWriter.write(line);
+        fileWriter.flush();
         fileWriter.close();
     }
 }
