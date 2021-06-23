@@ -2,8 +2,7 @@ package org.mskcc.cmo.common.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.lang.String.format;
+import org.apache.commons.lang3.StringUtils;
 
 public enum Preservation {
     FROZEN("Frozen"),
@@ -17,26 +16,38 @@ public enum Preservation {
     private static final Map<String, Preservation> nameToPreservation = new HashMap<>();
 
     static {
-        for (Preservation enumValue : values()) {
-            nameToPreservation.put(enumValue.name, enumValue);
+        for (Preservation preservation : values()) {
+            nameToPreservation.put(preservation.value, preservation);
         }
     }
 
-    private final String name;
+    private final String value;
 
-    Preservation(String name) {
-        this.name = name;
+    Preservation(String value) {
+        this.value = value;
     }
 
-    public static Preservation fromString(String name) {
-        if (!nameToPreservation.containsKey(name))
-            throw new RuntimeException(format("Unsupported %s: %s", Preservation.class.getName(), name));
+    /**
+     * Preservation enum constructor.
+     * @param value
+     * @return
+     */
+    public static Preservation fromString(String value) {
+        if (StringUtils.isEmpty(value)) {
+            throw new IllegalArgumentException("Preservation type is empty");
+        }
+        if (!nameToPreservation.containsKey(value)) {
+            throw new RuntimeException(String.format("Unsupported Preservation type: %s", value));
+        }
+        return nameToPreservation.get(value);
+    }
 
-        return nameToPreservation.get(name);
+    public String getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return name;
+        return value;
     }
 }

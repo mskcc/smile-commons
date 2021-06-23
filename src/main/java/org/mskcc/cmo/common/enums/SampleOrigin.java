@@ -1,8 +1,8 @@
 package org.mskcc.cmo.common.enums;
 
-import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 public enum SampleOrigin {
     BLOCK("Block"),
@@ -33,8 +33,9 @@ public enum SampleOrigin {
     private static final Map<String, SampleOrigin> valueToSampleOrigin = new HashMap<>();
 
     static {
-        for (SampleOrigin sampleClass : values())
+        for (SampleOrigin sampleClass : values()) {
             valueToSampleOrigin.put(sampleClass.value, sampleClass);
+        }
     }
 
     private String value;
@@ -43,18 +44,24 @@ public enum SampleOrigin {
         this.value = value;
     }
 
+    /**
+     * SampleOrigin enum constructor.
+     * @param value
+     * @return
+     */
     public static SampleOrigin fromValue(String value) {
-        if (StringUtils.isEmpty(value))
+        if (StringUtils.isEmpty(value)) {
             throw new IllegalArgumentException("Sample Origin is empty");
-        if (!valueToSampleOrigin.containsKey(value))
+        }
+        if (!valueToSampleOrigin.containsKey(value)) {
             throw new RuntimeException(String.format("Unsupported Sample Origin: %s", value));
+        }
         return valueToSampleOrigin.get(value);
     }
 
     public String getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {
