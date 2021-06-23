@@ -2,7 +2,7 @@ package org.mskcc.cmo.common.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-import static java.lang.String.format;
+import org.apache.commons.lang3.StringUtils;
 
 public enum SampleType {
     TISSUE("Tissue"),
@@ -19,29 +19,41 @@ public enum SampleType {
     CDNA_LIBRARY("cDNA Library"),
     OTHER("other");
 
-    private static final Map<String, SampleType> nameToEnum = new HashMap<>();
+    private static final Map<String, SampleType> valueToSampleType = new HashMap<>();
 
     static {
-        for (SampleType enumValue : values()) {
-            nameToEnum.put(enumValue.name, enumValue);
+        for (SampleType sampleType : values()) {
+            valueToSampleType.put(sampleType.value, sampleType);
         }
     }
 
-    private final String name;
+    private final String value;
 
-    SampleType(String name) {
-        this.name = name;
+    SampleType(String value) {
+        this.value = value;
     }
 
-    public static SampleType fromString(String name) {
-        if (!nameToEnum.containsKey(name))
-            throw new RuntimeException(format("Unsupported %s: %s", SampleType.class.getName(), name));
+    /**
+     * SampleType enum constructor.
+     * @param value
+     * @return
+     */
+    public static SampleType fromString(String value) {
+        if (StringUtils.isEmpty(value)) {
+            throw new IllegalArgumentException("Sample Type is empty");
+        }
+        if (!valueToSampleType.containsKey(value)) {
+            throw new RuntimeException(String.format("Unsupported Sample Type: %s", value));
+        }
+        return valueToSampleType.get(value);
+    }
 
-        return nameToEnum.get(name);
+    public String getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return name;
+        return value;
     }
 }

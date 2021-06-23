@@ -1,8 +1,8 @@
 package org.mskcc.cmo.common.enums;
 
-import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 public enum CmoSampleClass {
     ADJACENT_NORMAL("Adjacent Normal"),
@@ -31,11 +31,18 @@ public enum CmoSampleClass {
         this.value = value;
     }
 
+    /**
+     * CmoSampleClass enum constructor.
+     * @param value
+     * @return
+     */
     public static CmoSampleClass fromValue(String value) {
-        if (StringUtils.isEmpty(value))
+        if (StringUtils.isEmpty(value)) {
             throw new IllegalArgumentException("CMO Sample Class is empty");
-        if (!valueToCmoSampleClass.containsKey(value))
+        }
+        if (!valueToCmoSampleClass.containsKey(value)) {
             throw new RuntimeException(String.format("Unsupported CMO Sample Class: %s", value));
+        }
         return valueToCmoSampleClass.get(value);
     }
 

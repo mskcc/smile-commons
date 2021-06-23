@@ -1,8 +1,8 @@
 package org.mskcc.cmo.common.enums;
 
-import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 public enum SpecimenType {
     BIOPSY("Biopsy"),
@@ -34,18 +34,24 @@ public enum SpecimenType {
         this.value = value;
     }
 
+    /**
+     * SpecimenType enum constructor.
+     * @param value
+     * @return
+     */
     public static SpecimenType fromValue(String value) {
-        if (StringUtils.isEmpty(value))
-            throw new IllegalArgumentException("Specimen Type (CMO Sample Type) is empty");
-        if (!valueToSpecimenType.containsKey(value))
+        if (StringUtils.isEmpty(value)) {
+            throw new IllegalArgumentException("Specimen Type is empty");
+        }
+        if (!valueToSpecimenType.containsKey(value)) {
             throw new RuntimeException(String.format("Unsupported Specimen Type: %s", value));
+        }
         return valueToSpecimenType.get(value);
     }
 
     public String getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {

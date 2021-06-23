@@ -2,7 +2,6 @@ package org.mskcc.cmo.common.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-import static java.lang.String.format;
 
 /**
  *
@@ -17,26 +16,35 @@ public enum NucleicAcid {
     private static final Map<String, NucleicAcid> nameToEnum = new HashMap<>();
 
     static {
-        for (NucleicAcid enumValue : values()) {
-            nameToEnum.put(enumValue.name, enumValue);
+        for (NucleicAcid nucAcid : values()) {
+            nameToEnum.put(nucAcid.value, nucAcid);
         }
     }
 
-    private final String name;
+    private final String value;
 
-    NucleicAcid(String name) {
-        this.name = name;
+    NucleicAcid(String value) {
+        this.value = value;
     }
 
-    public static NucleicAcid fromString(String name) {
-        if (!nameToEnum.containsKey(name))
-            throw new RuntimeException(format("Unsupported %s: %s", NucleicAcid.class.getName(), name));
+    /**
+     * NucleicAcid enum constructor.
+     * @param value
+     * @return
+     */
+    public static NucleicAcid fromString(String value) {
+        if (!nameToEnum.containsKey(value)) {
+            throw new RuntimeException(String.format("Unsupported Nucleic Acid: %s", value));
+        }
+        return nameToEnum.get(value);
+    }
 
-        return nameToEnum.get(name);
+    public String getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return name;
+        return value;
     }
 }
