@@ -94,6 +94,7 @@
           <failsOnError>true</failsOnError>
           <linkXRef>false</linkXRef>
           <useFile>checkstyle_report.txt</useFile>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
         </configuration>
         <executions>
           <execution>
