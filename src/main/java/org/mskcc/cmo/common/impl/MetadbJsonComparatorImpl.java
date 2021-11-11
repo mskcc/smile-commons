@@ -32,7 +32,8 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
         "requestJson",
         "samples",
         "importDate",
-        "cmoSampleName"};
+        "cmoSampleName",
+        "sampleAliases"};
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
