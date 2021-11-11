@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.mskcc.cmo</groupId>
   <artifactId>cmo-metadb-common</artifactId>
-  <name>CMO MetaDB Common Config Manager</name>
+  <name>CMO MetaDB Commons</name>
   <version>1.0.0-SNAPSHOT</version>
   <description>master maven module</description>
   <packaging>jar</packaging>

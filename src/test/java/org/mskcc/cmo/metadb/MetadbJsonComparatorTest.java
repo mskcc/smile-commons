@@ -127,6 +127,23 @@ public class MetadbJsonComparatorTest {
         Assert.assertTrue(consistencyCheckStatus);
     }
 
+    /**
+     * Tests that 'sampleAliases' field added to the sample metadata gets ignored.
+     * @throws Exception
+     */
+    @Test
+    public void testPublishedSampleAliasesIgnored() throws Exception {
+        MockJsonTestData incomingRequest =
+                mockedRequestJsonDataMap.get("mockIncomingRequest1JsonDataWith2T2N");
+        Assert.assertFalse(incomingRequest.getJsonString().contains("sampleAliases"));
+        MockJsonTestData publishedRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonWithSampleAliases");
+        Assert.assertTrue(publishedRequest.getJsonString().contains("sampleAliases"));
+        Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
+                incomingRequest.getJsonString(), publishedRequest.getJsonString());
+        Assert.assertTrue(consistencyCheckStatus);
+    }
+
     private String getErrorMessage(Map<String, String> errorsMap) {
         StringBuilder builder = new StringBuilder();
         builder.append("\nConsistencyCheckerUtil failures summary:\n");
