@@ -137,7 +137,7 @@ public class MetadbJsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockIncomingRequest1JsonDataWith2T2N");
         Assert.assertFalse(incomingRequest.getJsonString().contains("sampleAliases"));
         MockJsonTestData publishedRequest =
-                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonWithSampleAliases");
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
         Assert.assertTrue(publishedRequest.getJsonString().contains("sampleAliases"));
         Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());

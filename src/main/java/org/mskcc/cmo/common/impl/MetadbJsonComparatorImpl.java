@@ -85,7 +85,11 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
         Iterator<JsonNode> itr = samplesArrayNode.elements();
         while (itr.hasNext()) {
             JsonNode n = filterJsonNode((ObjectNode) itr.next(), ignoredFields);
-            String sid = n.get("igoId").toString();
+            // treat igoid as primary id.
+            if (n.has("igoId")) {
+                n = replaceIgoIdWithPrimaryId((ObjectNode) n);
+            }
+            String sid = n.get("primaryId").toString();
             unorderedSamplesMap.put(sid, n);
         }
 
@@ -118,6 +122,13 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+
+    private JsonNode replaceIgoIdWithPrimaryId(ObjectNode node) {
+        String igoId = node.get("igoId").asText();
+        node.put("primaryId", igoId);
+        node.remove("igoId");
+        return node;
     }
 
     private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields) {
