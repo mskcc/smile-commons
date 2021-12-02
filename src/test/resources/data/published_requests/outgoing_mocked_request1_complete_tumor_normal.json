@@ -26,6 +26,8 @@
   "recipe": "GENESET101",
   "requestId": "MOCKREQUEST1_B",
   "metaDbRequestId": "6cc9f987-875a-11eb-ada3-acde48001122",
+  "isCmoRequest": true,
+  "bicAnalysis": false,
   "samples": [
     {
       "baitSet": "GENESET101_BAITS",
@@ -33,7 +35,7 @@
       "cmoSampleClass": "Primary",
       "cmoSampleName": "C-MP789JR-X001-d",
       "collectionYear": "",
-      "igoId": "MOCKREQUEST1_B_1",
+      "primaryId": "MOCKREQUEST1_B_1",
       "investigatorSampleId": "XXX002_P3_12345_L1",
       "libraries": [
         {
@@ -81,7 +83,7 @@
           "namespace": "investigatorId"
         },
         {
-          "value": "C-MP789JR-X001-d",
+          "value": "MOCKREQUEST1_B_1",
           "namespace": "igoId"
         }
       ]
@@ -92,7 +94,7 @@
       "cmoSampleClass": "Normal",
       "cmoSampleName": "C-MP789JR-N001-d",
       "collectionYear": "",
-      "igoId": "MOCKREQUEST1_B_2",
+      "primaryId": "MOCKREQUEST1_B_2",
       "investigatorSampleId": "01-0012345a",
       "libraries": [
         {
@@ -140,7 +142,7 @@
           "namespace": "investigatorId"
         },
         {
-          "value": "C-MP789JR-N001-d",
+          "value": "MOCKREQUEST1_B_2",
           "namespace": "igoId"
         }
       ]
@@ -151,7 +153,7 @@
       "cmoSampleClass": "Primary",
       "cmoSampleName": "C-8DH24X-X001-d",
       "collectionYear": "",
-      "igoId": "MOCKREQUEST1_B_3",
+      "primaryId": "MOCKREQUEST1_B_3",
       "investigatorSampleId": "XXX002_P1_12348a_R_43",
       "libraries": [
         {
@@ -199,7 +201,7 @@
           "namespace": "investigatorId"
         },
         {
-          "value": "C-8DH24X-X001-d",
+          "value": "MOCKREQUEST1_B_3",
           "namespace": "igoId"
         }
       ]
@@ -210,7 +212,7 @@
       "cmoSampleClass": "Normal",
       "cmoSampleName": "C-8DH24X-N001-d",
       "collectionYear": "",
-      "igoId": "MOCKREQUEST1_B_4",
+      "primaryId": "MOCKREQUEST1_B_4",
       "investigatorSampleId": "01-XXXXXXXa",
       "libraries": [
         {
@@ -258,7 +260,7 @@
           "namespace": "investigatorId"
         },
         {
-          "value": "C-8DH24X-N001-d",
+          "value": "MOCKREQUEST1_B_4",
           "namespace": "igoId"
         }
       ]
