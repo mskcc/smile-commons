@@ -25,6 +25,8 @@
     "/FASTQ/Project_POOLEDNORMALS/Sample_MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT/MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT_S61_R2_001.fastq.gz"
   ],
   "projectId": "MOCKREQUEST1",
+  "isCmoRequest": true,
+  "bicAnalysis": false,
   "samples": [
     {
       "primaryId": "MOCKREQUEST1_B_1",
