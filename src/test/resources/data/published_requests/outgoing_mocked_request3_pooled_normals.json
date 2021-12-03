@@ -26,8 +26,6 @@
   "genePanel": "IMPACT468",
   "igoRequestId": "33344_Z",
   "metaDbRequestId": "6ccad40a-875a-11eb-ba0a-acde48001122",
-  "isCmoRequest": true,
-  "bicAnalysis": false,
   "samples": [
     {
       "baitSet": "GENESET101_BAITS",
