@@ -68,6 +68,7 @@ public class MetadbJsonComparatorTest {
     /**
      * Tests if the incoming request jsons are consistent with their corresponding
      * published request json counterparts.
+     * @throws Exception
      */
     @Test
     public void testAllRequestJsonsForConsistency() throws Exception {
@@ -97,6 +98,7 @@ public class MetadbJsonComparatorTest {
 
     /**
      * Test for handling of null fields in the published request json but not the incoming request json.
+     * @throws Exception
      */
     @Test(expected = AssertionError.class)
     public void testNullJsonFieldHandlingInPublishedRequest() throws Exception {
