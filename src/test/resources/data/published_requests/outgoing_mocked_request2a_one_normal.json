@@ -20,6 +20,8 @@
   "genePanel": "GENESET101",
   "igoRequestId": "22022_CC",
   "metaDbRequestId": "6cc9c81e-875a-11eb-87f8-acde48001122",
+  "isCmoRequest": true,
+  "bicAnalysis": false,
   "samples": [
     {
       "baitSet": "GENESET101_BAITS",
