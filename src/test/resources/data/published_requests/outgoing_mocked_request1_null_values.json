@@ -20,11 +20,11 @@
     "/FASTQ/Project_POOLEDNORMALS/Sample_MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT/MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT_S61_R1_001.fastq.gz",
     "/FASTQ/Project_POOLEDNORMALS/Sample_MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT/MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT_S61_R2_001.fastq.gz"
   ],
-  "projectId": "MOCKREQUEST1",
+  "igoProjectId": "MOCKREQUEST1",
   "projectManagerName": "Bar, Foo",
   "qcAccessEmails": "",
-  "recipe": "GENESET101",
-  "requestId": "MOCKREQUEST1_B",
+  "genePanel": "GENESET101",
+  "igoRequestId": "MOCKREQUEST1_B",
   "metaDbRequestId": "6cc9f987-875a-11eb-ada3-acde48001122",
   "isCmoRequest": true,
   "bicAnalysis": false,
@@ -32,11 +32,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-MP789JR",
-      "cmoSampleClass": "Primary",
+      "oncotreeCode": "CLL",
+      "sampleType": "Primary",
       "cmoSampleName": "C-MP789JR-X001-d",
       "collectionYear": "",
       "primaryId": "MOCKREQUEST1_B_1",
       "investigatorSampleId": "XXX002_P3_12345_L1",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-MP789JR",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -83,7 +92,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "PDX",
+      "sampleClass": "PDX",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Tumor"
@@ -91,11 +100,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-MP789JR",
-      "cmoSampleClass": "Normal",
+      "oncotreeCode": "CLL",
+      "sampleType": "Normal",
       "cmoSampleName": "C-MP789JR-N001-d",
       "collectionYear": "",
       "primaryId": "MOCKREQUEST1_B_2",
       "investigatorSampleId": "01-0012345a",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-MP789JR",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -142,7 +160,7 @@
       "sampleOrigin": "Whole Blood",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Normal"
@@ -150,11 +168,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-8DH24X",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
+      "oncotreeCode": "COAD",
       "cmoSampleName": "C-8DH24X-X001-d",
       "collectionYear": "",
       "primaryId": "MOCKREQUEST1_B_3",
       "investigatorSampleId": "XXX002_P1_12348a_R_43",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-8DH24X",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -201,7 +228,7 @@
       "sampleOrigin": "Tissue",
       "sex": "M",
       "species": "Human",
-      "specimenType": "PDX",
+      "sampleClass": "PDX",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Tumor"
@@ -209,11 +236,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-8DH24X",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
+      "oncotreeCode": "COAD",
       "cmoSampleName": "C-8DH24X-N001-d",
       "collectionYear": "",
       "primaryId": "MOCKREQUEST1_B_4",
       "investigatorSampleId": "01-XXXXXXXa",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-8DH24X",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -260,7 +296,7 @@
       "sampleOrigin": "Whole Blood",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Normal"

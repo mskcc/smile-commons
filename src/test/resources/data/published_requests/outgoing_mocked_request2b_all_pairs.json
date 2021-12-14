@@ -14,11 +14,11 @@
     "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_GENESET101_TGTCTAAC/FROZENPOOLEDNORMAL_IGO_GENESET101_TGTCTAAC_S22_R1_001.fastq.gz",
     "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_GENESET101_TGTCTAAC/FROZENPOOLEDNORMAL_IGO_GENESET101_TGTCTAAC_S22_R2_001.fastq.gz"
   ],
-  "projectId": "22022",
+  "igoProjectId": "22022",
   "projectManagerName": "",
   "qcAccessEmails": "",
-  "recipe": "GENESET101",
-  "requestId": "22022_BZ",
+  "genePanel": "GENESET101",
+  "igoRequestId": "22022_BZ",
   "metaDbRequestId": "6cca6166-875a-11eb-ae9e-acde48001122",
   "isCmoRequest": true,
   "bicAnalysis": false,
@@ -26,11 +26,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-TX6DNG",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-TX6DNG-N001-d",
       "collectionYear": "",
       "primaryId": "22022_CC_3",
+      "oncotreeCode": "TPLL",
       "investigatorSampleId": "LMNO_4396_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-TX6DNG",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -86,7 +95,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "Blood",
       "tubeId": "4157451784",
       "tumorOrNormal": "Normal"
@@ -94,11 +103,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-DPCXX1",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-DPCXX1-N001-d",
       "collectionYear": "2018",
+      "oncotreeCode": "MPNWP",
       "primaryId": "22022_BZ_19",
       "investigatorSampleId": "LMNO_3443_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-DPCXX1",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -157,7 +175,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "M",
       "species": "Human",
-      "specimenType": "other",
+      "sampleClass": "other",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Normal"
@@ -165,11 +183,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-KXXL3J",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-KXXL3J-P001-d",
       "collectionYear": "2018",
+      "oncotreeCode": "SARCNOS",
       "primaryId": "22022_BZ_15",
       "investigatorSampleId": "LMNO_0034_T_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-KXXL3J",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -228,7 +255,7 @@
       "sampleOrigin": "Tissue",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Left Kidney",
       "tubeId": "TS-189768.2.T",
       "tumorOrNormal": "Tumor"
@@ -236,11 +263,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-XXX711",
-      "cmoSampleClass": "Metastasis",
+      "sampleType": "Metastasis",
       "cmoSampleName": "C-XXX711-M001-d",
       "collectionYear": "2017",
+      "oncotreeCode": "PAAD",
       "primaryId": "22022_BZ_17",
       "investigatorSampleId": "LMNO_9999_T",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-XXX711",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -299,18 +335,27 @@
       "sampleOrigin": "",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "",
       "tubeId": "181446.13.T",
       "tumorOrNormal": ""
     },
     {
       "cmoPatientId": "C-PPPXX2",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-PPPXX2-N001-d",
       "collectionYear": "",
+      "oncotreeCode": "COAD",
       "primaryId": "22022_BZ_4",
       "investigatorSampleId": "LMNO_8080_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-PPPXX2",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -336,7 +381,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "Blood",
       "tubeId": "8027185112",
       "tumorOrNormal": "Normal"
@@ -344,11 +389,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-KXXL3J",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-KXXL3J-N001-d",
       "collectionYear": "2019",
+      "oncotreeCode": "SARCNOS",
       "primaryId": "22022_BZ_3",
       "investigatorSampleId": "LMNO_0034_N2",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-KXXL3J",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -407,7 +461,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "BLD-12345",
       "tumorOrNormal": "Normal"
@@ -415,11 +469,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-X09281",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-X09281-N001-d",
       "collectionYear": "2018",
       "primaryId": "22022_BZ_2",
+      "oncotreeCode": "MACR",
       "investigatorSampleId": "LMNO_7787_N2",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-X09281",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -478,7 +541,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "Blood",
       "tubeId": "",
       "tumorOrNormal": "Normal"
@@ -486,11 +549,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-XXA40X",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-XXA40X-P001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_1",
+      "oncotreeCode": "CHOS",
       "investigatorSampleId": "LMNO_2020_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-XXA40X",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -549,7 +621,7 @@
       "sampleOrigin": "Tissue",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Right Distal Femur",
       "tubeId": "TS-193394.2.T",
       "tumorOrNormal": "Tumor"
@@ -557,11 +629,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-YXX89J",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-YXX89J-N001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_9",
+      "oncotreeCode": "TAML",
       "investigatorSampleId": "LMNO_3030_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-YXX89J",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -620,7 +701,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "other",
+      "sampleClass": "other",
       "tissueLocation": "",
       "tubeId": "BLD-33777",
       "tumorOrNormal": "Normal"
@@ -628,11 +709,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-DPCXX1",
-      "cmoSampleClass": "Metastasis",
+      "sampleType": "Metastasis",
       "cmoSampleName": "C-DPCXX1-M001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_8",
+      "oncotreeCode": "MPNWP",
       "investigatorSampleId": "LMNO_3443_T_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-DPCXX1",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -691,7 +781,7 @@
       "sampleOrigin": "Tissue",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Lung/Middle Lobe",
       "tubeId": "TS-019273.5.T",
       "tumorOrNormal": "Tumor"
@@ -699,11 +789,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-999XX",
-      "cmoSampleClass": "Metastasis",
+      "sampleType": "Metastasis",
       "cmoSampleName": "C-999XX-M001-d",
       "collectionYear": "2018",
       "primaryId": "22022_BZ_16",
+      "oncotreeCode": "MPNWP",
       "investigatorSampleId": "LMNO_6565_T2_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-999XX",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -762,7 +861,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Bladder Peritoneum",
       "tubeId": "TS-191305.1.T",
       "tumorOrNormal": "Tumor"
@@ -770,11 +869,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-9XX8808",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-9XX8808-P001-d",
       "collectionYear": "2018",
       "primaryId": "22022_BZ_13",
+      "oncotreeCode": "GBC",
       "investigatorSampleId": "LMNO_0011_T",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-9XX8808",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -833,7 +941,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Right Femur 4",
       "tubeId": "TS-54321.9.T",
       "tumorOrNormal": "Tumor"
@@ -841,11 +949,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-999XX",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-999XX-N002-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_21",
+      "oncotreeCode": "MPNWP",
       "investigatorSampleId": "LMNO_6565_N2",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-999XX",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -904,7 +1021,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "other",
+      "sampleClass": "other",
       "tissueLocation": "",
       "tubeId": "BLD-99111 BC",
       "tumorOrNormal": "Normal"
@@ -912,11 +1029,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-FFX222",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-FFX222-N001-d",
       "collectionYear": "2017",
       "primaryId": "22022_BZ_10",
+      "oncotreeCode": "MACR",
       "investigatorSampleId": "LMNO_2299_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-FFX222",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -975,7 +1101,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "other",
+      "sampleClass": "other",
       "tissueLocation": "",
       "tubeId": "BLD-98765 BC",
       "tumorOrNormal": "Normal"
@@ -983,11 +1109,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-PPPXX2",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-PPPXX2-P001-d",
       "collectionYear": "",
+      "oncotreeCode": "COAD",
       "primaryId": "22022_BZ_5",
       "investigatorSampleId": "LMNO_8080_T_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-PPPXX2",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1046,7 +1181,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Liver/Right lobe",
       "tubeId": "TS.928838.4.T",
       "tumorOrNormal": "Tumor"
@@ -1054,11 +1189,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-YXX89J",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-YXX89J-P001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_11",
+      "oncotreeCode": "TAML",
       "investigatorSampleId": "LMNO_3030_T_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-YXX89J",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1117,7 +1261,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "left retroperitoneum",
       "tubeId": "TS-223344.0.T",
       "tumorOrNormal": "Tumor"
@@ -1125,11 +1269,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-XXX711",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-XXX711-N001-d",
       "collectionYear": "2017",
       "primaryId": "22022_BZ_12",
+      "oncotreeCode": "PAAD",
       "investigatorSampleId": "WT_PXX_bc",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-XXX711",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1188,7 +1341,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "88354511236",
       "tumorOrNormal": ""
@@ -1196,11 +1349,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-9XX8808",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-9XX8808-N001-d",
       "collectionYear": "2018",
       "primaryId": "22022_BZ_18",
+      "oncotreeCode": "GBC",
       "investigatorSampleId": "LMNO_0011_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-9XX8808",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1259,7 +1421,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "BLD-98765",
       "tumorOrNormal": "Normal"
@@ -1267,11 +1429,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-XXC4XX",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-XXC4XX-N001-d",
       "collectionYear": "",
       "primaryId": "22022_BZ_6",
+      "oncotreeCode": "GBC",
       "investigatorSampleId": "LMNO_8895_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-XXC4XX",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1330,7 +1501,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Blood",
+      "sampleClass": "Blood",
       "tissueLocation": "",
       "tubeId": "",
       "tumorOrNormal": "Normal"
@@ -1338,11 +1509,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-XXA40X",
-      "cmoSampleClass": "Normal",
+      "sampleType": "Normal",
       "cmoSampleName": "C-XXA40X-N001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_20",
+      "oncotreeCode": "CHOS",
       "investigatorSampleId": "LMNO_2020_N",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-XXA40X",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1401,7 +1581,7 @@
       "sampleOrigin": "Buffy Coat",
       "sex": "M",
       "species": "Human",
-      "specimenType": "other",
+      "sampleClass": "other",
       "tissueLocation": "Buffy Coat",
       "tubeId": "BLD-98981 BC",
       "tumorOrNormal": "Normal"
@@ -1409,11 +1589,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-X09281",
-      "cmoSampleClass": "Metastasis",
+      "sampleType": "Metastasis",
       "cmoSampleName": "C-X09281-M001-d",
       "collectionYear": "2018",
       "primaryId": "22022_BZ_14",
+      "oncotreeCode": "MACR",
       "investigatorSampleId": "LMNO_7787_T",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-X09281",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1472,7 +1661,7 @@
       "sampleOrigin": "Tissue",
       "sex": "M",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Left Kidney Hilar Lymph Node",
       "tubeId": "TS-828282",
       "tumorOrNormal": "Tumor"
@@ -1480,11 +1669,20 @@
     {
       "baitSet": "GENESET101_BAITS",
       "cmoPatientId": "C-FFX222",
-      "cmoSampleClass": "Primary",
+      "sampleType": "Primary",
       "cmoSampleName": "C-FFX222-P001-d",
       "collectionYear": "2019",
       "primaryId": "22022_BZ_7",
+      "oncotreeCode": "MACR",
       "investigatorSampleId": "LMNO_2299_T_DNA",
+      "genePanel": "GENESET101",
+      "datasource": "igo",
+      "patientAliases": [
+        {
+          "value": "C-FFX222",
+          "namespace": "cmo"
+        }
+      ],
       "sampleAliases": [
         {
           "namespace": "igoId",
@@ -1543,7 +1741,7 @@
       "sampleOrigin": "Tissue",
       "sex": "F",
       "species": "Human",
-      "specimenType": "Resection",
+      "sampleClass": "Resection",
       "tissueLocation": "Abdomen",
       "tubeId": "TS-888999.1.T",
       "tumorOrNormal": "Tumor"
