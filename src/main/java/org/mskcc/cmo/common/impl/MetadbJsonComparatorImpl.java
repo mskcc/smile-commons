@@ -36,8 +36,9 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
         "importDate",
         "cmoSampleName",
         "sampleAliases",
-        "dataSource",
-        "patientAlias"};
+//        "dataSource",
+//        "patientAlias"
+    };
 
     Map<String, String> setUpResearchRequestMapping() {
         Map<String, String> researchRequestMapping = new HashMap<>();
