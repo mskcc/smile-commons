@@ -1,7 +1,7 @@
 {
   "metaDbRequestId": "6cc9f987-875a-11eb-ada3-acde48001122",
   "igoRequestId": "MOCKREQUEST1_B",
-  "genePanel": "GENESET101",
+  "genePanel": "GENESET101_BAITS",
   "projectManagerName": "Bar, Foo",
   "piEmail": "request1pi@mskcc.org",
   "labHeadName": "Foo Bar",
@@ -65,7 +65,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -133,7 +133,7 @@
       "sampleOrigin": "Whole Blood",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -201,7 +201,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -269,7 +269,7 @@
       "sampleOrigin": "Whole Blood",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {

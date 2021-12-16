@@ -1,7 +1,7 @@
 {
   "metaDbRequestId": "6cca6166-875a-11eb-ae9e-acde48001122",
   "igoRequestId": "22022_BZ",
-  "genePanel": "GENESET101",
+  "genePanel": "GENESET101_BAITS",
   "projectManagerName": "",
   "piEmail": "",
   "labHeadName": "James Holt",
@@ -74,7 +74,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Blood",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -154,7 +154,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -234,7 +234,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Left Kidney",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -314,7 +314,7 @@
       "sampleOrigin": "",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -360,8 +360,8 @@
       "sampleClass": "Blood",
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Blood",
-      "baitSet": "GENESET101",
-      "genePanel": "GENESET101",
+      "baitSet": "GENESET101_BAITS",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -441,7 +441,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -521,7 +521,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Blood",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -601,7 +601,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Right Distal Femur",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -681,7 +681,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -761,7 +761,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Lung/Middle Lobe",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -841,7 +841,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Bladder Peritoneum",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -921,7 +921,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Right Femur 4",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1001,7 +1001,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1081,7 +1081,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1161,7 +1161,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Liver/Right lobe",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1241,7 +1241,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "left retroperitoneum",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1321,7 +1321,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1401,7 +1401,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1481,7 +1481,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1561,7 +1561,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Buffy Coat",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1641,7 +1641,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Left Kidney Hilar Lymph Node",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {
@@ -1721,7 +1721,7 @@
       "sampleOrigin": "Tissue",
       "tissueLocation": "Abdomen",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {

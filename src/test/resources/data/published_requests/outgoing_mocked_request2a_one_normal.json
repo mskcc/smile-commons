@@ -1,7 +1,7 @@
 {
   "metaDbRequestId": "6cc9c81e-875a-11eb-87f8-acde48001122",
   "igoRequestId": "22022_CC",
-  "genePanel": "GENESET101",
+  "genePanel": "GENESET101_BAITS",
   "projectManagerName": "",
   "piEmail": "",
   "labHeadName": "James Holt",
@@ -74,7 +74,7 @@
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Blood",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101",
+      "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "patientAliases": [
         {

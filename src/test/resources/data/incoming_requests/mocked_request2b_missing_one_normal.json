@@ -1,6 +1,6 @@
 {
   "requestId": "22022_BZ",
-  "recipe": "GENESET101",
+  "recipe": "GENESET101_BAITS",
   "projectManagerName": "",
   "piEmail": "",
   "labHeadName": "James Holt",
@@ -19,7 +19,7 @@
       "cmoSampleName": "C-DPCXX1-N001-d",
       "sampleName": "LMNO_3443_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MPNWP",
       "collectionYear": "2018",
       "tubeId": "",
       "qcReports": [
@@ -84,7 +84,7 @@
       "cmoSampleName": "C-KXXL3J-P001-d",
       "sampleName": "LMNO_0034_T_DNA",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "SARCNOS",
       "collectionYear": "2018",
       "tubeId": "TS-189768.2.T",
       "qcReports": [
@@ -149,7 +149,7 @@
       "cmoSampleName": "C-XXX711-M001-d",
       "sampleName": "LMNO_9999_T",
       "cmoSampleClass": "Metastasis",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "PAAD",
       "collectionYear": "2017",
       "tubeId": "181446.13.T",
       "qcReports": [
@@ -214,7 +214,7 @@
       "cmoSampleName": "C-PPPXX2-N001-d",
       "sampleName": "LMNO_8080_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "COAD",
       "collectionYear": "",
       "tubeId": "8027185112",
       "qcReports": [
@@ -246,7 +246,7 @@
       "cmoSampleName": "C-KXXL3J-N001-d",
       "sampleName": "LMNO_0034_N2",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "SARCNOS",
       "collectionYear": "2019",
       "tubeId": "BLD-12345",
       "qcReports": [
@@ -311,7 +311,7 @@
       "cmoSampleName": "C-X09281-N001-d",
       "sampleName": "LMNO_7787_N2",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MACR",
       "collectionYear": "2018",
       "tubeId": "",
       "qcReports": [
@@ -376,7 +376,7 @@
       "cmoSampleName": "C-XXA40X-P001-d",
       "sampleName": "LMNO_2020_DNA",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "CHOS",
       "collectionYear": "2019",
       "tubeId": "TS-193394.2.T",
       "qcReports": [
@@ -441,7 +441,7 @@
       "cmoSampleName": "C-YXX89J-N001-d",
       "sampleName": "LMNO_3030_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "TAML",
       "collectionYear": "2019",
       "tubeId": "BLD-33777",
       "qcReports": [
@@ -506,7 +506,7 @@
       "cmoSampleName": "C-DPCXX1-M001-d",
       "sampleName": "LMNO_3443_T_DNA",
       "cmoSampleClass": "Metastasis",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MPNWP",
       "collectionYear": "2019",
       "tubeId": "TS-019273.5.T",
       "qcReports": [
@@ -571,7 +571,7 @@
       "cmoSampleName": "C-999XX-M001-d",
       "sampleName": "LMNO_6565_T2_DNA",
       "cmoSampleClass": "Metastasis",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MPNWP",
       "collectionYear": "2018",
       "tubeId": "TS-191305.1.T",
       "qcReports": [
@@ -636,7 +636,7 @@
       "cmoSampleName": "C-9XX8808-P001-d",
       "sampleName": "LMNO_0011_T",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "GBC",
       "collectionYear": "2018",
       "tubeId": "TS-54321.9.T",
       "qcReports": [
@@ -701,7 +701,7 @@
       "cmoSampleName": "C-999XX-N002-d",
       "sampleName": "LMNO_6565_N2",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MPNWP",
       "collectionYear": "2019",
       "tubeId": "BLD-99111 BC",
       "qcReports": [
@@ -766,7 +766,7 @@
       "cmoSampleName": "C-FFX222-N001-d",
       "sampleName": "LMNO_2299_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MACR",
       "collectionYear": "2017",
       "tubeId": "BLD-98765 BC",
       "qcReports": [
@@ -831,7 +831,7 @@
       "cmoSampleName": "C-PPPXX2-P001-d",
       "sampleName": "LMNO_8080_T_DNA",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "COAD",
       "collectionYear": "",
       "tubeId": "TS.928838.4.T",
       "qcReports": [
@@ -896,7 +896,7 @@
       "cmoSampleName": "C-YXX89J-P001-d",
       "sampleName": "LMNO_3030_T_DNA",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "TAML",
       "collectionYear": "2019",
       "tubeId": "TS-223344.0.T",
       "qcReports": [
@@ -961,7 +961,7 @@
       "cmoSampleName": "C-XXX711-N001-d",
       "sampleName": "WT_PXX_bc",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "PAAD",
       "collectionYear": "2017",
       "tubeId": "88354511236",
       "qcReports": [
@@ -1026,7 +1026,7 @@
       "cmoSampleName": "C-9XX8808-N001-d",
       "sampleName": "LMNO_0011_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "GBC",
       "collectionYear": "2018",
       "tubeId": "BLD-98765",
       "qcReports": [
@@ -1091,7 +1091,7 @@
       "cmoSampleName": "C-XXC4XX-N001-d",
       "sampleName": "LMNO_8895_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "GBC",
       "collectionYear": "",
       "tubeId": "",
       "qcReports": [
@@ -1156,7 +1156,7 @@
       "cmoSampleName": "C-XXA40X-N001-d",
       "sampleName": "LMNO_2020_N",
       "cmoSampleClass": "Normal",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "CHOS",
       "collectionYear": "2019",
       "tubeId": "BLD-98981 BC",
       "qcReports": [
@@ -1221,7 +1221,7 @@
       "cmoSampleName": "C-X09281-M001-d",
       "sampleName": "LMNO_7787_T",
       "cmoSampleClass": "Metastasis",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MACR",
       "collectionYear": "2018",
       "tubeId": "TS-828282",
       "qcReports": [
@@ -1286,7 +1286,7 @@
       "cmoSampleName": "C-FFX222-P001-d",
       "sampleName": "LMNO_2299_T_DNA",
       "cmoSampleClass": "Primary",
-      "oncoTreeCode": "BRCA",
+      "oncoTreeCode": "MACR",
       "collectionYear": "2019",
       "tubeId": "TS-888999.1.T",
       "qcReports": [
