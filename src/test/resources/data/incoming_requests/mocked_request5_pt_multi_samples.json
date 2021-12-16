@@ -63,6 +63,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
@@ -114,6 +115,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
@@ -165,6 +167,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
@@ -216,6 +219,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
@@ -267,6 +271,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
@@ -318,6 +323,7 @@
       "sampleOrigin": "Plasma",
       "tissueLocation": "",
       "baitSet": "null",
+      "recipe": "null",
       "cmoSampleIdFields": {
         "naToExtract": "",
         "normalizedPatientId": "MRN_REDACTED"
