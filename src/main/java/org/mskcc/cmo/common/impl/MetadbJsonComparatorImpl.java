@@ -41,8 +41,10 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
         "sampleAliases",
         "genePanel"};
 
-    private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP = initStandardizedIgoRequestJsonPropsMap();
-    private final Map<String, String> STD_IGO_SAMPLE_JSON_PROPS_MAP = initStandardizedIgoSampleJsonPropsMap();
+    private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
+            initStandardizedIgoRequestJsonPropsMap();
+    private final Map<String, String> STD_IGO_SAMPLE_JSON_PROPS_MAP =
+            initStandardizedIgoSampleJsonPropsMap();
 
     private Map<String, String> initStandardizedIgoRequestJsonPropsMap() {
         Map<String, String> map = new HashMap<>();
