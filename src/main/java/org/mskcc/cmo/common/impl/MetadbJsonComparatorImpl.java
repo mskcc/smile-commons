@@ -39,7 +39,8 @@ public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
         "datasource",
         "patientAliases",
         "sampleAliases",
-        "genePanel"};
+        "genePanel",
+        "additionalProperties"};
 
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
             initStandardizedIgoRequestJsonPropsMap();
