@@ -83,7 +83,7 @@
         }
       ],
       "additionalProperties": {
-        "isCmoSample": "true",
+        "isCmoSample": "",
         "igoRequestId": "MOCKREQUEST1_B"
       },
       "cmoSampleIdFields": {
@@ -160,7 +160,7 @@
         }
       ],
       "additionalProperties": {
-        "isCmoSample": "true",
+        "isCmoSample": "null",
         "igoRequestId": "MOCKREQUEST1_B"
       },
       "cmoSampleIdFields": {
@@ -237,7 +237,7 @@
         }
       ],
       "additionalProperties": {
-        "isCmoSample": "true",
+        "isCmoSample": null,
         "igoRequestId": "MOCKREQUEST1_B"
       },
       "cmoSampleIdFields": {
