@@ -37,6 +37,7 @@ Please follow these checklists to help prevent any unexpected issues from being 
 Updates were made to the mocked incoming request data and/or mocked published request data:
 - [ ] [cmo-metadb test data](https://github.com/mskcc/cmo-metadb/tree/master/service/src/test/resources/data)
 - [ ] [cmo-metadb-common test data](https://github.com/mskcc/cmo-metadb-common/tree/master/src/test/resources/data)
+- [ ] [cmo-metadb-label-generator test data](https://github.com/mskcc/cmo-metadb-label-generator/tree/master/src/test/resources/data)
 
 **Code checks:**
 - [ ] The JSON comparator code been updated to handle new changes.
