@@ -1,4 +1,4 @@
-package org.mskcc.cmo.common;
+package org.mskcc.smile.commons;
 
 import java.io.File;
 import java.io.IOException;

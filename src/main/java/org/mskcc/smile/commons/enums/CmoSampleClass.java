@@ -1,4 +1,4 @@
-package org.mskcc.cmo.common.enums;
+package org.mskcc.smile.commons.enums;
 
 import java.util.HashMap;
 import java.util.Map;
