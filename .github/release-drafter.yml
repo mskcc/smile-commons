@@ -14,4 +14,4 @@ template: |
 
   ## 🕵️ Full commit logs
 
-  https://github.com/mskcc/cmo-metadb-common/compare/$PREVIOUS_TAG...$NEXT_PATCH_VERSION.RELEASE
+  https://github.com/mskcc/smile-commons/compare/$PREVIOUS_TAG...$NEXT_PATCH_VERSION.RELEASE
