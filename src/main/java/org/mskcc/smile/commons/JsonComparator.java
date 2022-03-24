@@ -1,10 +1,10 @@
-package org.mskcc.cmo.common;
+package org.mskcc.smile.commons;
 
 /**
  *
  * @author ochoaa
  */
-public interface MetadbJsonComparator {
+public interface JsonComparator {
     Boolean isConsistent(String referenceJson, String targetJson) throws Exception;
     Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields) throws Exception;
 }

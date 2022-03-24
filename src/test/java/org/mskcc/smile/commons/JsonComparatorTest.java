@@ -1,13 +1,13 @@
-package org.mskcc.cmo.metadb;
+package org.mskcc.smile.commons;
 
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mskcc.cmo.common.MetadbJsonComparator;
-import org.mskcc.cmo.metadb.config.MockDataConfig;
-import org.mskcc.cmo.metadb.model.MockJsonTestData;
+import org.mskcc.smile.commons.JsonComparator;
+import org.mskcc.smile.commons.config.MockDataConfig;
+import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,9 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @ContextConfiguration(classes = MockDataConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MetadbJsonComparatorTest {
+public class JsonComparatorTest {
     @Autowired
-    private MetadbJsonComparator metadbJsonComparator;
+    private JsonComparator jsonComparator;
 
     private Map<String, String> requestJsonDataIdMap;
 
@@ -48,7 +48,7 @@ public class MetadbJsonComparatorTest {
     public void testConsistencyCheckFailure() throws Exception {
         String referenceJson = "{\"requestId\":\"mockRequestId\"}";
         String targetJson = "{\"requestId\":\"differentRequestId\"}";
-        metadbJsonComparator.isConsistent(referenceJson, targetJson);
+        jsonComparator.isConsistent(referenceJson, targetJson);
     }
 
     /**
@@ -80,7 +80,7 @@ public class MetadbJsonComparatorTest {
             MockJsonTestData publishedRequest = mockedRequestJsonDataMap.get(publishedRequestId);
 
             try {
-                Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
+                Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                         incomingRequest.getJsonString(), publishedRequest.getJsonString());
                 if (!consistencyCheckStatus) {
                     errorsMap.put(incomingRequestId,
@@ -106,7 +106,7 @@ public class MetadbJsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockIncomingRequest1JsonDataWith2T2N");
         MockJsonTestData publishedRequest =
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonNullValues");
-        Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
         Assert.assertFalse(consistencyCheckStatus);
     }
@@ -124,7 +124,7 @@ public class MetadbJsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockIncomingRequest4JsonNullOrEmptyValues");
         MockJsonTestData publishedRequest =
                 mockedRequestJsonDataMap.get("mockPublishedRequest4JsonNullOrEmptyValues");
-        Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
     }
@@ -141,7 +141,7 @@ public class MetadbJsonComparatorTest {
         MockJsonTestData publishedRequest =
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
         Assert.assertTrue(publishedRequest.getJsonString().contains("sampleAliases"));
-        Boolean consistencyCheckStatus = metadbJsonComparator.isConsistent(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
     }

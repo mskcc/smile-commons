@@ -1,4 +1,4 @@
-package org.mskcc.cmo.common.impl;
+package org.mskcc.smile.commons.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONException;
-import org.mskcc.cmo.common.MetadbJsonComparator;
+import org.mskcc.smile.commons.JsonComparator;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author ochoaa
  */
 @Component
-public class MetadbJsonComparatorImpl implements MetadbJsonComparator {
+public class JsonComparatorImpl implements JsonComparator {
     private final ObjectMapper mapper = new ObjectMapper();
 
     public final String[] DEFAULT_IGNORED_FIELDS = new String[]{

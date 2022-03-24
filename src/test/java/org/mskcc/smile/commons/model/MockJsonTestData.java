@@ -1,4 +1,4 @@
-package org.mskcc.cmo.metadb.model;
+package org.mskcc.smile.commons.model;
 
 /**
  *

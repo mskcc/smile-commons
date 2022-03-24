@@ -1,10 +1,10 @@
-package org.mskcc.cmo.common.impl;
+package org.mskcc.smile.commons.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.mskcc.cmo.common.FileUtil;
+import org.mskcc.smile.commons.FileUtil;
 import org.springframework.stereotype.Component;
 
 @Component

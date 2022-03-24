@@ -1,4 +1,4 @@
-package org.mskcc.cmo.metadb.config;
+package org.mskcc.smile.commons.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.mskcc.cmo.common.FileUtil;
-import org.mskcc.cmo.common.MetadbJsonComparator;
-import org.mskcc.cmo.metadb.model.MockJsonTestData;
+import org.mskcc.smile.commons.FileUtil;
+import org.mskcc.smile.commons.JsonComparator;
+import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +24,7 @@ import org.springframework.core.io.ClassPathResource;
  * @author ochoaa
  */
 @Configuration
-@ComponentScan(basePackages = "org.mskcc.cmo.common.*")
+@ComponentScan(basePackages = "org.mskcc.smile.commons.*")
 public class MockDataConfig {
     private final ObjectMapper mapper = new ObjectMapper();
     private final String MOCKED_REQUEST_DATA_DETAILS_FILEPATH = "data/mocked_request_data_details.txt";
@@ -46,11 +46,11 @@ public class MockDataConfig {
     }
 
     @Autowired
-    private MetadbJsonComparator metadbJsonComparator;
+    private JsonComparator jsonComparator;
 
     @Bean
-    public MetadbJsonComparator metadbJsonComparator() {
-        return metadbJsonComparator;
+    public JsonComparator jsonComparator() {
+        return jsonComparator;
     }
 
     private Map<String, MockJsonTestData> mockedRequestJsonDataMap;
