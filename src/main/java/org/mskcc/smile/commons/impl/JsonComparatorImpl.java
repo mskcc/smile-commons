@@ -28,9 +28,9 @@ public class JsonComparatorImpl implements JsonComparator {
     private final ObjectMapper mapper = new ObjectMapper();
 
     public final String[] DEFAULT_IGNORED_FIELDS = new String[]{
-        "metaDbRequestId",
-        "metaDbSampleId",
-        "metaDbPatientId",
+        "smileRequestId",
+        "smileSampleId",
+        "smilePatientId",
         "requestJson",
         "samples",
         "importDate",
