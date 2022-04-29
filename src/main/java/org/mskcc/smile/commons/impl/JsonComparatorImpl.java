@@ -40,6 +40,7 @@ public class JsonComparatorImpl implements JsonComparator {
         "patientAliases",
         "sampleAliases",
         "genePanel",
+        "igoComplete",
         "additionalProperties"};
 
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
