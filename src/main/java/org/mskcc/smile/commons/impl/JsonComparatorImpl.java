@@ -184,6 +184,9 @@ public class JsonComparatorImpl implements JsonComparator {
             JSONAssert.assertEquals(referenceJson, targetJson, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             return Boolean.FALSE;
+        } catch (AssertionError ae) {
+            System.out.println(ae.getLocalizedMessage());
+            return Boolean.FALSE;
         }
         return Boolean.TRUE;
     }

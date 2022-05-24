@@ -44,11 +44,12 @@ public class JsonComparatorTest {
      * Simple test to assert failure when request ids are different.
      * @throws Exception
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testConsistencyCheckFailure() throws Exception {
         String referenceJson = "{\"requestId\":\"mockRequestId\"}";
         String targetJson = "{\"requestId\":\"differentRequestId\"}";
-        jsonComparator.isConsistent(referenceJson, targetJson);
+        Boolean isConsistent = jsonComparator.isConsistent(referenceJson, targetJson);
+        Assert.assertFalse(isConsistent);
     }
 
     /**
@@ -100,7 +101,7 @@ public class JsonComparatorTest {
      * Test for handling of null fields in the published request json but not the incoming request json.
      * @throws Exception
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testNullJsonFieldHandlingInPublishedRequest() throws Exception {
         MockJsonTestData incomingRequest =
                 mockedRequestJsonDataMap.get("mockIncomingRequest1JsonDataWith2T2N");
