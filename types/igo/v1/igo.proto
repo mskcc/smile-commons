@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+option go_package = "github.com/mskcc/smile-commons/types/igo/v1";
+
+message Delivery {
+    string request = 1;
+    int64 deliveryDate = 2; // unix time in milliseconds
+}
+
+message Request {
+    bool bicAnalysis = 1;
+    string dataAccessEmails = 2;
+    string dataAnalystEmail = 3;
+    string dataAnalystName = 4;
+    int64 deliveryDate = 5;
+    string investigatorEmail = 6;
+    string investigatorName = 7;
+    bool isCmoRequest = 8;
+    string labHeadEmail = 9;
+    string labHeadName = 10;
+    string libraryType = 11;
+    string otherContactEmails = 12;
+    string piEmail = 13;
+    repeated string pooledNormals = 14;
+    string projectManagerName = 15;
+    string qcAccessEmails = 16;
+    string recipe = 17;
+    string requestId = 18;
+    repeated Samples samples = 19;
+    string strand = 20;
+
+    message Samples {
+        bool igoComplete = 1;
+        string igoSampleId = 2;
+        string investigatorSampleId = 3;
+    }
+}
+
+message RequestWithManifests {
+    bool bicAnalysis = 1;
+    string dataAccessEmails = 2;
+    string dataAnalystEmail = 3;
+    string dataAnalystName = 4;
+    int64 deliveryDate = 5;
+    string investigatorEmail = 6;
+    string investigatorName = 7;
+    bool isCmoRequest = 8;
+    string labHeadEmail = 9;
+    string labHeadName = 10;
+    string libraryType = 11;
+    string otherContactEmails = 12;
+    string piEmail = 13;
+    repeated string pooledNormals = 14;
+    string projectManagerName = 15;
+    string qcAccessEmails = 16;
+    string recipe = 17;
+    string requestId = 18;
+    repeated SampleManifest samples = 19;
+    string strand = 20;
+    string projectId = 21;
+}
+
+message SampleManifest {
+    string baitSet = 1;
+    string cfDNA2dBarcode = 2;
+    string cmoInfoIgoId = 3;
+    string cmoPatientId = 4;
+    string cmoSampleClass = 5;
+    Cmosampleidfields cmoSampleIdFields = 6;
+    string cmoSampleName = 7;
+    string collectionYear = 8;
+    string igoId = 9;
+    string investigatorSampleId = 10;
+    repeated Libraries libraries = 11;
+    string oncoTreeCode = 12;
+    string preservation = 13;
+    repeated Qcreports qcReports = 14;
+    string sampleName = 15;
+    string sampleOrigin = 16;
+    string sex = 17;
+    string species = 18;
+    string specimenType = 19;
+    string tissueLocation = 20;
+    string tubeId = 21;
+    string tumorOrNormal = 22;
+    bool igoComplete = 23;
+
+    message Cmosampleidfields {
+        string naToExtract = 1;
+        string normalizedPatientId = 2;
+        string recipe = 3;
+        string sampleType = 4;
+    }
+
+    message Runs {
+        repeated string fastqs = 1;
+        string flowCellId = 2;
+        repeated uint32 flowCellLanes = 3;
+        string readLength = 4;
+        string runDate = 5;
+        string runId = 6;
+        string runMode = 7;
+    }
+
+    message Libraries {
+        string barcodeId = 1;
+        string barcodeIndex = 2;
+        string captureConcentrationNm = 3;
+        string captureInputNg = 4;
+        string captureName = 5;
+        float dnaInputNg = 6;
+        float libraryConcentrationNgul = 7;
+        string libraryIgoId = 8;
+        float libraryVolume = 9;
+        repeated Runs runs = 10;
+    }
+
+    message Qcreports {
+        string IGORecommendation = 1;
+        string comments = 2;
+        string investigatorDecision = 3;
+        string qcReportType = 4;
+    }
+}

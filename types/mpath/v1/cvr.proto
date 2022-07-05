@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "github.com/mskcc/smile-commons/mpath/v1";
+
+message Sample {
+        Metadata metadata = 1;
+        CNVVariants variants = 2;
+}
+
+message Metadata {
+        string DMPSampleId = 1;
+}
+
+message CNVVariants {
+        repeated CVNVariant Variant=1;
+}
+
+message CVNVariant {
+        string GeneId = 1;
+}
