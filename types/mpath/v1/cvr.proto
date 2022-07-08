@@ -1,20 +1,205 @@
 syntax = "proto3";
+import "google/protobuf/any.proto";
 
-option go_package = "github.com/mskcc/smile-commons/mpath/v1";
+option go_package = "github.com/mskcc/smile_types/mpath/v1";
 
-message Sample {
-        Metadata metadata = 1;
-        CNVVariants variants = 2;
-}
-
-message Metadata {
-        string DMPSampleId = 1;
-}
-
-message CNVVariants {
-        repeated CVNVariant Variant=1;
-}
-
-message CVNVariant {
-        string GeneId = 1;
-}
+message FetchJSON {
+        uint32 sampleCount = 1 [json_name = "sample-count"];
+        repeated Result results = 2;
+        string disclaimer = 3;
+    }
+    
+    message Result {
+        repeated Snp snp_indel_silent_np = 1 [json_name = "snp-indel-silent-np"];
+        repeated CnvVariants cnv_variants = 2 [json_name = "cnv-variants"];
+        repeated Snp snp_indel_silent = 3 [json_name = "snp-indel-silent"];
+        MetaData meta_data = 4 [json_name = "meta-data"];
+        repeated Snp snp_indel_exonic = 5 [json_name = "snp-indel-exonic"];
+        repeated CnvIntragenicVariants cnv_intragenic_variants = 6 [json_name = "cnv-intragenic-variants"]; 
+        repeated SvVariants sv_variants = 7 [json_name = "sv-variants"];
+        repeated Snp snp_indel_exonic_np = 8 [json_name = "snp-indel-exonic-np"];
+    }
+    
+    message Snp {
+        string alt_allele = 1;
+        uint32 oncokb_reported = 2;
+        uint32 so_status_cv_id = 3;
+        string rlevel = 4;
+        string mafreq_1000g = 5;
+        string mrev_status_name = 6;
+        string variant_class = 7;
+        uint32 confidence_cv_id = 8;
+        string so_status_name = 9;
+        string oncokb_ver = 10;
+        uint32 mrev_status_cv_id = 11;
+        string ref_allele = 12;
+        string chromosome = 13;
+        uint32 variant_class_cv_id = 14;
+        string snp_indel_tool_name = 15;
+        string cDNA_change = 16;
+        string occurance_in_pop = 17;
+        string so_comments = 18;
+        uint32 normal_dp = 19;
+        string variant_status_name = 20;
+        string comments = 21;
+        string transcript_id = 22;
+        uint32 variant_status_cv_id = 23;
+        uint32 dmp_variant_id = 24;
+        uint32 is_hotspot = 25;
+        string dbSNP_id = 26;
+        string treatments = 27;
+        string gene_id = 28;
+        uint32 tumor_ad = 29;
+        uint32 dmp_sample_mrev_id = 30;
+        uint32 start_position = 31;
+        uint32 snp_indel_variant_id = 32;
+        string occurance_in_normal = 33;
+        string mrev_comments = 34;
+        double normal_vfreq = 35;
+        string level = 36;
+        double tumor_vfreq = 37;
+        string oncogenic = 38;
+        string exon_num = 39;
+        uint32 normal_ad = 40;
+        string cosmic_id = 41;
+        string clinical_signed_out = 42 [json_name = "clinical-signed-out"];
+        string confidence_class = 43;
+        uint32 dmp_sample_so_id = 44;
+        uint32 tumor_dp = 45;
+        string oncokb_interpretation = 46;
+        string aa_change = 47;
+        uint32 is_reported = 48;
+        google.protobuf.Any d_tumor_ad = 49;
+        google.protobuf.Any d_tumor_rd = 50;
+        google.protobuf.Any d_tumor_dp = 51;
+        google.protobuf.Any d_tumor_vfreq = 52;
+        google.protobuf.Any s_tumor_ad = 53;
+        google.protobuf.Any s_tumor_dp = 54;
+        google.protobuf.Any s_tumor_rd = 55;
+        google.protobuf.Any s_tumor_vfreq = 56;
+    }
+    
+    message CnvVariants {
+        uint32 oncokb_reported = 1;
+        double gene_p_value = 2;
+        google.protobuf.Any rlevel = 3;
+        uint32 cnv_filter_cv_id = 4;
+        uint32 confidence_cv_id = 5;
+        string oncokb_ver = 6;
+        string oncogenic = 7;
+        string chromosome = 8;
+        string variant_status_name = 9;
+        string comments = 10;
+        uint32 variant_status_cv_id = 11;
+        string confidence_class = 12;
+        string treatments = 13;
+        double gene_fold_change = 14;
+        string gene_id = 15;
+        uint32 is_significant = 16;
+        string cytoband = 17;
+        string level = 18;
+        string cnv_filter_name = 19;
+        uint32 cnv_variant_id = 20;
+        string cnv_class_name = 21;
+        string clinical_signed_out = 22 [json_name = "clinical-signed-out"];
+        uint32 cnv_class_cv_id = 23;
+        string oncokb_interpretation = 24;
+        uint32 is_reported = 25;
+    }
+    
+    message MetaData {
+        double tmb_tt_percentile = 1;
+        double tmb_score = 2;
+        string dt_alys_end_time = 3;
+        string metastasis_site = 4;
+        double tmb_cohort_percentile = 5;
+        string mrev_status_name = 6;
+        string msi_score = 7 [json_name = "msi-score"];
+        string slide_viewer_id = 8 [json_name = "slide-viewer-id"];
+        string gene_panel = 9 [json_name = "gene-panel"];
+        string dmp_patient_id = 10;
+        double tmb_tt_cohort = 11;
+        string so_comments = 12;
+        string dmp_sample_id = 13;
+        uint32 retrieve_status = 14;
+        uint32 cbx_sample_id = 15;
+        string dt_dms_start_time = 16;
+        uint32 is_metastasis = 17;
+        string date_tumor_sequencing = 18;
+        string somatic_status = 19;
+        uint32 dmp_sample_so_id = 20;
+        uint32 alys2sample_id = 21;
+        string tumor_type_code = 22;
+        string legacy_patient_id = 23;
+        uint32 cbx_patient_id = 24;
+        bool consent_parta = 25 [json_name = "consent-parta"];
+        bool consent_partc = 26 [json_name = "consent-partc"];
+        uint32 dmp_alys_task_id = 27;
+        string tumor_purity = 28;
+        string mrev_comments = 29;
+        uint32 sample_coverage = 30;
+        uint32 gender = 31;
+        string msi_type = 32 [json_name = "msi-type"];
+        string tumor_type_name = 33;
+        string legacy_sample_id = 34;
+        string outside_institute = 35;
+        double tmb_cohort = 36;
+        string msi_comment = 37 [json_name = "msi-comment"];
+        string primary_site = 38;
+        string dmp_alys_task_name = 39;
+        string so_status_name = 40;
+    }
+    
+    message CnvIntragenicVariants {
+        string refseq_acc = 1;
+        google.protobuf.Any treatments = 2;
+        uint32 oncokb_reported = 3;
+        string cytoband = 4;
+        google.protobuf.Any level = 5;
+        google.protobuf.Any rlevel = 6;
+        string cluster_2 = 7;
+        uint32 cnv_variant_id = 8;
+        string gene_id = 9;
+        string cluster_1 = 10;
+        uint32 confidence_cv_id = 11;
+        google.protobuf.Any oncokb_ver = 12;
+        google.protobuf.Any oncogenic = 13;
+        google.protobuf.Any oncokb_interpretation = 14;
+        uint32 variant_status_cv_id = 15;
+    }
+    
+    message SvVariants {
+        string site1_desc = 1;
+        uint32 oncokb_reported = 2;
+        uint32 tumor_variant_count = 3;
+        google.protobuf.Any rlevel = 4;
+        uint32 normal_variant_count = 5;
+        string variant_status_name = 6;
+        string site1_gene = 7;
+        string site2_chrom = 8;
+        string oncogenic = 9;
+        string connection_type = 10;
+        string site2_desc = 11;
+        string event_info = 12;
+        string comments = 13;
+        string conn_type = 14;
+        uint32 sv_variant_id = 15;
+        uint32 mapq = 16;
+        string site1_chrom = 17;
+        uint32 site1_pos = 18;
+        string sv_desc = 19;
+        string sv_class_name = 20;
+        string breakpoint_type = 21;
+        uint32 site2_pos = 22;
+        string site2_gene = 23;
+        string treatments = 24;
+        uint32 paired_end_read_support = 25;
+        uint32 tumor_read_count = 26;
+        string annotation = 27;
+        uint32 split_read_support = 28;
+        string level = 29;
+        uint32 normal_read_count = 30;
+        string confidence_class = 31;
+        string oncokb_interpretation = 32;
+        uint32 sv_length = 33;
+    }
