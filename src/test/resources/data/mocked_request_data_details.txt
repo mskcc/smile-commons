@@ -7,6 +7,7 @@ mockIncomingRequest3JsonDataPooledNormals	incoming_requests/mocked_request3_pool
 mockIncomingRequest4JsonNullOrEmptyValues	incoming_requests/mocked_request4_null_or_empty_values.json	Mock incoming request json with null or empty values.
 mockIncomingRequest5JsonPtMultiSamples	incoming_requests/mocked_request5_pt_multi_samples.json	Mock incoming request json with 6 samples having the same patient.
 mockPublishedRequest1JsonDataWith2T2N	published_requests/outgoing_mocked_request1_complete_tumor_normal.json	Mock published request json with 2 tumor samples and 2 matching normals, and smile ids.
+mockPublishedRequest1JsonDataWithLibUpdates	published_requests/outgoing_mocked_request1_lib_update.json	Mock published request json with libraries, qcReports and runs updates in sampleMetadata level
 mockPublishedRequest2aJsonData1N	published_requests/outgoing_mocked_request2a_one_normal.json	Mock published request with a single normal sample, and smile ids.
 mockPublishedRequest2bJsonDataMissing1N	published_requests/outgoing_mocked_request2b_missing_one_normal.json	Mock published request missing a single normal sample, and smile ids.
 mockPublishedRequest2bJsonDataComplete	published_requests/outgoing_mocked_request2b_all_pairs.json	Mock published request with all tumor and normal sample pairs. Same as request 'mockPublishedRequest2bJsonDataMissing1N' but includes the missing normal sample, and smile ids.
