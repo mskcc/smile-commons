@@ -105,11 +105,10 @@ public class JsonComparatorImpl implements JsonComparator {
                 String primaryId = findPrimaryIdFromJsonNode(refSampleNode);
                 if (primaryId != null) {
                     JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
-                    // Compares libraries, runs and qcReports.
+                    // Compares libraries and qcReports.
+                    // Runs still need to be addressed
                     if (!isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "qcReports")
-                            || !isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "libraries")
-                            || !isMatchingJsonByFieldName(refSampleNode.get("libraries"),
-                                    tarSampleNode.get("libraries"), "runs")) {
+                            || !isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "libraries")) {
                         consistencyCheckStatus = Boolean.FALSE;
                     }
                 }
@@ -167,7 +166,11 @@ public class JsonComparatorImpl implements JsonComparator {
         return mapper.readTree(convertedMapAsString);
     }
 
-
+    /**
+     * Helps find primaryId or igoId from sampleMetadata Node
+     * @param sampleNode
+     * @return
+     */
     private String findPrimaryIdFromJsonNode(JsonNode sampleNode) {
         return (sampleNode.get("primaryId") == null)
                 ? sampleNode.get("igoId").toString() : sampleNode.get("primaryId").toString();
@@ -342,7 +345,6 @@ public class JsonComparatorImpl implements JsonComparator {
         }
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
     }
-
 
     /**
      * Returns a JsonNode with standardized properties based on the provided jsonPropsMap.
