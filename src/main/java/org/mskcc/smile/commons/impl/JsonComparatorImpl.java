@@ -1,6 +1,7 @@
 package org.mskcc.smile.commons.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -91,8 +92,86 @@ public class JsonComparatorImpl implements JsonComparator {
             if (!isMatchingJsons(filteredReferenceSamplesJson, filteredTargetSamplesJson)) {
                 consistencyCheckStatus = Boolean.FALSE;
             }
+
+            JsonNode refSamplesJsonNode = mapper.readTree(referenceJson).get("samples");
+            ArrayNode refSamplesArrayNode = (ArrayNode) refSamplesJsonNode;
+            Iterator<JsonNode> itrRef = refSamplesArrayNode.elements();
+
+            // Iterating through a list of samples from referenceJson
+            while (itrRef.hasNext()) {
+                JsonNode refSampleNode = itrRef.next();
+                String primaryId = findPrimaryIdFromJsonNode(refSampleNode);
+                if (primaryId != null) {
+                    JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
+                    // Compares libraries and qcReports.
+                    // Runs still need to be addressed
+                    if (!isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "qcReports")
+                            || !isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "libraries")) {
+                        consistencyCheckStatus = Boolean.FALSE;
+                    }
+                }
+            }
         }
         return consistencyCheckStatus;
+    }
+
+    private JsonNode findSampleNodeFromSampleArray(String targetJson, String primaryId)
+            throws JsonMappingException, JsonProcessingException {
+        JsonNode tarSamplesJsonNode = mapper.readTree(targetJson).get("samples");
+        ArrayNode tarSamplesArrayNode = (ArrayNode) tarSamplesJsonNode;
+        Iterator<JsonNode> itrTar = tarSamplesArrayNode.elements();
+
+        while (itrTar.hasNext()) {
+            JsonNode sampleNode = itrTar.next();
+            String tarPrimaryId =  findPrimaryIdFromJsonNode(sampleNode);
+            if (primaryId.equals(tarPrimaryId)) {
+                return sampleNode;
+            }
+        }
+        return null;
+    }
+
+    private Boolean isMatchingJsonByFieldName(JsonNode refNode, JsonNode tarNode,
+            String fieldName) throws JsonProcessingException {
+        if (refNode.has(fieldName) || tarNode.has(fieldName)) {
+            // filter the ref and target jsons first then run comparison
+            JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
+            JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
+
+            JsonNode filteredRefNode = filterJsonNode(
+                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS);
+            JsonNode filteredTarNode = filterJsonNode(
+                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS);
+            if (!isMatchingJsons(mapper.writeValueAsString(filteredRefNode),
+                    mapper.writeValueAsString(filteredTarNode))) {
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.TRUE;
+    }
+
+    /**
+     * Helper function to treat possible array node json comparisons as instances of regular JSONs.
+     * @param fieldName
+     * @param node
+     * @return JsonNode
+     * @throws JsonProcessingException
+     */
+    private JsonNode convertToMapJsonNode(String fieldName, JsonNode node) throws JsonProcessingException {
+        Map<String, String> map = new HashMap<>();
+        map.put(fieldName, node.get(fieldName).toString());
+        String convertedMapAsString = mapper.writeValueAsString(map);
+        return mapper.readTree(convertedMapAsString);
+    }
+
+    /**
+     * Helps find primaryId or igoId from sampleMetadata Node
+     * @param sampleNode
+     * @return
+     */
+    private String findPrimaryIdFromJsonNode(JsonNode sampleNode) {
+        return (sampleNode.get("primaryId") == null)
+                ? sampleNode.get("igoId").toString() : sampleNode.get("primaryId").toString();
     }
 
     /**
@@ -198,20 +277,30 @@ public class JsonComparatorImpl implements JsonComparator {
      * @param ignoredFields
      * @return JsonNode
      */
-    private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields) {
+    private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields) throws JsonProcessingException {
         List<String> fieldsToRemove = new ArrayList<>();
         // if ignored fields is not null then add to list of fields to remove
         if (ignoredFields != null) {
             fieldsToRemove.addAll(Arrays.asList(ignoredFields));
         }
 
+        JsonNode modifiedQcReportsNode = null;
+        JsonNode modifiedLibrariesNode = null; // this is for special case handling
         // append list of fields to remove from node that contain null or empty values
         Iterator<String> itr = node.fieldNames();
         while (itr.hasNext()) {
             String field = itr.next();
             String value = node.get(field).asText();
-            if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")) {
+
+            if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
+                    || value.equalsIgnoreCase("[]")) {
                 fieldsToRemove.add(field);
+            } else if (field.equals("libraries")) {
+                // special handling for libraries
+                modifiedLibrariesNode = filterArrayNodeChildren(value);
+            } else if (field.equals("qcReports")) {
+                // special handling for libraries
+                modifiedQcReportsNode = filterArrayNodeChildren(value);
             }
         }
 
@@ -223,7 +312,36 @@ public class JsonComparatorImpl implements JsonComparator {
             }
         }
 
+        // update the modified libraries node if not null
+        if (modifiedLibrariesNode != null) {
+            node.remove("libraries");
+            node.put("libraries", modifiedLibrariesNode);
+        }
+        if (modifiedQcReportsNode != null) {
+            node.remove("qcReports");
+            node.put("qcReports", modifiedLibrariesNode);
+        }
         return node;
+    }
+
+    /**
+     * Given a parent node as a string, returns a filtered JsonNode.
+     * This is special case handling specific to 'libraries' and other
+     * child properties of samples that are actually array nodes
+     * @param parentNode
+     * @return JsonNode
+     * @throws JsonProcessingException
+     */
+    private JsonNode filterArrayNodeChildren(String parentNode) throws JsonProcessingException {
+        List<Object> filteredParentNode = new ArrayList<>();
+        List<Object> childrenObjects = mapper.readValue(parentNode, List.class);
+        for (Object childObj : childrenObjects) {
+            String childObjString = mapper.writeValueAsString(childObj);
+            JsonNode filteredChildNode = filterJsonNode((ObjectNode)
+                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS);
+            filteredParentNode.add(filteredChildNode);
+        }
+        return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
     }
 
     /**

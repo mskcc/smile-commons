@@ -5,7 +5,6 @@ import java.util.Map;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mskcc.smile.commons.JsonComparator;
 import org.mskcc.smile.commons.config.MockDataConfig;
 import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,6 +144,21 @@ public class JsonComparatorTest {
         Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
+    }
+
+    /**
+     * Test if the comparator recognizes updates in libraries, qcReports and runs
+     * @throws Exception
+     */
+    @Test
+    public void testSubSampleMetadataJsonUpdates() throws Exception {
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithLibUpdates");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistent(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertFalse(consistencyCheckStatus);
     }
 
     private String getErrorMessage(Map<String, String> errorsMap) {
