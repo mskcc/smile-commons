@@ -68,6 +68,7 @@ public class JsonComparatorImpl implements JsonComparator {
 
     @Override
     public Boolean isConsistent(String referenceJson, String targetJson) throws Exception {
+        System.out.println("\n\n\nIn the JSON comparator.");
         return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS);
     }
 
@@ -81,6 +82,12 @@ public class JsonComparatorImpl implements JsonComparator {
         String filteredTargetJson = standardizeAndFilterRequestJson(targetJson, ignoredFields);
         if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
             consistencyCheckStatus = Boolean.FALSE;
+        }
+        // check qcreports and libraries (case where sample metadata is compared directly)
+        if (jsonHasQcAndOrLibrariesFields(referenceJson) || jsonHasQcAndOrLibrariesFields(targetJson)) {
+            if (!isConsistentSampleMetadata(referenceJson, targetJson)) {
+                consistencyCheckStatus = Boolean.FALSE;
+            }
         }
 
         // filter reference and target sample list jsons and compare if applicable
@@ -105,14 +112,27 @@ public class JsonComparatorImpl implements JsonComparator {
                     JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
                     // Compares libraries and qcReports.
                     // Runs still need to be addressed
-                    if (!isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "qcReports")
-                            || !isMatchingJsonByFieldName(refSampleNode, tarSampleNode, "libraries")) {
+                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode)) {
                         consistencyCheckStatus = Boolean.FALSE;
                     }
                 }
             }
         }
         return consistencyCheckStatus;
+    }
+
+    private Boolean isConsistentSampleMetadata(String referenceJson, String targetJson)
+            throws JsonProcessingException {
+        return isConsistentSampleMetadata(mapper.readTree(referenceJson), mapper.readTree(targetJson));
+    }
+
+    private Boolean isConsistentSampleMetadata(JsonNode referenceNode, JsonNode targetNode)
+            throws JsonProcessingException {
+        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports")
+                            || !isMatchingJsonByFieldName(referenceNode, targetNode, "libraries")) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 
     private JsonNode findSampleNodeFromSampleArray(String targetJson, String primaryId)
@@ -234,6 +254,11 @@ public class JsonComparatorImpl implements JsonComparator {
             sortedRequestSamplesArrayNode.add(entry.getValue());
         });
         return mapper.writeValueAsString(sortedRequestSamplesArrayNode);
+    }
+
+    private Boolean jsonHasQcAndOrLibrariesFields(String jsonString) throws JsonProcessingException {
+        JsonNode jsonNode = mapper.readTree(jsonString);
+        return jsonNode.has("libraries") || jsonNode.has("qcReports");
     }
 
     /**
