@@ -161,6 +161,80 @@ public class JsonComparatorTest {
         Assert.assertFalse(consistencyCheckStatus);
     }
 
+    @Test
+    public void testUpdatesComparatorSampleMetadata() throws Exception {
+        // create json with sample-level metadata and another with updates
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadata");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidUpdates");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertTrue(consistencyCheckStatus);
+    }
+
+    @Test
+    public void testValidUpdatesComparatorWholeRequest() throws Exception {
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithLibUpdates");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertFalse(consistencyCheckStatus);
+    }
+
+    @Test
+    public void testInvalidUpdatesComparatorWholeRequest() throws Exception {
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithInvalidUpdates");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertTrue(consistencyCheckStatus);
+
+    }
+
+    /**
+     * Tests that sample has changes in IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testSampleHasIgoUpdates() throws Exception {
+        MockJsonTestData refSample = mockedRequestJsonDataMap.get("samplePreUpdate");
+        MockJsonTestData igoUpdateSample = mockedRequestJsonDataMap.get("sampleLimsUpdatesOnly");
+        Boolean igoUpdatesOnlyCheck = jsonComparator.isConsistentByIgoProperties(
+                refSample.getJsonString(), igoUpdateSample.getJsonString());
+        Assert.assertFalse(igoUpdatesOnlyCheck);
+    }
+
+    /**
+     * Tests that comparator can identify changes in IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testSampleHasNonIgoUpdates() throws Exception {
+        MockJsonTestData refSample = mockedRequestJsonDataMap.get("samplePreUpdate");
+        MockJsonTestData nonIgoUpdateSample = mockedRequestJsonDataMap.get("sampleNonLimsUpdates");
+        Boolean nonIgoUpdatesCheck2 = jsonComparator.isConsistentByIgoProperties(
+                refSample.getJsonString(), nonIgoUpdateSample.getJsonString());
+        Assert.assertTrue(nonIgoUpdatesCheck2);
+    }
+
+    /**
+     * Tests that the comparator can detect changes in general as well as IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testSampleHasMixedIgoAndNonIgoUpdates() throws Exception {
+        MockJsonTestData refSample = mockedRequestJsonDataMap.get("samplePreUpdate");
+        MockJsonTestData mixedUpdatesSample = mockedRequestJsonDataMap.get("sampleMixedUpdates");
+        Boolean mixedUpdatesSampleCheck1 = jsonComparator.isConsistent(
+                refSample.getJsonString(), mixedUpdatesSample.getJsonString());
+        Assert.assertFalse(mixedUpdatesSampleCheck1);
+        Boolean mixedUpdatesSampleCheck2 = jsonComparator.isConsistentByIgoProperties(
+                refSample.getJsonString(), mixedUpdatesSample.getJsonString());
+        Assert.assertTrue(mixedUpdatesSampleCheck2);
+    }
+
     private String getErrorMessage(Map<String, String> errorsMap) {
         StringBuilder builder = new StringBuilder();
         builder.append("\nConsistencyCheckerUtil failures summary:\n");

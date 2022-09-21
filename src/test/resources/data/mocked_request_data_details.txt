@@ -8,6 +8,7 @@ mockIncomingRequest4JsonNullOrEmptyValues	incoming_requests/mocked_request4_null
 mockIncomingRequest5JsonPtMultiSamples	incoming_requests/mocked_request5_pt_multi_samples.json	Mock incoming request json with 6 samples having the same patient.
 mockPublishedRequest1JsonDataWith2T2N	published_requests/outgoing_mocked_request1_complete_tumor_normal.json	Mock published request json with 2 tumor samples and 2 matching normals, and smile ids.
 mockPublishedRequest1JsonDataWithLibUpdates	published_requests/outgoing_mocked_request1_lib_update.json	Mock published request json with libraries, qcReports and runs updates in sampleMetadata level
+mockPublishedRequest1JsonDataWithInvalidUpdates	published_requests/outgoing_mocked_request1_invalid_updates.json	Mock published request json with invalid updates
 mockPublishedRequest2aJsonData1N	published_requests/outgoing_mocked_request2a_one_normal.json	Mock published request with a single normal sample, and smile ids.
 mockPublishedRequest2bJsonDataMissing1N	published_requests/outgoing_mocked_request2b_missing_one_normal.json	Mock published request missing a single normal sample, and smile ids.
 mockPublishedRequest2bJsonDataComplete	published_requests/outgoing_mocked_request2b_all_pairs.json	Mock published request with all tumor and normal sample pairs. Same as request 'mockPublishedRequest2bJsonDataMissing1N' but includes the missing normal sample, and smile ids.
@@ -15,6 +16,9 @@ mockPublishedRequest3JsonDataPooledNormals	published_requests/outgoing_mocked_re
 mockPublishedRequest1JsonNullValues	published_requests/outgoing_mocked_request1_null_values.json	Mock published request with null values.
 mockPublishedRequest4JsonNullOrEmptyValues	published_requests/outgoing_mocked_request4_null_or_empty_values.json	Mock published request with null or empty values.
 mockUpdatedPublishedRequest1Metadata	other_mocked_data/outgoing_mocked_request1_updated_metadata.json	Mock published request metadata json with updates.
+mockUpdatedPublishedRequest1MetadataWithInvalidUpdates	other_mocked_data/outgoing_mocked_request1_invalid_updates.json	Mock request metadata json with invalid updates without samples
+mockUpdatedPublishedSampleMetadata	other_mocked_data/sample_metadata_update_inc_label_CMP789JRX001d.json	Mock published sample metadata json
+mockUpdatedPublishedSampleMetadataWithInvalidUpdates	other_mocked_data/sample_metadata_invalid_updates_CMP789JRX001d.json	Mock published sample metadata json with invalid updates
 mockIncomingRequestPreCmoPatientSwap	incoming_requests/mocked_request6_cmopt_swap.json	Mock incoming request json for pre-CMO patient ID swap testing.
 mockIncomingRequestPostCmoPatientSwap	incoming_requests/mocked_request6_cmopt_after_swap.json	Mock incoming request json for post-CMO patient ID swap testing.
 mockRequest1aJsonDataWithSTA	incoming_requests/mocked_request1a_sample_type_abbreviation.json	Mock request json with available fields to determine sample type abbreviation
@@ -26,3 +30,7 @@ mockRequest2aEmptySampleManifestValues	incoming_requests/mocked_request2a_one_em
 mockRequest1SamplesMissingFastQs	incoming_requests/mocked_request1_sample_missing_fastqs.json	Mock requset json with 2 samples missing fastqs
 mockRequest1AllSamplesMissingFastQs	incoming_requests/mocked_request1_all_samples_missing_fastqs.json	Mock requset json with all samples missing fastqs
 mockRequest1eNullStringBaitSet	incoming_requests/mocked_request1e_null_string_baitset.json	Mock requset json with "null" baitset values
+samplePreUpdate	lims_update_handling/sample_pre_update.json	Base sample metadata json to test update handling.
+sampleLimsUpdatesOnly	lims_update_handling/sample_lims_updates_only.json	Sample from 'samplePreUpdate' with only LIMS prop updates.
+sampleNonLimsUpdates	lims_update_handling/sample_non_lims_updates.json	Sample from 'samplePreUpdate' with updates to non-LIMS properties. This would be treated as if it was received on the IGO topic and would therefore be rejected.
+sampleMixedUpdates	lims_update_handling/sample_mixed_updates.json	Sample from 'samplePreUpdate' with changes to both LIMS and non-LIMS properties. In this case the expected sample saved to SMILE would have only the IGO LIMS updates persisted to the database.

@@ -43,6 +43,50 @@ public class JsonComparatorImpl implements JsonComparator {
         "genePanel",
         "additionalProperties"};
 
+    public final String[] IGO_ACCEPTED_FIELDS = new String[]{
+        //RequestMetadata fields
+        "deliveryDate",
+        "isCmoRequest",
+        "libraryType",
+        "pooledNormals",
+        "genePanel",
+        "igoRequestId",
+        "igoComplete",
+        "igoSampleId",
+        "strand",
+        // SampleMetadata fields
+        "baitSet",
+        "cfDNA2dBarcode",
+        "recipe",
+        "genePanel",
+        "primaryId",
+        "igoId",
+        "barcodeId",
+        "barcodeIndex",
+        "captureConcentrationNm",
+        "captureInputNg",
+        "captureName",
+        "dnaInputNg",
+        "libraryConcentrationNgul",
+        "libraryIgoId",
+        "libraryVolume",
+        "fastqs",
+        "flowCellId",
+        "flowCellLanes",
+        "readLength",
+        "runDate",
+        "runId",
+        "runMode",
+        "IGORecommendation",
+        "comments",
+        "investigatorDecision",
+        "qcReportType",
+        "libraries",
+        "qcReports",
+        "cmoSampleIdFields",
+        "runs"
+    };
+
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
             initStandardizedIgoRequestJsonPropsMap();
     private final Map<String, String> STD_IGO_SAMPLE_JSON_PROPS_MAP =
@@ -67,25 +111,41 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     @Override
-    public Boolean isConsistent(String referenceJson, String targetJson) throws Exception {
-        System.out.println("\n\n\nIn the JSON comparator.");
-        return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS);
+    public Boolean isConsistentByIgoProperties(String referenceJson, String targetJson) throws Exception {
+        return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, "igo");
     }
 
     @Override
-    public Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields)
-            throws Exception {
+    public Boolean isConsistent(String referenceJson, String targetJson) throws Exception {
+        return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS, "new");
+    }
+
+    /**
+     * Accepted values of String comparisonType are new, igo and dashboard
+     * @param referenceJson
+     * @param targetJson
+     * @param ignoredFields
+     * @param comparisonType
+     * @return Boolean
+     * @throws Exception
+     */
+    @Override
+    public Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields,
+            String comparisonType) throws Exception {
         Boolean consistencyCheckStatus = Boolean.TRUE;
 
         // filter reference and target request jsons and compare
-        String filteredReferenceJson = standardizeAndFilterRequestJson(referenceJson, ignoredFields);
-        String filteredTargetJson = standardizeAndFilterRequestJson(targetJson, ignoredFields);
+        String filteredReferenceJson = standardizeAndFilterRequestJson(referenceJson,
+                ignoredFields, comparisonType);
+        String filteredTargetJson = standardizeAndFilterRequestJson(targetJson,
+                ignoredFields, comparisonType);
         if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
             consistencyCheckStatus = Boolean.FALSE;
         }
+
         // check qcreports and libraries (case where sample metadata is compared directly)
         if (jsonHasQcAndOrLibrariesFields(referenceJson) || jsonHasQcAndOrLibrariesFields(targetJson)) {
-            if (!isConsistentSampleMetadata(referenceJson, targetJson)) {
+            if (!isConsistentSampleMetadata(referenceJson, targetJson, comparisonType)) {
                 consistencyCheckStatus = Boolean.FALSE;
             }
         }
@@ -93,9 +153,10 @@ public class JsonComparatorImpl implements JsonComparator {
         // filter reference and target sample list jsons and compare if applicable
         if (jsonHasSamplesField(referenceJson) || jsonHasSamplesField(targetJson)) {
             String filteredReferenceSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(referenceJson, ignoredFields);
+                    standardizeAndFilterRequestSamplesJson(referenceJson, ignoredFields, comparisonType);
             String filteredTargetSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(targetJson, ignoredFields);
+                    standardizeAndFilterRequestSamplesJson(targetJson, ignoredFields, comparisonType);
+
             if (!isMatchingJsons(filteredReferenceSamplesJson, filteredTargetSamplesJson)) {
                 consistencyCheckStatus = Boolean.FALSE;
             }
@@ -112,7 +173,7 @@ public class JsonComparatorImpl implements JsonComparator {
                     JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
                     // Compares libraries and qcReports.
                     // Runs still need to be addressed
-                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode)) {
+                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode, comparisonType)) {
                         consistencyCheckStatus = Boolean.FALSE;
                     }
                 }
@@ -121,15 +182,17 @@ public class JsonComparatorImpl implements JsonComparator {
         return consistencyCheckStatus;
     }
 
-    private Boolean isConsistentSampleMetadata(String referenceJson, String targetJson)
-            throws JsonProcessingException {
-        return isConsistentSampleMetadata(mapper.readTree(referenceJson), mapper.readTree(targetJson));
+    private Boolean isConsistentSampleMetadata(String referenceJson, String targetJson,
+            String comparisonType) throws JsonProcessingException {
+        return isConsistentSampleMetadata(mapper.readTree(referenceJson),
+                mapper.readTree(targetJson), comparisonType);
     }
 
-    private Boolean isConsistentSampleMetadata(JsonNode referenceNode, JsonNode targetNode)
-            throws JsonProcessingException {
-        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports")
-                            || !isMatchingJsonByFieldName(referenceNode, targetNode, "libraries")) {
+    private Boolean isConsistentSampleMetadata(JsonNode referenceNode,
+            JsonNode targetNode, String comparisonType) throws JsonProcessingException {
+        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports", comparisonType)
+                            || !isMatchingJsonByFieldName(referenceNode, targetNode,
+                                    "libraries", comparisonType)) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -152,16 +215,16 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     private Boolean isMatchingJsonByFieldName(JsonNode refNode, JsonNode tarNode,
-            String fieldName) throws JsonProcessingException {
+            String fieldName, String comparisonType) throws JsonProcessingException {
         if (refNode.has(fieldName) || tarNode.has(fieldName)) {
             // filter the ref and target jsons first then run comparison
             JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
             JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
 
             JsonNode filteredRefNode = filterJsonNode(
-                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS);
+                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS, comparisonType);
             JsonNode filteredTarNode = filterJsonNode(
-                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS);
+                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS, comparisonType);
             if (!isMatchingJsons(mapper.writeValueAsString(filteredRefNode),
                     mapper.writeValueAsString(filteredTarNode))) {
                 return Boolean.FALSE;
@@ -203,12 +266,13 @@ public class JsonComparatorImpl implements JsonComparator {
      * @return String
      * @throws JsonProcessingException
      */
-    private String standardizeAndFilterRequestJson(String jsonString, String[] ignoredFields)
-            throws JsonProcessingException {
+    private String standardizeAndFilterRequestJson(String jsonString, String[] ignoredFields,
+            String comparisonType) throws JsonProcessingException {
         JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
         JsonNode stdJsonNode = standardizeJsonProperties(
                 (ObjectNode) unfilteredJsonNode, STD_IGO_REQUEST_JSON_PROPS_MAP);
-        JsonNode stdFilteredJsonNode = filterJsonNode((ObjectNode) stdJsonNode, ignoredFields);
+        JsonNode stdFilteredJsonNode = filterJsonNode((ObjectNode) stdJsonNode,
+                ignoredFields, comparisonType);
         return mapper.writeValueAsString(stdFilteredJsonNode);
     }
 
@@ -221,8 +285,8 @@ public class JsonComparatorImpl implements JsonComparator {
      * @return String
      * @throws JsonProcessingException
      */
-    private String standardizeAndFilterRequestSamplesJson(String jsonString, String[] ignoredFields)
-            throws JsonProcessingException {
+    private String standardizeAndFilterRequestSamplesJson(String jsonString, String[] ignoredFields,
+            String comparisonType) throws JsonProcessingException {
         if (!jsonHasSamplesField(jsonString)) {
             return null;
         }
@@ -236,9 +300,10 @@ public class JsonComparatorImpl implements JsonComparator {
         while (itr.hasNext()) {
             JsonNode stdSampleNode = standardizeJsonProperties(
                     (ObjectNode) itr.next(), STD_IGO_SAMPLE_JSON_PROPS_MAP);
-            JsonNode stdFilteredSampleNode = filterJsonNode((ObjectNode) stdSampleNode, ignoredFields);
+            JsonNode stdFilteredSampleNode = filterJsonNode((ObjectNode) stdSampleNode,
+                    ignoredFields, comparisonType);
 
-            String sid = stdFilteredSampleNode.get("primaryId").toString();
+            String sid = findPrimaryIdFromJsonNode(stdFilteredSampleNode);
             unorderedSamplesMap.put(sid, stdFilteredSampleNode);
         }
         // order array of sample nodes by their primary id
@@ -302,8 +367,11 @@ public class JsonComparatorImpl implements JsonComparator {
      * @param ignoredFields
      * @return JsonNode
      */
-    private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields) throws JsonProcessingException {
+    private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields,
+            String comparisonType) throws JsonProcessingException {
         List<String> fieldsToRemove = new ArrayList<>();
+        List<String> igoUpdatesRejectedFields = Arrays.asList(IGO_ACCEPTED_FIELDS);
+
         // if ignored fields is not null then add to list of fields to remove
         if (ignoredFields != null) {
             fieldsToRemove.addAll(Arrays.asList(ignoredFields));
@@ -317,15 +385,21 @@ public class JsonComparatorImpl implements JsonComparator {
             String field = itr.next();
             String value = node.get(field).asText();
 
+            // special handling for metadata updates
+            if (comparisonType.equals("igo")
+                    && !igoUpdatesRejectedFields.contains(field)) {
+                fieldsToRemove.add(field);
+            }
+
             if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
                     || value.equalsIgnoreCase("[]")) {
                 fieldsToRemove.add(field);
             } else if (field.equals("libraries")) {
                 // special handling for libraries
-                modifiedLibrariesNode = filterArrayNodeChildren(value);
+                modifiedLibrariesNode = filterArrayNodeChildren(value, comparisonType);
             } else if (field.equals("qcReports")) {
                 // special handling for libraries
-                modifiedQcReportsNode = filterArrayNodeChildren(value);
+                modifiedQcReportsNode = filterArrayNodeChildren(value, comparisonType);
             }
         }
 
@@ -357,13 +431,14 @@ public class JsonComparatorImpl implements JsonComparator {
      * @return JsonNode
      * @throws JsonProcessingException
      */
-    private JsonNode filterArrayNodeChildren(String parentNode) throws JsonProcessingException {
+    private JsonNode filterArrayNodeChildren(String parentNode, String comparisonType)
+            throws JsonProcessingException {
         List<Object> filteredParentNode = new ArrayList<>();
         List<Object> childrenObjects = mapper.readValue(parentNode, List.class);
         for (Object childObj : childrenObjects) {
             String childObjString = mapper.writeValueAsString(childObj);
             JsonNode filteredChildNode = filterJsonNode((ObjectNode)
-                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS);
+                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
             filteredParentNode.add(filteredChildNode);
         }
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
