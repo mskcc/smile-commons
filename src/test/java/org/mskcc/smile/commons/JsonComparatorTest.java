@@ -161,6 +161,53 @@ public class JsonComparatorTest {
         Assert.assertFalse(consistencyCheckStatus);
     }
 
+    @Test
+    public void testUpdatesComparatorRequestMetadata() throws Exception {
+        // create json with request-level metadata and another with updates
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedRequest1Metadata");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedRequest1MetadataWithInvalidUpdates");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertFalse(consistencyCheckStatus);
+    }
+
+    @Test
+    public void testUpdatesComparatorSampleMetadata() throws Exception {
+        // create json with sample-level metadata and another with updates
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadata");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidUpdates");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertTrue(consistencyCheckStatus);
+    }
+
+    @Test
+    public void testValidUpdatesComparatorWholeRequest() throws Exception {
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithLibUpdates");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertFalse(consistencyCheckStatus);
+    }
+
+    @Test
+    public void testInvalidUpdatesComparatorWholeRequest() throws Exception {
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithInvalidUpdates");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertTrue(consistencyCheckStatus);
+
+    }
+
     private String getErrorMessage(Map<String, String> errorsMap) {
         StringBuilder builder = new StringBuilder();
         builder.append("\nConsistencyCheckerUtil failures summary:\n");
