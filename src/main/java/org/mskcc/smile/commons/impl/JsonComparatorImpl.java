@@ -43,30 +43,15 @@ public class JsonComparatorImpl implements JsonComparator {
         "genePanel",
         "additionalProperties"};
 
-    public final String[] DEFAULT_ACEPTED_UPDATES_FIELDS = new String[]{
-        "bicAnalysis",
-        "dataAccessEmails",
-        "dataAnalystEmail",
-        "dataAnalystName",
-        "deliveryDate",
-        "investigatorEmail",
-        "investigatorName",
-        "isCmoRequest",
-        "labHeadEmail",
-        "labHeadName",
-        "libraryType",
-        "otherContactEmails",
-        "piEmail",
-        "pooledNormals",
-        "projectManagerName",
-        "qcAccessEmails",
-        "genePanel",
-        "igoRequestId",
-        "igoComplete",
-        "igoSampleId",
-        "investigatorSampleId",
-        "strand",
-        "primaryId"};
+    // Unused fields: deliveryDate and igoSampleId
+    public final String[] UPDATES_DEFAULT_IGNORED_FIELDS = new String[]{
+        "namespace", // SmileRequest field
+        // should this be included or should we let the label generator create a new one?
+        "cmoSampleName", // SampleMetadata field
+        // also apart of the list of accepted updates, but it is not found in the returned json model
+        "cmoInfoIgoId", // SampleMetadata field
+        "collectionYear", // SampleMetadata field
+    };
 
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
             initStandardizedIgoRequestJsonPropsMap();
@@ -93,7 +78,6 @@ public class JsonComparatorImpl implements JsonComparator {
 
     @Override
     public Boolean isConsistentUpdates(String referenceJson, String targetJson) throws Exception {
-        System.out.println("\n\n\nIn the JSON comparator for updates.");
         return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, Boolean.TRUE);
     }
 
@@ -343,9 +327,9 @@ public class JsonComparatorImpl implements JsonComparator {
     private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields,
             Boolean isUpdateMetadata) throws JsonProcessingException {
         List<String> fieldsToRemove = new ArrayList<>();
-        List<String> fieldsToKeep = new ArrayList<>();
+        List<String> igoUpdatesRejectedFields = new ArrayList<>();
 
-        fieldsToKeep.addAll(Arrays.asList(DEFAULT_ACEPTED_UPDATES_FIELDS));
+        igoUpdatesRejectedFields.addAll(Arrays.asList(UPDATES_DEFAULT_IGNORED_FIELDS));
 
         // if ignored fields is not null then add to list of fields to remove
         if (ignoredFields != null) {
@@ -361,8 +345,8 @@ public class JsonComparatorImpl implements JsonComparator {
             String value = node.get(field).asText();
 
             // special handling for metadata updates
-            if (isUpdateMetadata && !fieldExistsInListOfFields(DEFAULT_ACEPTED_UPDATES_FIELDS, field)) {
-                if (!fieldExistsInListOfFields(ignoredFields, field)) {
+            if (isUpdateMetadata && fieldExistsInList(UPDATES_DEFAULT_IGNORED_FIELDS, field)) {
+                if (!fieldExistsInList(ignoredFields, field)) {
                     fieldsToRemove.add(field);
                 }
             }
@@ -398,15 +382,15 @@ public class JsonComparatorImpl implements JsonComparator {
         return node;
     }
 
-    private Boolean fieldExistsInListOfFields(String[] fieldList, String field) {
-        List<String> fieldsToKeep = new ArrayList<>();
+    private Boolean fieldExistsInList(String[] fieldList, String field) {
+        List<String> fieldsArrayList = new ArrayList<>();
         if (fieldList != null) {
-            fieldsToKeep.addAll(Arrays.asList(fieldList));
+            fieldsArrayList.addAll(Arrays.asList(fieldList));
 
         } else {
-            fieldsToKeep.addAll(Arrays.asList(DEFAULT_ACEPTED_UPDATES_FIELDS));
+            fieldsArrayList.addAll(Arrays.asList(UPDATES_DEFAULT_IGNORED_FIELDS));
         }
-        for (String fieldName: fieldsToKeep) {
+        for (String fieldName: fieldsArrayList) {
             if (fieldName.equals(field)) {
                 return Boolean.TRUE;
             }

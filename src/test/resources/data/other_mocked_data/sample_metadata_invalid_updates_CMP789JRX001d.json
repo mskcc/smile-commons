@@ -3,8 +3,8 @@
   "sampleName": "XXX002_P3_12345_L1",
   "sampleType": "Primary",
   "oncotreeCode": "CLL",
-  "collectionYear": "",
-  "tubeId": "NEW_TUBE_ID",
+  "collectionYear": "NEW_COLLECTION_YEAR",
+  "tubeId": "",
   "qcReports": [],
   "libraries": [
 	{
