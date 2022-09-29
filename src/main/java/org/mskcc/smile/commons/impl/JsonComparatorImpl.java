@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.json.JSONException;
 import org.mskcc.smile.commons.JsonComparator;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -205,7 +206,14 @@ public class JsonComparatorImpl implements JsonComparator {
      */
     private String standardizeAndFilterRequestJson(String jsonString, String[] ignoredFields)
             throws JsonProcessingException {
-        JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
+        Map<String, Object> jsonMap = mapper.readValue(jsonString, Map.class);
+        // alternative way of removing fields we want to ignore when comparing
+        // 2 jsons & may be simpler than the logic that we have currently in place?
+        Map<String, Object> jsonMapFiltered = jsonMap.entrySet().stream()
+                .filter(e -> !Arrays.asList(ignoredFields).contains(e.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        e -> e.getValue() == null ? "" : e.getValue()));
+        JsonNode unfilteredJsonNode = mapper.readTree(mapper.writeValueAsString(jsonMapFiltered));
         JsonNode stdJsonNode = standardizeJsonProperties(
                 (ObjectNode) unfilteredJsonNode, STD_IGO_REQUEST_JSON_PROPS_MAP);
         JsonNode stdFilteredJsonNode = filterJsonNode((ObjectNode) stdJsonNode, ignoredFields);
@@ -328,7 +336,6 @@ public class JsonComparatorImpl implements JsonComparator {
                 modifiedQcReportsNode = filterArrayNodeChildren(value);
             }
         }
-
         // remove compiled fields to remove list from input node
         // and return cleaned up node
         if (!fieldsToRemove.isEmpty()) {
@@ -336,7 +343,6 @@ public class JsonComparatorImpl implements JsonComparator {
                 node.remove(field);
             }
         }
-
         // update the modified libraries node if not null
         if (modifiedLibrariesNode != null) {
             node.remove("libraries");
