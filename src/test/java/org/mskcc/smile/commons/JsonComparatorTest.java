@@ -168,9 +168,12 @@ public class JsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockUpdatedPublishedRequest1Metadata");
         MockJsonTestData targetRequest =
                 mockedRequestJsonDataMap.get("mockUpdatedPublishedRequest1MetadataWithInvalidUpdates");
-        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+        Boolean igoConsistencyCheckStatus = jsonComparator.isConsistentIgoUpdates(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertFalse(consistencyCheckStatus);
+        Boolean dashboardConsistencyCheckStatus = jsonComparator.isConsistentDashboardUpdates(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertTrue(igoConsistencyCheckStatus);
+        Assert.assertFalse(dashboardConsistencyCheckStatus);
     }
 
     @Test
@@ -180,7 +183,7 @@ public class JsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadata");
         MockJsonTestData targetRequest =
                 mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidUpdates");
-        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentIgoUpdates(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
     }
@@ -191,7 +194,7 @@ public class JsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithLibUpdates");
         MockJsonTestData targetRequest =
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
-        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentIgoUpdates(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
         Assert.assertFalse(consistencyCheckStatus);
     }
@@ -202,7 +205,7 @@ public class JsonComparatorTest {
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWithInvalidUpdates");
         MockJsonTestData targetRequest =
                 mockedRequestJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
-        Boolean consistencyCheckStatus = jsonComparator.isConsistentUpdates(
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentIgoUpdates(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
 

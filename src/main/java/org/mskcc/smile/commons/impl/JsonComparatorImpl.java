@@ -43,14 +43,72 @@ public class JsonComparatorImpl implements JsonComparator {
         "genePanel",
         "additionalProperties"};
 
-    // Unused fields: deliveryDate and igoSampleId
-    public final String[] UPDATES_DEFAULT_IGNORED_FIELDS = new String[]{
-        "namespace", // SmileRequest field
-        // should this be included or should we let the label generator create a new one?
-        "cmoSampleName", // SampleMetadata field
-        // also apart of the list of accepted updates, but it is not found in the returned json model
-        "cmoInfoIgoId", // SampleMetadata field
-        "collectionYear", // SampleMetadata field
+    public final String[] IGO_ACCEPTED_FIELDS = new String[]{
+        //RequestMetadata fields
+        "deliveryDate",
+        "isCmoRequest",
+        "libraryType",
+        "pooledNormals",
+        "genePanel",
+        "igoRequestId",
+        "igoComplete",
+        "igoSampleId",
+        "strand",
+        // SampleMetadata fields
+        "baitSet",
+        "cfDNA2dBarcode",
+        "recipe",
+        "primaryId",
+        "barcodeId",
+        "barcodeIndex",
+        "captureConcentrationNm",
+        "captureInputNg",
+        "captureName",
+        "dnaInputNg",
+        "libraryConcentrationNgul",
+        "libraryIgoId",
+        "libraryVolume",
+        "fastqs",
+        "flowCellId",
+        "flowCellLanes",
+        "readLength",
+        "runDate",
+        "runId",
+        "runMode",
+        "IGORecommendation",
+        "comments",
+        "investigatorDecision",
+        "qcReportType"
+    };
+
+    public final String[] DASHBOARD_ACCEPTED_FIELDS = new String[]{
+        // SampleMetadata fields
+        "sampleName",
+        "sampleOrigin",
+        "sex",
+        "species",
+        "sampleClass",
+        "tissueLocation",
+        "tubeId",
+        "tumorOrNormal",
+        "oncotreeCode",
+        "preservation",
+        "investigatorSampleId",
+        "cmoPatientId",
+        // RequestMetadata fields
+        "bicAnalysis",
+        "dataAccessEmails",
+        "dataAnalystEmail",
+        "dataAnalystName",
+        "investigatorEmail",
+        "investigatorName",
+        "labHeadEmail",
+        "labHeadName",
+        "otherContactEmails",
+        "piEmail",
+        "projectManagerName",
+        "qcAccessEmails",
+        "investigatorSampleId" // Source is sample submission, is this is an accepted field?
     };
 
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
@@ -77,32 +135,40 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     @Override
-    public Boolean isConsistentUpdates(String referenceJson, String targetJson) throws Exception {
-        return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, Boolean.TRUE);
+    public Boolean isConsistentIgoUpdates(String referenceJson, String targetJson) throws Exception {
+        return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, "igo");
+    }
+
+    @Override
+    public Boolean isConsistentDashboardUpdates(String referenceJson, String targetJson) throws Exception {
+        return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, "dashboard");
     }
 
     @Override
     public Boolean isConsistent(String referenceJson, String targetJson) throws Exception {
         System.out.println("\n\n\nIn the JSON comparator.");
-        return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS, Boolean.FALSE);
+        return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS, "new");
     }
 
+    /**
+     * Accepted values of String comparisonType are new, igo and dashboard
+     */
     @Override
     public Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields,
-            Boolean isUpdate) throws Exception {
+            String comparisonType) throws Exception {
         Boolean consistencyCheckStatus = Boolean.TRUE;
 
         // filter reference and target request jsons and compare
         String filteredReferenceJson = standardizeAndFilterRequestJson(referenceJson,
-                ignoredFields, isUpdate);
+                ignoredFields, comparisonType);
         String filteredTargetJson = standardizeAndFilterRequestJson(targetJson,
-                ignoredFields, isUpdate);
+                ignoredFields, comparisonType);
         if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
             consistencyCheckStatus = Boolean.FALSE;
         }
         // check qcreports and libraries (case where sample metadata is compared directly)
         if (jsonHasQcAndOrLibrariesFields(referenceJson) || jsonHasQcAndOrLibrariesFields(targetJson)) {
-            if (!isConsistentSampleMetadata(referenceJson, targetJson, isUpdate)) {
+            if (!isConsistentSampleMetadata(referenceJson, targetJson, comparisonType)) {
                 consistencyCheckStatus = Boolean.FALSE;
             }
         }
@@ -110,9 +176,9 @@ public class JsonComparatorImpl implements JsonComparator {
         // filter reference and target sample list jsons and compare if applicable
         if (jsonHasSamplesField(referenceJson) || jsonHasSamplesField(targetJson)) {
             String filteredReferenceSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(referenceJson, ignoredFields, isUpdate);
+                    standardizeAndFilterRequestSamplesJson(referenceJson, ignoredFields, comparisonType);
             String filteredTargetSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(targetJson, ignoredFields, isUpdate);
+                    standardizeAndFilterRequestSamplesJson(targetJson, ignoredFields, comparisonType);
 
             if (!isMatchingJsons(filteredReferenceSamplesJson, filteredTargetSamplesJson)) {
                 consistencyCheckStatus = Boolean.FALSE;
@@ -130,7 +196,7 @@ public class JsonComparatorImpl implements JsonComparator {
                     JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
                     // Compares libraries and qcReports.
                     // Runs still need to be addressed
-                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode, isUpdate)) {
+                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode, comparisonType)) {
                         consistencyCheckStatus = Boolean.FALSE;
                     }
                 }
@@ -140,16 +206,16 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     private Boolean isConsistentSampleMetadata(String referenceJson, String targetJson,
-            Boolean isUpdate) throws JsonProcessingException {
+            String comparisonType) throws JsonProcessingException {
         return isConsistentSampleMetadata(mapper.readTree(referenceJson),
-                mapper.readTree(targetJson), isUpdate);
+                mapper.readTree(targetJson), comparisonType);
     }
 
     private Boolean isConsistentSampleMetadata(JsonNode referenceNode,
-            JsonNode targetNode, Boolean isUpdate) throws JsonProcessingException {
-        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports", isUpdate)
+            JsonNode targetNode, String comparisonType) throws JsonProcessingException {
+        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports", comparisonType)
                             || !isMatchingJsonByFieldName(referenceNode, targetNode,
-                                    "libraries", isUpdate)) {
+                                    "libraries", comparisonType)) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -172,16 +238,16 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     private Boolean isMatchingJsonByFieldName(JsonNode refNode, JsonNode tarNode,
-            String fieldName, Boolean isUpdate) throws JsonProcessingException {
+            String fieldName, String comparisonType) throws JsonProcessingException {
         if (refNode.has(fieldName) || tarNode.has(fieldName)) {
             // filter the ref and target jsons first then run comparison
             JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
             JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
 
             JsonNode filteredRefNode = filterJsonNode(
-                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS, isUpdate);
+                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS, comparisonType);
             JsonNode filteredTarNode = filterJsonNode(
-                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS, isUpdate);
+                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS, comparisonType);
             if (!isMatchingJsons(mapper.writeValueAsString(filteredRefNode),
                     mapper.writeValueAsString(filteredTarNode))) {
                 return Boolean.FALSE;
@@ -224,12 +290,12 @@ public class JsonComparatorImpl implements JsonComparator {
      * @throws JsonProcessingException
      */
     private String standardizeAndFilterRequestJson(String jsonString, String[] ignoredFields,
-            Boolean isUpdate) throws JsonProcessingException {
+            String comparisonType) throws JsonProcessingException {
         JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
         JsonNode stdJsonNode = standardizeJsonProperties(
                 (ObjectNode) unfilteredJsonNode, STD_IGO_REQUEST_JSON_PROPS_MAP);
         JsonNode stdFilteredJsonNode = filterJsonNode((ObjectNode) stdJsonNode,
-                ignoredFields, isUpdate);
+                ignoredFields, comparisonType);
         return mapper.writeValueAsString(stdFilteredJsonNode);
     }
 
@@ -243,7 +309,7 @@ public class JsonComparatorImpl implements JsonComparator {
      * @throws JsonProcessingException
      */
     private String standardizeAndFilterRequestSamplesJson(String jsonString, String[] ignoredFields,
-            Boolean isUpdate) throws JsonProcessingException {
+            String comparisonType) throws JsonProcessingException {
         if (!jsonHasSamplesField(jsonString)) {
             return null;
         }
@@ -258,7 +324,7 @@ public class JsonComparatorImpl implements JsonComparator {
             JsonNode stdSampleNode = standardizeJsonProperties(
                     (ObjectNode) itr.next(), STD_IGO_SAMPLE_JSON_PROPS_MAP);
             JsonNode stdFilteredSampleNode = filterJsonNode((ObjectNode) stdSampleNode,
-                    ignoredFields, isUpdate);
+                    ignoredFields, comparisonType);
 
             String sid = findPrimaryIdFromJsonNode(stdFilteredSampleNode);
             unorderedSamplesMap.put(sid, stdFilteredSampleNode);
@@ -325,11 +391,11 @@ public class JsonComparatorImpl implements JsonComparator {
      * @return JsonNode
      */
     private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields,
-            Boolean isUpdateMetadata) throws JsonProcessingException {
+            String comparisonType) throws JsonProcessingException {
         List<String> fieldsToRemove = new ArrayList<>();
         List<String> igoUpdatesRejectedFields = new ArrayList<>();
 
-        igoUpdatesRejectedFields.addAll(Arrays.asList(UPDATES_DEFAULT_IGNORED_FIELDS));
+        igoUpdatesRejectedFields.addAll(Arrays.asList(IGO_ACCEPTED_FIELDS));
 
         // if ignored fields is not null then add to list of fields to remove
         if (ignoredFields != null) {
@@ -345,20 +411,29 @@ public class JsonComparatorImpl implements JsonComparator {
             String value = node.get(field).asText();
 
             // special handling for metadata updates
-            if (isUpdateMetadata && fieldExistsInList(UPDATES_DEFAULT_IGNORED_FIELDS, field)) {
+            if (comparisonType.equals("igo") && !fieldExistsInList(IGO_ACCEPTED_FIELDS, field)) {
+                System.out.println("\n\n\nchecking ignored igo field...\n\n\n");
                 if (!fieldExistsInList(ignoredFields, field)) {
                     fieldsToRemove.add(field);
                 }
             }
+
+            if (comparisonType.equals("dashboard") && !fieldExistsInList(DASHBOARD_ACCEPTED_FIELDS, field)) {
+                System.out.println("\n\n\nchecking ignored dashboard field...\n\n\n");
+                if (!fieldExistsInList(ignoredFields, field)) {
+                    fieldsToRemove.add(field);
+                }
+            }
+
             if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
                     || value.equalsIgnoreCase("[]")) {
                 fieldsToRemove.add(field);
             } else if (field.equals("libraries")) {
                 // special handling for libraries
-                modifiedLibrariesNode = filterArrayNodeChildren(value, isUpdateMetadata);
+                modifiedLibrariesNode = filterArrayNodeChildren(value, comparisonType);
             } else if (field.equals("qcReports")) {
                 // special handling for libraries
-                modifiedQcReportsNode = filterArrayNodeChildren(value, isUpdateMetadata);
+                modifiedQcReportsNode = filterArrayNodeChildren(value, comparisonType);
             }
         }
 
@@ -388,7 +463,7 @@ public class JsonComparatorImpl implements JsonComparator {
             fieldsArrayList.addAll(Arrays.asList(fieldList));
 
         } else {
-            fieldsArrayList.addAll(Arrays.asList(UPDATES_DEFAULT_IGNORED_FIELDS));
+            fieldsArrayList.addAll(Arrays.asList(IGO_ACCEPTED_FIELDS));
         }
         for (String fieldName: fieldsArrayList) {
             if (fieldName.equals(field)) {
@@ -406,14 +481,14 @@ public class JsonComparatorImpl implements JsonComparator {
      * @return JsonNode
      * @throws JsonProcessingException
      */
-    private JsonNode filterArrayNodeChildren(String parentNode, Boolean isUpdateMetadata)
+    private JsonNode filterArrayNodeChildren(String parentNode, String comparisonType)
             throws JsonProcessingException {
         List<Object> filteredParentNode = new ArrayList<>();
         List<Object> childrenObjects = mapper.readValue(parentNode, List.class);
         for (Object childObj : childrenObjects) {
             String childObjString = mapper.writeValueAsString(childObj);
             JsonNode filteredChildNode = filterJsonNode((ObjectNode)
-                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, isUpdateMetadata);
+                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
             filteredParentNode.add(filteredChildNode);
         }
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
