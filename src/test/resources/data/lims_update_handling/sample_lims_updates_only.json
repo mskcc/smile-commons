@@ -1,0 +1,55 @@
+{
+  "cmoSampleName": "C-8DH24X-N001-d",
+  "sampleName": "01-XXXXXXXa",
+  "cmoSampleClass": "Normal",
+  "oncoTreeCode": "COAD",
+  "collectionYear": "",
+  "tubeId": "",
+  "qcReports": [],
+  "libraries": [
+	{
+	  "barcodeId": null,
+	  "barcodeIndex": "TGGAACAA",
+	  "libraryIgoId": "MOCKREQUEST1_B_4_1_1_1",
+	  "libraryVolume": 35.0,
+	  "libraryConcentrationNgul": 34.1,
+	  "captureConcentrationNm": "4.9853372434017595",
+	  "captureInputNg": "170.0",
+	  "captureName": "Pool-MOCKREQUEST1_B-Tube7_1",
+	  "runs": [
+		{
+		  "runMode": "HiSeq High Output",
+		  "runId": "RUNID_0123",
+		  "flowCellId": "X5KL2KKAY",
+		  "readLength": "",
+		  "runDate": "2018-06-05",
+		  "flowCellLanes": [
+			5
+		  ],
+		  "fastqs": [
+			"/FASTQ/Project_MOCKREQUEST1_B/Sample_01-XXXXXXXa_IGO_MOCKREQUEST1_B_4/01-XXXXXXXa_IGO_MOCKREQUEST1_B_4_S85_R1_001.fastq.gz",
+			"/FASTQ/Project_MOCKREQUEST1_B/Sample_01-XXXXXXXa_IGO_MOCKREQUEST1_B_4/01-XXXXXXXa_IGO_MOCKREQUEST1_B_4_S85_R2_001.fastq.gz"
+		  ]
+		}
+	  ]
+	}
+  ],
+  "cmoPatientId": "C-8DH24X",
+  "igoId": "MOCKREQUEST1_B_4",
+  "investigatorSampleId": "01-XXXXXXXa",
+  "species": "Human",
+  "sex": "M",
+  "tumorOrNormal": "Normal",
+  "preservation": "Frozen",
+  "specimenType": "Blood",
+  "sampleOrigin": "Whole Blood",
+  "tissueLocation": "",
+  "baitSet": "IGO_LIMS_APPROVED_BAITSET",
+  "igoComplete": true,
+  "cmoSampleIdFields": {
+	"naToExtract": "",
+	"sampleType": "Whole Blood",
+	"normalizedPatientId": "MRN_REDACTED",
+	"recipe": "IGO_LIMS_APPROVED_BAITSET"
+  }
+}
