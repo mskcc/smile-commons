@@ -235,6 +235,46 @@ public class JsonComparatorTest {
         Assert.assertTrue(mixedUpdatesSampleCheck2);
     }
 
+    /**
+     * Tests that the comparator can detect changes in general as well as IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testCompareSampleStatus() throws Exception {
+        MockJsonTestData refJson = mockedRequestJsonDataMap.get("mockIncomingRequest1JsonWithSampleStatus");
+        MockJsonTestData tarJson = mockedRequestJsonDataMap.get("mockPublishingRequest1JsonWithSampleStatus");
+        Boolean compareSampleStatus = jsonComparator.isConsistent(
+                refJson.getJsonString(), tarJson.getJsonString());
+        Assert.assertTrue(compareSampleStatus);
+    }
+
+    /**
+     * Tests that the comparator can detect changes in general as well as IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testCompareInvalidSampleStatus() throws Exception {
+        MockJsonTestData refJson = mockedRequestJsonDataMap.get(
+                "mockIncomingRequest1JsonWithSampleStatus");
+        MockJsonTestData tarJson = mockedRequestJsonDataMap.get(
+                "mockPublishingRequest1JsonInvalidSampleStatus");
+        Boolean compareSampleStatus = jsonComparator.isConsistent(
+                refJson.getJsonString(), tarJson.getJsonString());
+        Assert.assertFalse(compareSampleStatus);
+    }
+
+    /**
+     * Tests that the comparator can detect changes in general as well as IGO-specific properties.
+     * @throws Exception
+     */
+    @Test public void testCompareMissingSampleStatus() throws Exception {
+        MockJsonTestData refJson = mockedRequestJsonDataMap.get(
+                "mockIncomingRequest1JsonWithSampleStatus");
+        MockJsonTestData tarJson = mockedRequestJsonDataMap.get(
+                "mockPublishingRequest1JsonMissingSampleStatus");
+        Boolean compareSampleStatus = jsonComparator.isConsistent(
+                refJson.getJsonString(), tarJson.getJsonString());
+        Assert.assertFalse(compareSampleStatus);
+    }
+
     private String getErrorMessage(Map<String, String> errorsMap) {
         StringBuilder builder = new StringBuilder();
         builder.append("\nConsistencyCheckerUtil failures summary:\n");
