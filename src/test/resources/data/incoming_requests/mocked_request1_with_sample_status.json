@@ -71,8 +71,8 @@
       },
       "status": [
         {
-        "validationStatus": true,
-        "validationReport": ""
+          "validationStatus": false,
+          "validationReport" : "[{ \"sampleOrigin\": \"value\"},{ \"sampleClass\": \"value\"}]"
         }
       ]
     },

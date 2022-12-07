@@ -96,8 +96,8 @@
       },
       "status": [
         {
-        "validationStatus": false,
-        "validationReport": ""
+          "validationStatus": false,
+          "validationReport" : "[{ \"sampleOrigin\": \"value\"},{ \"sampleClass\": \"invalid value\"}]"
         }
       ]
     },
