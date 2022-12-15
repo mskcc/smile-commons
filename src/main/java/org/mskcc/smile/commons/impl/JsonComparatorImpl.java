@@ -83,6 +83,7 @@ public class JsonComparatorImpl implements JsonComparator {
         "qcReportType",
         "libraries",
         "qcReports",
+        "status",
         "cmoSampleIdFields",
         "runs"
     };
@@ -143,8 +144,9 @@ public class JsonComparatorImpl implements JsonComparator {
             consistencyCheckStatus = Boolean.FALSE;
         }
 
-        // check qcreports and libraries (case where sample metadata is compared directly)
-        if (jsonHasQcAndOrLibrariesFields(referenceJson) || jsonHasQcAndOrLibrariesFields(targetJson)) {
+        // checks qcreports, libraries and status (case where sample metadata is compared directly)
+        if (jsonHasQcAndOrLibrariesAndOrStatusFields(referenceJson)
+                || jsonHasQcAndOrLibrariesAndOrStatusFields(targetJson)) {
             if (!isConsistentSampleMetadata(referenceJson, targetJson, comparisonType)) {
                 consistencyCheckStatus = Boolean.FALSE;
             }
@@ -171,7 +173,7 @@ public class JsonComparatorImpl implements JsonComparator {
                 String primaryId = findPrimaryIdFromJsonNode(refSampleNode);
                 if (primaryId != null) {
                     JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
-                    // Compares libraries and qcReports.
+                    // Compares status, libraries and qcReports.
                     // Runs still need to be addressed
                     if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode, comparisonType)) {
                         consistencyCheckStatus = Boolean.FALSE;
@@ -192,7 +194,9 @@ public class JsonComparatorImpl implements JsonComparator {
             JsonNode targetNode, String comparisonType) throws JsonProcessingException {
         if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports", comparisonType)
                             || !isMatchingJsonByFieldName(referenceNode, targetNode,
-                                    "libraries", comparisonType)) {
+                                    "libraries", comparisonType)
+                            || !isMatchingJsonByFieldName(referenceNode, targetNode,
+                                            "status", comparisonType)) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
@@ -216,7 +220,8 @@ public class JsonComparatorImpl implements JsonComparator {
 
     private Boolean isMatchingJsonByFieldName(JsonNode refNode, JsonNode tarNode,
             String fieldName, String comparisonType) throws JsonProcessingException {
-        if (refNode.has(fieldName) || tarNode.has(fieldName)) {
+        // Case 1: target and reference have the field
+        if (refNode.has(fieldName) && tarNode.has(fieldName)) {
             // filter the ref and target jsons first then run comparison
             JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
             JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
@@ -229,8 +234,14 @@ public class JsonComparatorImpl implements JsonComparator {
                     mapper.writeValueAsString(filteredTarNode))) {
                 return Boolean.FALSE;
             }
+            return Boolean.TRUE;
         }
-        return Boolean.TRUE;
+        // Case 2: target and reference do not have the field
+        if (!refNode.has(fieldName) && !tarNode.has(fieldName)) {
+            return Boolean.TRUE;
+        }
+        // Case 3: One of them is missing the field
+        return Boolean.FALSE;
     }
 
     /**
@@ -321,9 +332,10 @@ public class JsonComparatorImpl implements JsonComparator {
         return mapper.writeValueAsString(sortedRequestSamplesArrayNode);
     }
 
-    private Boolean jsonHasQcAndOrLibrariesFields(String jsonString) throws JsonProcessingException {
+    private Boolean jsonHasQcAndOrLibrariesAndOrStatusFields(String jsonString)
+            throws JsonProcessingException {
         JsonNode jsonNode = mapper.readTree(jsonString);
-        return jsonNode.has("libraries") || jsonNode.has("qcReports");
+        return jsonNode.has("libraries") || jsonNode.has("qcReports") || jsonNode.has("status");
     }
 
     /**
@@ -378,7 +390,8 @@ public class JsonComparatorImpl implements JsonComparator {
         }
 
         JsonNode modifiedQcReportsNode = null;
-        JsonNode modifiedLibrariesNode = null; // this is for special case handling
+        JsonNode modifiedLibrariesNode = null;
+        JsonNode modifiedStatusNode = null; // this is for special case handling
         // append list of fields to remove from node that contain null or empty values
         Iterator<String> itr = node.fieldNames();
         while (itr.hasNext()) {
@@ -398,8 +411,11 @@ public class JsonComparatorImpl implements JsonComparator {
                 // special handling for libraries
                 modifiedLibrariesNode = filterArrayNodeChildren(value, comparisonType);
             } else if (field.equals("qcReports")) {
-                // special handling for libraries
+                // special handling for qcReports
                 modifiedQcReportsNode = filterArrayNodeChildren(value, comparisonType);
+            } else if (field.equals("status")) {
+                // special handling for status
+                modifiedStatusNode = filterArrayNodeChildren(value, comparisonType);
             }
         }
 
@@ -418,7 +434,11 @@ public class JsonComparatorImpl implements JsonComparator {
         }
         if (modifiedQcReportsNode != null) {
             node.remove("qcReports");
-            node.put("qcReports", modifiedLibrariesNode);
+            node.put("qcReports", modifiedQcReportsNode);
+        }
+        if (modifiedStatusNode != null) {
+            node.remove("status");
+            node.put("status", modifiedStatusNode);
         }
         return node;
     }
