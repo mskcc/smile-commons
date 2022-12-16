@@ -222,7 +222,17 @@ public class JsonComparatorImpl implements JsonComparator {
             String fieldName, String comparisonType) throws JsonProcessingException {
         // Case 1: target and reference have the field
         if (refNode.has(fieldName) && tarNode.has(fieldName)) {
-            // filter the ref and target jsons first then run comparison
+            // Case 1a: target and reference have an empty field
+            if (refNode.get(fieldName).isEmpty() && refNode.get(fieldName).isEmpty()) {
+                return Boolean.TRUE;
+            }
+
+            // Case 1b: target or reference have an empty field
+            if (refNode.get(fieldName).isEmpty() || refNode.get(fieldName).isEmpty()) {
+                return Boolean.FALSE;
+            }
+
+            // Case 1c: filter the ref and target jsons first then compare
             JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
             JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
 
@@ -233,6 +243,29 @@ public class JsonComparatorImpl implements JsonComparator {
             if (!isMatchingJsons(mapper.writeValueAsString(filteredRefNode),
                     mapper.writeValueAsString(filteredTarNode))) {
                 return Boolean.FALSE;
+            }
+
+            if (fieldName.equals("libraries")) {
+                ArrayNode librariesRefArrayNode = (ArrayNode) refNode.get(fieldName);
+                Iterator<JsonNode> itrLibRef = librariesRefArrayNode.elements();
+
+                ArrayNode librariesTarArrayNode = (ArrayNode) tarNode.get(fieldName);
+                Iterator<JsonNode> itrLibTar = librariesTarArrayNode.elements();
+
+                if (librariesRefArrayNode.size() != librariesTarArrayNode.size()) {
+                    return Boolean.FALSE;
+                }
+
+                // Assumption: corresponding library elements from ref and tar are in the same index
+                while (itrLibRef.hasNext() && itrLibTar.hasNext()) {
+                    JsonNode refLibNext = itrLibRef.next();
+                    JsonNode tarLibNext = itrLibTar.next();
+
+                    if (!isMatchingJsonByFieldName(refLibNext,
+                            tarLibNext, "runs", comparisonType)) {
+                        return Boolean.FALSE;
+                    }
+                }
             }
             return Boolean.TRUE;
         }
@@ -253,6 +286,9 @@ public class JsonComparatorImpl implements JsonComparator {
      */
     private JsonNode convertToMapJsonNode(String fieldName, JsonNode node) throws JsonProcessingException {
         Map<String, String> map = new HashMap<>();
+        if (!node.has(fieldName)) {
+            return null;
+        }
         map.put(fieldName, node.get(fieldName).toString());
         String convertedMapAsString = mapper.writeValueAsString(map);
         return mapper.readTree(convertedMapAsString);

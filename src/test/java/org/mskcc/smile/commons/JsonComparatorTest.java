@@ -161,6 +161,10 @@ public class JsonComparatorTest {
         Assert.assertFalse(consistencyCheckStatus);
     }
 
+    /**
+     * Test if the comparator recognizes consistent sampleMetadata
+     * @throws Exception
+     */
     @Test
     public void testUpdatesComparatorSampleMetadata() throws Exception {
         // create json with sample-level metadata and another with updates
@@ -171,6 +175,22 @@ public class JsonComparatorTest {
         Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
         Assert.assertTrue(consistencyCheckStatus);
+    }
+
+    /**
+     * Test if the comparator recognizes invalid runs updates in sampleMetadata
+     * @throws Exception
+     */
+    @Test
+    public void testInvalidRunsUpdatesComparatorSampleMetadata() throws Exception {
+        // create json with sample-level metadata and another with updates
+        MockJsonTestData referenceRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadata");
+        MockJsonTestData targetRequest =
+                mockedRequestJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidRunsUpdates");
+        Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
+                referenceRequest.getJsonString(), targetRequest.getJsonString());
+        Assert.assertFalse(consistencyCheckStatus);
     }
 
     @Test
