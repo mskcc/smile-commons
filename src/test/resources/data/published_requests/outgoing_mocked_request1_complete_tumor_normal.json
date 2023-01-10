@@ -302,7 +302,7 @@
       "sampleOrigin": "Whole Blood",
       "tissueLocation": "",
       "baitSet": "GENESET101_BAITS",
-      "genePanel": "GENESET101_BAITS",
+      "genePanel": "GENESET101_BAITS_UPDATED",
       "datasource": "igo",
       "igoComplete": true,
       "cmoSampleIdFields": {

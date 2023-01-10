@@ -73,7 +73,6 @@
       "sampleClass": "Blood",
       "sampleOrigin": "Buffy Coat",
       "tissueLocation": "Blood",
-      "baitSet": "GENESET101_BAITS",
       "genePanel": "GENESET101_BAITS",
       "datasource": "igo",
       "igoComplete": true,

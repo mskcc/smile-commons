@@ -40,7 +40,6 @@ public class JsonComparatorImpl implements JsonComparator {
         "datasource",
         "patientAliases",
         "sampleAliases",
-        "genePanel",
         "additionalProperties"};
 
     public final String[] IGO_ACCEPTED_FIELDS = new String[]{
@@ -108,6 +107,7 @@ public class JsonComparatorImpl implements JsonComparator {
         map.put("oncoTreeCode", "oncotreeCode");
         map.put("requestId", "igoRequestId");
         map.put("igoId", "primaryId");
+        map.put("baitSet", "genePanel");
         return map;
     }
 
