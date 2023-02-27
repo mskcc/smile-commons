@@ -264,7 +264,7 @@ public class JsonComparatorTest {
         MockJsonTestData tarJson = mockedRequestJsonDataMap.get("mockPublishingRequest1JsonWithSampleStatus");
         Boolean compareSampleStatus = jsonComparator.isConsistent(
                 refJson.getJsonString(), tarJson.getJsonString());
-        Assert.assertTrue(compareSampleStatus);
+        Assert.assertFalse(compareSampleStatus);
     }
 
     /**

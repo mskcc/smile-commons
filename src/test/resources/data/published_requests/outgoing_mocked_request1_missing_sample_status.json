@@ -93,12 +93,10 @@
         "isCmoSample": "true",
         "igoRequestId": "MOCKREQUEST1_B"
       },
-      "status": [
-        {
+      "status": {
         "validationStatus": true,
         "validationReport": ""
         }
-      ]
     },
     {
       "smileSampleId": "afe75123-8756-11eb-8f14-acde48001122",

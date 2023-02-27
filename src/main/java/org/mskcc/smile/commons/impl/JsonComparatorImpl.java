@@ -267,6 +267,7 @@ public class JsonComparatorImpl implements JsonComparator {
                     }
                 }
             }
+            // compare status nodes
             return Boolean.TRUE;
         }
         // Case 2: target and reference do not have the field
@@ -451,7 +452,7 @@ public class JsonComparatorImpl implements JsonComparator {
                 modifiedQcReportsNode = filterArrayNodeChildren(value, comparisonType);
             } else if (field.equals("status")) {
                 // special handling for status
-                modifiedStatusNode = filterArrayNodeChildren(value, comparisonType);
+                modifiedStatusNode = filterArrayNodeChildrenByMap(value, comparisonType);
             }
         }
 
@@ -496,6 +497,19 @@ public class JsonComparatorImpl implements JsonComparator {
             JsonNode filteredChildNode = filterJsonNode((ObjectNode)
                     mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
             filteredParentNode.add(filteredChildNode);
+        }
+        return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
+    }
+    
+    private JsonNode filterArrayNodeChildrenByMap(String parentNode, String comparisonType)
+            throws JsonProcessingException {
+        Map<String,Object> filteredParentNode = new HashMap<>();
+        Map<String,String> childrenObjects = mapper.readValue(parentNode, Map.class);
+        for (Map.Entry<String, String> childObj : childrenObjects.entrySet()) {
+            String childObjString = mapper.writeValueAsString(childObj);
+            JsonNode filteredChildNode = filterJsonNode((ObjectNode)
+                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
+            filteredParentNode.put(childObj.getKey(), filteredChildNode);
         }
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
     }
