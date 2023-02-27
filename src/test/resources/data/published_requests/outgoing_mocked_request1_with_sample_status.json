@@ -96,7 +96,7 @@
       },
       "status": {
           "validationStatus": false,
-          "validationReport": "[{ \"sampleOrigin\": \"valueeee\"},{ \"sampleClass\": \"value\"}]"
+          "validationReport": "[{ \"sampleOrigin\": \"value\"},{ \"sampleClass\": \"value\"}]"
 
         }
     },

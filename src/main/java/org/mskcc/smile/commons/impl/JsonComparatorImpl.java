@@ -446,10 +446,10 @@ public class JsonComparatorImpl implements JsonComparator {
                 fieldsToRemove.add(field);
             } else if (field.equals("libraries")) {
                 // special handling for libraries
-                modifiedLibrariesNode = filterArrayNodeChildren(value, comparisonType);
+                modifiedLibrariesNode = filterArrayNodeChildrenByList(value, comparisonType);
             } else if (field.equals("qcReports")) {
                 // special handling for qcReports
-                modifiedQcReportsNode = filterArrayNodeChildren(value, comparisonType);
+                modifiedQcReportsNode = filterArrayNodeChildrenByList(value, comparisonType);
             } else if (field.equals("status")) {
                 // special handling for status
                 modifiedStatusNode = filterArrayNodeChildrenByMap(value, comparisonType);
@@ -484,11 +484,12 @@ public class JsonComparatorImpl implements JsonComparator {
      * Given a parent node as a string, returns a filtered JsonNode.
      * This is special case handling specific to 'libraries' and other
      * child properties of samples that are actually array nodes
+     * This maps the parentNode to List.class
      * @param parentNode
      * @return JsonNode
      * @throws JsonProcessingException
      */
-    private JsonNode filterArrayNodeChildren(String parentNode, String comparisonType)
+    private JsonNode filterArrayNodeChildrenByList(String parentNode, String comparisonType)
             throws JsonProcessingException {
         List<Object> filteredParentNode = new ArrayList<>();
         List<Object> childrenObjects = mapper.readValue(parentNode, List.class);
@@ -501,6 +502,15 @@ public class JsonComparatorImpl implements JsonComparator {
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
     }
     
+    /**
+     * Given a parent node as a string, returns a filtered JsonNode.
+     * This is special case handling specific to 'status' and other
+     * child properties of samples that are actually array nodes
+     * This maps the parentNode to Map.class
+     * @param parentNode
+     * @return JsonNode
+     * @throws JsonProcessingException
+     */
     private JsonNode filterArrayNodeChildrenByMap(String parentNode, String comparisonType)
             throws JsonProcessingException {
         Map<String,Object> filteredParentNode = new HashMap<>();
