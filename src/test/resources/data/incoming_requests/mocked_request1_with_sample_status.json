@@ -69,12 +69,10 @@
         "normalizedPatientId": "MRN_REDACTED",
         "recipe": "GENESET101_BAITS"
       },
-      "status": [
-        {
+      "status": {
           "validationStatus": false,
           "validationReport" : "[{ \"sampleOrigin\": \"value\"},{ \"sampleClass\": \"value\"}]"
         }
-      ]
     },
     {
       "cmoSampleName": "C-MP789JR-N001-d",
