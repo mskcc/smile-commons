@@ -41,7 +41,8 @@ public class JsonComparatorImpl implements JsonComparator {
         "patientAliases",
         "sampleAliases",
         "genePanel",
-        "additionalProperties"};
+        "additionalProperties",
+        "cmoInfoIgoId"};
 
     public final String[] IGO_ACCEPTED_FIELDS = new String[]{
         //RequestMetadata fields
