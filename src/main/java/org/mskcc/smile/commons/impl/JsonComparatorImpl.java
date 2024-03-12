@@ -42,7 +42,8 @@ public class JsonComparatorImpl implements JsonComparator {
         "sampleAliases",
         "genePanel",
         "additionalProperties",
-        "cmoInfoIgoId"};
+        "cmoInfoIgoId",
+        "date"};
 
     public final String[] IGO_ACCEPTED_FIELDS = new String[]{
         //RequestMetadata fields
@@ -87,6 +88,11 @@ public class JsonComparatorImpl implements JsonComparator {
         "status",
         "cmoSampleIdFields",
         "runs"
+    };
+
+    public final String[] GENERIC_IGNORED_FIELDS = new String[]{
+        "date",
+        "samples"
     };
 
     private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
@@ -181,6 +187,17 @@ public class JsonComparatorImpl implements JsonComparator {
                     }
                 }
             }
+        }
+        return consistencyCheckStatus;
+    }
+
+    @Override
+    public Boolean isConsistentGenericComparison(String referenceJson, String targetJson) throws Exception {
+        Boolean consistencyCheckStatus = Boolean.TRUE;
+        String filteredReferenceJson = filterGenericJson(referenceJson);
+        String filteredTargetJson = filterGenericJson(targetJson);
+        if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
+            consistencyCheckStatus = Boolean.FALSE;
         }
         return consistencyCheckStatus;
     }
@@ -326,6 +343,19 @@ public class JsonComparatorImpl implements JsonComparator {
     }
 
     /**
+     * Given an input jsonString, returns a JSON with (1) generic fields ignored and (2) null
+     * or empty values removed.
+     * @param jsonString
+     * @return String
+     * @throws JsonProcessingException
+     */
+    private String filterGenericJson(String jsonString) throws JsonProcessingException {
+        JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
+        JsonNode filteredJsonNode = filterGenericJsonNode((ObjectNode) unfilteredJsonNode);
+        return mapper.writeValueAsString(filteredJsonNode);
+    }
+
+    /**
      * Given an input jsonString and an array of ignoredFields, returns a JSON
      * with (1) the fields to ignore removed, (2) json fields with null or empty values
      * removed, and (3) standardize json property names.
@@ -408,6 +438,30 @@ public class JsonComparatorImpl implements JsonComparator {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+
+    private JsonNode filterGenericJsonNode(ObjectNode node) throws JsonProcessingException {
+        List<String> fieldsToRemove = new ArrayList<>();
+        fieldsToRemove.addAll(Arrays.asList(GENERIC_IGNORED_FIELDS));
+
+        Iterator<String> itr = node.fieldNames();
+        while (itr.hasNext()) {
+            String field = itr.next();
+            String value = node.get(field).toString();
+
+            if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
+                    || value.equalsIgnoreCase("[]")) {
+                fieldsToRemove.add(field);
+            }
+        }
+        // remove compiled fields to remove list from input node
+        // and return cleaned up node
+        if (!fieldsToRemove.isEmpty()) {
+            for (String field : fieldsToRemove) {
+                node.remove(field);
+            }
+        }
+        return node;
     }
 
     /**
@@ -502,7 +556,7 @@ public class JsonComparatorImpl implements JsonComparator {
         }
         return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
     }
-    
+
     /**
      * Given a parent node as a string, returns a filtered JsonNode.
      * This is special case handling specific to 'status' and other

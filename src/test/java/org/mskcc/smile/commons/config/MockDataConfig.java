@@ -53,16 +53,16 @@ public class MockDataConfig {
         return jsonComparator;
     }
 
-    private Map<String, MockJsonTestData> mockedRequestJsonDataMap;
+    private Map<String, MockJsonTestData> mockedJsonDataMap;
 
     /**
      * Generates a mocked request json data map.
      * @return Map
      * @throws IOException
      */
-    @Bean(name = "mockedRequestJsonDataMap")
-    public Map<String, MockJsonTestData> mockedRequestJsonDataMap() throws IOException {
-        this.mockedRequestJsonDataMap = new HashMap<>();
+    @Bean(name = "mockedJsonDataMap")
+    public Map<String, MockJsonTestData> mockedJsonDataMap() throws IOException {
+        this.mockedJsonDataMap = new HashMap<>();
         ClassPathResource jsonDataDetailsResource =
                 new ClassPathResource(MOCKED_REQUEST_DATA_DETAILS_FILEPATH);
         BufferedReader reader = new BufferedReader(new FileReader(jsonDataDetailsResource.getFile()));
@@ -77,11 +77,11 @@ public class MockDataConfig {
             String identifier = data[columns.indexOf("identifier")];
             String filepath = data[columns.indexOf("filepath")];
             String description = data[columns.indexOf("description")];
-            mockedRequestJsonDataMap.put(identifier,
+            mockedJsonDataMap.put(identifier,
                     createMockJsonTestData(identifier, filepath, description));
         }
         reader.close();
-        return mockedRequestJsonDataMap;
+        return mockedJsonDataMap;
     }
 
     private MockJsonTestData createMockJsonTestData(String identifier,

@@ -39,3 +39,6 @@ samplePreUpdate	lims_update_handling/sample_pre_update.json	Base sample metadata
 sampleLimsUpdatesOnly	lims_update_handling/sample_lims_updates_only.json	Sample from 'samplePreUpdate' with only LIMS prop updates.
 sampleNonLimsUpdates	lims_update_handling/sample_non_lims_updates.json	Sample from 'samplePreUpdate' with updates to non-LIMS properties. This would be treated as if it was received on the IGO topic and would therefore be rejected.
 sampleMixedUpdates	lims_update_handling/sample_mixed_updates.json	Sample from 'samplePreUpdate' with changes to both LIMS and non-LIMS properties. In this case the expected sample saved to SMILE would have only the IGO LIMS updates persisted to the database.
+mockCohortCompleteCCSPPPQQQQ	tempo/cohort_complete_CCS_PPPQQQQ.json	Mocked Cohort complete JSON with cohort ID CCS_PPPQQQQ. Has 4 samples associated with it.
+mockCohortCompleteCCSPPPQQQQ2	tempo/cohort_complete_CCS_PPPQQQQ_2.json	Mocked Cohort complete JSON with cohort ID CCS_PPPQQQQ_2. Has 2 samples associated with it.
+mockCohortCompleteCCSPPPQQQQUpdated	tempo/cohort_complete_CCS_PPPQQQQ_updated.json	Mocked updated Cohort complete JSON with cohort ID CCS_PPPQQQQ. Has 4 samples associated with it.
