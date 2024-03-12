@@ -9,4 +9,5 @@ public interface JsonComparator {
     Boolean isConsistent(String referenceJson, String targetJson) throws Exception;
     Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields,
             String comparisonType) throws Exception;
+    Boolean isConsistentGenericComparison(String referenceJson, String targetJson) throws Exception;
 }
