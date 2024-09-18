@@ -1,6 +1,6 @@
 defaults: &defaults
     docker:
-        - image: cimg/openjdk:8.0.275
+        - image: cimg/openjdk:19.0.0
 
 version: 2.1
 
