@@ -2,7 +2,5 @@ jdk:
   - openjdk19
 
 before_install:
-   - sdk install java 19.0.1   
-   - sdk use java 19.0.1
    - sdk install maven 3.6.3
    - sdk use maven 3.6.3
