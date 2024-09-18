@@ -6,3 +6,4 @@ before_install:
    - sdk use maven 3.6.3
    - sdk install java 19.0.2-open
    - sdk use java 19.0.2.-open
+   - sdk update
