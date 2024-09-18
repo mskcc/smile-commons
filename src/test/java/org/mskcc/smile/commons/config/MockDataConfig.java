@@ -14,8 +14,8 @@ import org.mskcc.smile.commons.FileUtil;
 import org.mskcc.smile.commons.JsonComparator;
 import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
@@ -23,8 +23,8 @@ import org.springframework.core.io.ClassPathResource;
  *
  * @author ochoaa
  */
+@SpringBootApplication(scanBasePackages = {"org.mskcc.smile.commons.*"})
 @Configuration
-@ComponentScan(basePackages = "org.mskcc.smile.commons.*")
 public class MockDataConfig {
     private final ObjectMapper mapper = new ObjectMapper();
     private final String MOCKED_REQUEST_DATA_DETAILS_FILEPATH = "data/mocked_request_data_details.txt";

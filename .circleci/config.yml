@@ -1,16 +1,10 @@
-defaults: &defaults
-    docker:
-        - image: cimg/openjdk:8.0.275
-
 version: 2.1
-
-orbs:
-  maven: circleci/maven@1.0.3
 
 jobs:
   run_checkstyle:
-    <<: *defaults
     working_directory: /tmp/repos/smile-commons
+    machine:
+      image: ubuntu-2004:2024.05.1
     steps:
       - checkout
       - run:

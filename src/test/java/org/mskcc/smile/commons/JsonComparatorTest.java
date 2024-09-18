@@ -8,14 +8,14 @@ import org.junit.runner.RunWith;
 import org.mskcc.smile.commons.config.MockDataConfig;
 import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author ochoaa
  */
-@ContextConfiguration(classes = MockDataConfig.class)
+@SpringBootTest(classes = MockDataConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class JsonComparatorTest {
     @Autowired
