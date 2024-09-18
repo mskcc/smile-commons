@@ -6,9 +6,9 @@ import io.opentelemetry.context.Context;
 import io.opentelemetry.context.propagation.TextMapGetter;
 import io.opentelemetry.context.propagation.TextMapSetter;
 import io.opentelemetry.extension.trace.propagation.B3Propagator;
+import jakarta.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Nullable;
 import org.mskcc.smile.commons.OpenTelemetryUtils;
 import org.springframework.stereotype.Component;
 
