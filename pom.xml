@@ -20,8 +20,7 @@
   <properties>
     <spring.version>6.1.12</spring.version>
     <java.version>21</java.version>
-    <maven.compiler.version>21</maven.compiler.version>
-    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven.compiler.version>3.11.0</maven.compiler.version>
     <jackson.version>2.17.2</jackson.version>
   </properties>
 
@@ -113,7 +112,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.plugin.version}</version>
+        <version>${maven.compiler.version}</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
