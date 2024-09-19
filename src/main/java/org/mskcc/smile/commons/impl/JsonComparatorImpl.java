@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.mskcc.smile.commons.JsonComparator;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -449,7 +449,7 @@ public class JsonComparatorImpl implements JsonComparator {
             String field = itr.next();
             String value = node.get(field).toString();
 
-            if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
+            if (StringUtils.isBlank(value) || value.equalsIgnoreCase("null")
                     || value.equalsIgnoreCase("[]")) {
                 fieldsToRemove.add(field);
             }
@@ -496,7 +496,7 @@ public class JsonComparatorImpl implements JsonComparator {
                 fieldsToRemove.add(field);
             }
 
-            if (Strings.isNullOrEmpty(value) || value.equalsIgnoreCase("null")
+            if (StringUtils.isBlank(value) || value.equalsIgnoreCase("null")
                     || value.equalsIgnoreCase("[]")) {
                 fieldsToRemove.add(field);
             } else if (field.equals("libraries")) {
