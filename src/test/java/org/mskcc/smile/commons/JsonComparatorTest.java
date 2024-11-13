@@ -2,21 +2,18 @@ package org.mskcc.smile.commons;
 
 import java.util.HashMap;
 import java.util.Map;
-import junit.framework.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mskcc.smile.commons.config.MockDataConfig;
 import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author ochoaa
  */
 @SpringBootTest(classes = MockDataConfig.class)
-@RunWith(SpringJUnit4ClassRunner.class)
 public class JsonComparatorTest {
     @Autowired
     private JsonComparator jsonComparator;
@@ -48,7 +45,7 @@ public class JsonComparatorTest {
         String referenceJson = "{\"requestId\":\"mockRequestId\"}";
         String targetJson = "{\"requestId\":\"differentRequestId\"}";
         Boolean isConsistent = jsonComparator.isConsistent(referenceJson, targetJson);
-        Assert.assertFalse(isConsistent);
+        Assertions.assertFalse(isConsistent);
     }
 
     /**
@@ -57,11 +54,11 @@ public class JsonComparatorTest {
      */
     @Test
     public void testMockedRequestJsonDataLoading() {
-        Assert.assertNotNull(mockedJsonDataMap);
+        Assertions.assertNotNull(mockedJsonDataMap);
 
         for (Map.Entry<String, String> entry : requestJsonDataIdMap.entrySet()) {
-            Assert.assertTrue(mockedJsonDataMap.containsKey(entry.getKey()));
-            Assert.assertTrue(mockedJsonDataMap.containsKey(entry.getValue()));
+            Assertions.assertTrue(mockedJsonDataMap.containsKey(entry.getKey()));
+            Assertions.assertTrue(mockedJsonDataMap.containsKey(entry.getValue()));
         }
     }
 
@@ -92,7 +89,7 @@ public class JsonComparatorTest {
         }
         // if any errors caught then print report and fail test
         if (!errorsMap.isEmpty()) {
-            Assert.fail(getErrorMessage(errorsMap));
+            Assertions.fail(getErrorMessage(errorsMap));
         }
     }
 
@@ -108,7 +105,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockPublishedRequest1JsonNullValues");
         Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
-        Assert.assertFalse(consistencyCheckStatus);
+        Assertions.assertFalse(consistencyCheckStatus);
     }
 
     /**
@@ -126,7 +123,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockPublishedRequest4JsonNullOrEmptyValues");
         Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
-        Assert.assertTrue(consistencyCheckStatus);
+        Assertions.assertTrue(consistencyCheckStatus);
     }
 
     /**
@@ -137,13 +134,13 @@ public class JsonComparatorTest {
     public void testPublishedSampleAliasesIgnored() throws Exception {
         MockJsonTestData incomingRequest =
                 mockedJsonDataMap.get("mockIncomingRequest1JsonDataWith2T2N");
-        Assert.assertFalse(incomingRequest.getJsonString().contains("sampleAliases"));
+        Assertions.assertFalse(incomingRequest.getJsonString().contains("sampleAliases"));
         MockJsonTestData publishedRequest =
                 mockedJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
-        Assert.assertTrue(publishedRequest.getJsonString().contains("sampleAliases"));
+        Assertions.assertTrue(publishedRequest.getJsonString().contains("sampleAliases"));
         Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 incomingRequest.getJsonString(), publishedRequest.getJsonString());
-        Assert.assertTrue(consistencyCheckStatus);
+        Assertions.assertTrue(consistencyCheckStatus);
     }
 
     /**
@@ -158,7 +155,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
         Boolean consistencyCheckStatus = jsonComparator.isConsistent(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertFalse(consistencyCheckStatus);
+        Assertions.assertFalse(consistencyCheckStatus);
     }
 
     /**
@@ -174,7 +171,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidUpdates");
         Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertTrue(consistencyCheckStatus);
+        Assertions.assertTrue(consistencyCheckStatus);
     }
 
     /**
@@ -190,7 +187,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockUpdatedPublishedSampleMetadataWithInvalidRunsUpdates");
         Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertFalse(consistencyCheckStatus);
+        Assertions.assertFalse(consistencyCheckStatus);
     }
 
     @Test
@@ -201,7 +198,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
         Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertFalse(consistencyCheckStatus);
+        Assertions.assertFalse(consistencyCheckStatus);
     }
 
     @Test
@@ -212,7 +209,7 @@ public class JsonComparatorTest {
                 mockedJsonDataMap.get("mockPublishedRequest1JsonDataWith2T2N");
         Boolean consistencyCheckStatus = jsonComparator.isConsistentByIgoProperties(
                 referenceRequest.getJsonString(), targetRequest.getJsonString());
-        Assert.assertTrue(consistencyCheckStatus);
+        Assertions.assertTrue(consistencyCheckStatus);
 
     }
 
@@ -225,7 +222,7 @@ public class JsonComparatorTest {
         MockJsonTestData igoUpdateSample = mockedJsonDataMap.get("sampleLimsUpdatesOnly");
         Boolean igoUpdatesOnlyCheck = jsonComparator.isConsistentByIgoProperties(
                 refSample.getJsonString(), igoUpdateSample.getJsonString());
-        Assert.assertFalse(igoUpdatesOnlyCheck);
+        Assertions.assertFalse(igoUpdatesOnlyCheck);
     }
 
     /**
@@ -237,7 +234,7 @@ public class JsonComparatorTest {
         MockJsonTestData nonIgoUpdateSample = mockedJsonDataMap.get("sampleNonLimsUpdates");
         Boolean nonIgoUpdatesCheck2 = jsonComparator.isConsistentByIgoProperties(
                 refSample.getJsonString(), nonIgoUpdateSample.getJsonString());
-        Assert.assertTrue(nonIgoUpdatesCheck2);
+        Assertions.assertTrue(nonIgoUpdatesCheck2);
     }
 
     /**
@@ -249,10 +246,10 @@ public class JsonComparatorTest {
         MockJsonTestData mixedUpdatesSample = mockedJsonDataMap.get("sampleMixedUpdates");
         Boolean mixedUpdatesSampleCheck1 = jsonComparator.isConsistent(
                 refSample.getJsonString(), mixedUpdatesSample.getJsonString());
-        Assert.assertFalse(mixedUpdatesSampleCheck1);
+        Assertions.assertFalse(mixedUpdatesSampleCheck1);
         Boolean mixedUpdatesSampleCheck2 = jsonComparator.isConsistentByIgoProperties(
                 refSample.getJsonString(), mixedUpdatesSample.getJsonString());
-        Assert.assertTrue(mixedUpdatesSampleCheck2);
+        Assertions.assertTrue(mixedUpdatesSampleCheck2);
     }
 
     /**
@@ -264,7 +261,7 @@ public class JsonComparatorTest {
         MockJsonTestData tarJson = mockedJsonDataMap.get("mockPublishingRequest1JsonWithSampleStatus");
         Boolean compareSampleStatus = jsonComparator.isConsistent(
                 refJson.getJsonString(), tarJson.getJsonString());
-        Assert.assertTrue(compareSampleStatus);
+        Assertions.assertTrue(compareSampleStatus);
     }
 
     /**
@@ -278,7 +275,7 @@ public class JsonComparatorTest {
                 "mockPublishingRequest1JsonInvalidSampleStatus");
         Boolean compareSampleStatus = jsonComparator.isConsistent(
                 refJson.getJsonString(), tarJson.getJsonString());
-        Assert.assertFalse(compareSampleStatus);
+        Assertions.assertFalse(compareSampleStatus);
     }
 
     /**
@@ -292,7 +289,7 @@ public class JsonComparatorTest {
                 "mockPublishingRequest1JsonMissingSampleStatus");
         Boolean compareSampleStatus = jsonComparator.isConsistent(
                 refJson.getJsonString(), tarJson.getJsonString());
-        Assert.assertFalse(compareSampleStatus);
+        Assertions.assertFalse(compareSampleStatus);
     }
 
     /**
@@ -308,7 +305,7 @@ public class JsonComparatorTest {
                 "mockCohortCompleteCCSPPPQQQQUpdated");
         Boolean isConsistent = jsonComparator.isConsistentGenericComparison(refJson.getJsonString(),
                 tarJson.getJsonString());
-        Assert.assertFalse(isConsistent);
+        Assertions.assertFalse(isConsistent);
     }
 
     private String getErrorMessage(Map<String, String> errorsMap) {
