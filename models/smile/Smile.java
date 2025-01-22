@@ -769,28 +769,28 @@ public final class Smile {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string igoId = 1;</code>
-     * @return The igoId.
+     * <code>string primaryId = 1;</code>
+     * @return The primaryId.
      */
-    java.lang.String getIgoId();
+    java.lang.String getPrimaryId();
     /**
-     * <code>string igoId = 1;</code>
-     * @return The bytes for igoId.
+     * <code>string primaryId = 1;</code>
+     * @return The bytes for primaryId.
      */
     com.google.protobuf.ByteString
-        getIgoIdBytes();
+        getPrimaryIdBytes();
 
     /**
-     * <code>string cmoId = 2;</code>
-     * @return The cmoId.
+     * <code>string cmoSampleName = 2;</code>
+     * @return The cmoSampleName.
      */
-    java.lang.String getCmoId();
+    java.lang.String getCmoSampleName();
     /**
-     * <code>string cmoId = 2;</code>
-     * @return The bytes for cmoId.
+     * <code>string cmoSampleName = 2;</code>
+     * @return The bytes for cmoSampleName.
      */
     com.google.protobuf.ByteString
-        getCmoIdBytes();
+        getCmoSampleNameBytes();
 
     /**
      * <code>bool embargoStatus = 3;</code>
@@ -799,16 +799,16 @@ public final class Smile {
     boolean getEmbargoStatus();
 
     /**
-     * <code>string custodian = 4;</code>
-     * @return The custodian.
+     * <code>string custodianInformation = 4;</code>
+     * @return The custodianInformation.
      */
-    java.lang.String getCustodian();
+    java.lang.String getCustodianInformation();
     /**
-     * <code>string custodian = 4;</code>
-     * @return The bytes for custodian.
+     * <code>string custodianInformation = 4;</code>
+     * @return The bytes for custodianInformation.
      */
     com.google.protobuf.ByteString
-        getCustodianBytes();
+        getCustodianInformationBytes();
   }
   /**
    * Protobuf type {@code smile.TempoSample}
@@ -832,9 +832,9 @@ public final class Smile {
       super(builder);
     }
     private TempoSample() {
-      igoId_ = "";
-      cmoId_ = "";
-      custodian_ = "";
+      primaryId_ = "";
+      cmoSampleName_ = "";
+      custodianInformation_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -850,78 +850,78 @@ public final class Smile {
               smile.Smile.TempoSample.class, smile.Smile.TempoSample.Builder.class);
     }
 
-    public static final int IGOID_FIELD_NUMBER = 1;
+    public static final int PRIMARYID_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object igoId_ = "";
+    private volatile java.lang.Object primaryId_ = "";
     /**
-     * <code>string igoId = 1;</code>
-     * @return The igoId.
+     * <code>string primaryId = 1;</code>
+     * @return The primaryId.
      */
     @java.lang.Override
-    public java.lang.String getIgoId() {
-      java.lang.Object ref = igoId_;
+    public java.lang.String getPrimaryId() {
+      java.lang.Object ref = primaryId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        igoId_ = s;
+        primaryId_ = s;
         return s;
       }
     }
     /**
-     * <code>string igoId = 1;</code>
-     * @return The bytes for igoId.
+     * <code>string primaryId = 1;</code>
+     * @return The bytes for primaryId.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getIgoIdBytes() {
-      java.lang.Object ref = igoId_;
+        getPrimaryIdBytes() {
+      java.lang.Object ref = primaryId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        igoId_ = b;
+        primaryId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int CMOID_FIELD_NUMBER = 2;
+    public static final int CMOSAMPLENAME_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object cmoId_ = "";
+    private volatile java.lang.Object cmoSampleName_ = "";
     /**
-     * <code>string cmoId = 2;</code>
-     * @return The cmoId.
+     * <code>string cmoSampleName = 2;</code>
+     * @return The cmoSampleName.
      */
     @java.lang.Override
-    public java.lang.String getCmoId() {
-      java.lang.Object ref = cmoId_;
+    public java.lang.String getCmoSampleName() {
+      java.lang.Object ref = cmoSampleName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        cmoId_ = s;
+        cmoSampleName_ = s;
         return s;
       }
     }
     /**
-     * <code>string cmoId = 2;</code>
-     * @return The bytes for cmoId.
+     * <code>string cmoSampleName = 2;</code>
+     * @return The bytes for cmoSampleName.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getCmoIdBytes() {
-      java.lang.Object ref = cmoId_;
+        getCmoSampleNameBytes() {
+      java.lang.Object ref = cmoSampleName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        cmoId_ = b;
+        cmoSampleName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -939,39 +939,39 @@ public final class Smile {
       return embargoStatus_;
     }
 
-    public static final int CUSTODIAN_FIELD_NUMBER = 4;
+    public static final int CUSTODIANINFORMATION_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object custodian_ = "";
+    private volatile java.lang.Object custodianInformation_ = "";
     /**
-     * <code>string custodian = 4;</code>
-     * @return The custodian.
+     * <code>string custodianInformation = 4;</code>
+     * @return The custodianInformation.
      */
     @java.lang.Override
-    public java.lang.String getCustodian() {
-      java.lang.Object ref = custodian_;
+    public java.lang.String getCustodianInformation() {
+      java.lang.Object ref = custodianInformation_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        custodian_ = s;
+        custodianInformation_ = s;
         return s;
       }
     }
     /**
-     * <code>string custodian = 4;</code>
-     * @return The bytes for custodian.
+     * <code>string custodianInformation = 4;</code>
+     * @return The bytes for custodianInformation.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getCustodianBytes() {
-      java.lang.Object ref = custodian_;
+        getCustodianInformationBytes() {
+      java.lang.Object ref = custodianInformation_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        custodian_ = b;
+        custodianInformation_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -992,17 +992,17 @@ public final class Smile {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(igoId_)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 1, igoId_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(primaryId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, primaryId_);
       }
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoId_)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 2, cmoId_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoSampleName_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, cmoSampleName_);
       }
       if (embargoStatus_ != false) {
         output.writeBool(3, embargoStatus_);
       }
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodian_)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 4, custodian_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodianInformation_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 4, custodianInformation_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1013,18 +1013,18 @@ public final class Smile {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(igoId_)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, igoId_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(primaryId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, primaryId_);
       }
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoId_)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, cmoId_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoSampleName_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, cmoSampleName_);
       }
       if (embargoStatus_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, embargoStatus_);
       }
-      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodian_)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, custodian_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodianInformation_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, custodianInformation_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1041,14 +1041,14 @@ public final class Smile {
       }
       smile.Smile.TempoSample other = (smile.Smile.TempoSample) obj;
 
-      if (!getIgoId()
-          .equals(other.getIgoId())) return false;
-      if (!getCmoId()
-          .equals(other.getCmoId())) return false;
+      if (!getPrimaryId()
+          .equals(other.getPrimaryId())) return false;
+      if (!getCmoSampleName()
+          .equals(other.getCmoSampleName())) return false;
       if (getEmbargoStatus()
           != other.getEmbargoStatus()) return false;
-      if (!getCustodian()
-          .equals(other.getCustodian())) return false;
+      if (!getCustodianInformation()
+          .equals(other.getCustodianInformation())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1060,15 +1060,15 @@ public final class Smile {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IGOID_FIELD_NUMBER;
-      hash = (53 * hash) + getIgoId().hashCode();
-      hash = (37 * hash) + CMOID_FIELD_NUMBER;
-      hash = (53 * hash) + getCmoId().hashCode();
+      hash = (37 * hash) + PRIMARYID_FIELD_NUMBER;
+      hash = (53 * hash) + getPrimaryId().hashCode();
+      hash = (37 * hash) + CMOSAMPLENAME_FIELD_NUMBER;
+      hash = (53 * hash) + getCmoSampleName().hashCode();
       hash = (37 * hash) + EMBARGOSTATUS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getEmbargoStatus());
-      hash = (37 * hash) + CUSTODIAN_FIELD_NUMBER;
-      hash = (53 * hash) + getCustodian().hashCode();
+      hash = (37 * hash) + CUSTODIANINFORMATION_FIELD_NUMBER;
+      hash = (53 * hash) + getCustodianInformation().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1200,10 +1200,10 @@ public final class Smile {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        igoId_ = "";
-        cmoId_ = "";
+        primaryId_ = "";
+        cmoSampleName_ = "";
         embargoStatus_ = false;
-        custodian_ = "";
+        custodianInformation_ = "";
         return this;
       }
 
@@ -1238,16 +1238,16 @@ public final class Smile {
       private void buildPartial0(smile.Smile.TempoSample result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.igoId_ = igoId_;
+          result.primaryId_ = primaryId_;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.cmoId_ = cmoId_;
+          result.cmoSampleName_ = cmoSampleName_;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
           result.embargoStatus_ = embargoStatus_;
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.custodian_ = custodian_;
+          result.custodianInformation_ = custodianInformation_;
         }
       }
 
@@ -1263,21 +1263,21 @@ public final class Smile {
 
       public Builder mergeFrom(smile.Smile.TempoSample other) {
         if (other == smile.Smile.TempoSample.getDefaultInstance()) return this;
-        if (!other.getIgoId().isEmpty()) {
-          igoId_ = other.igoId_;
+        if (!other.getPrimaryId().isEmpty()) {
+          primaryId_ = other.primaryId_;
           bitField0_ |= 0x00000001;
           onChanged();
         }
-        if (!other.getCmoId().isEmpty()) {
-          cmoId_ = other.cmoId_;
+        if (!other.getCmoSampleName().isEmpty()) {
+          cmoSampleName_ = other.cmoSampleName_;
           bitField0_ |= 0x00000002;
           onChanged();
         }
         if (other.getEmbargoStatus() != false) {
           setEmbargoStatus(other.getEmbargoStatus());
         }
-        if (!other.getCustodian().isEmpty()) {
-          custodian_ = other.custodian_;
+        if (!other.getCustodianInformation().isEmpty()) {
+          custodianInformation_ = other.custodianInformation_;
           bitField0_ |= 0x00000008;
           onChanged();
         }
@@ -1308,12 +1308,12 @@ public final class Smile {
                 done = true;
                 break;
               case 10: {
-                igoId_ = input.readStringRequireUtf8();
+                primaryId_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
-                cmoId_ = input.readStringRequireUtf8();
+                cmoSampleName_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
@@ -1323,7 +1323,7 @@ public final class Smile {
                 break;
               } // case 24
               case 34: {
-                custodian_ = input.readStringRequireUtf8();
+                custodianInformation_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000008;
                 break;
               } // case 34
@@ -1344,145 +1344,145 @@ public final class Smile {
       }
       private int bitField0_;
 
-      private java.lang.Object igoId_ = "";
+      private java.lang.Object primaryId_ = "";
       /**
-       * <code>string igoId = 1;</code>
-       * @return The igoId.
+       * <code>string primaryId = 1;</code>
+       * @return The primaryId.
        */
-      public java.lang.String getIgoId() {
-        java.lang.Object ref = igoId_;
+      public java.lang.String getPrimaryId() {
+        java.lang.Object ref = primaryId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          igoId_ = s;
+          primaryId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string igoId = 1;</code>
-       * @return The bytes for igoId.
+       * <code>string primaryId = 1;</code>
+       * @return The bytes for primaryId.
        */
       public com.google.protobuf.ByteString
-          getIgoIdBytes() {
-        java.lang.Object ref = igoId_;
+          getPrimaryIdBytes() {
+        java.lang.Object ref = primaryId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          igoId_ = b;
+          primaryId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string igoId = 1;</code>
-       * @param value The igoId to set.
+       * <code>string primaryId = 1;</code>
+       * @param value The primaryId to set.
        * @return This builder for chaining.
        */
-      public Builder setIgoId(
+      public Builder setPrimaryId(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        igoId_ = value;
+        primaryId_ = value;
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>string igoId = 1;</code>
+       * <code>string primaryId = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIgoId() {
-        igoId_ = getDefaultInstance().getIgoId();
+      public Builder clearPrimaryId() {
+        primaryId_ = getDefaultInstance().getPrimaryId();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
-       * <code>string igoId = 1;</code>
-       * @param value The bytes for igoId to set.
+       * <code>string primaryId = 1;</code>
+       * @param value The bytes for primaryId to set.
        * @return This builder for chaining.
        */
-      public Builder setIgoIdBytes(
+      public Builder setPrimaryIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        igoId_ = value;
+        primaryId_ = value;
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object cmoId_ = "";
+      private java.lang.Object cmoSampleName_ = "";
       /**
-       * <code>string cmoId = 2;</code>
-       * @return The cmoId.
+       * <code>string cmoSampleName = 2;</code>
+       * @return The cmoSampleName.
        */
-      public java.lang.String getCmoId() {
-        java.lang.Object ref = cmoId_;
+      public java.lang.String getCmoSampleName() {
+        java.lang.Object ref = cmoSampleName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          cmoId_ = s;
+          cmoSampleName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string cmoId = 2;</code>
-       * @return The bytes for cmoId.
+       * <code>string cmoSampleName = 2;</code>
+       * @return The bytes for cmoSampleName.
        */
       public com.google.protobuf.ByteString
-          getCmoIdBytes() {
-        java.lang.Object ref = cmoId_;
+          getCmoSampleNameBytes() {
+        java.lang.Object ref = cmoSampleName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          cmoId_ = b;
+          cmoSampleName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string cmoId = 2;</code>
-       * @param value The cmoId to set.
+       * <code>string cmoSampleName = 2;</code>
+       * @param value The cmoSampleName to set.
        * @return This builder for chaining.
        */
-      public Builder setCmoId(
+      public Builder setCmoSampleName(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        cmoId_ = value;
+        cmoSampleName_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>string cmoId = 2;</code>
+       * <code>string cmoSampleName = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCmoId() {
-        cmoId_ = getDefaultInstance().getCmoId();
+      public Builder clearCmoSampleName() {
+        cmoSampleName_ = getDefaultInstance().getCmoSampleName();
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
-       * <code>string cmoId = 2;</code>
-       * @param value The bytes for cmoId to set.
+       * <code>string cmoSampleName = 2;</code>
+       * @param value The bytes for cmoSampleName to set.
        * @return This builder for chaining.
        */
-      public Builder setCmoIdBytes(
+      public Builder setCmoSampleNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        cmoId_ = value;
+        cmoSampleName_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
@@ -1520,73 +1520,73 @@ public final class Smile {
         return this;
       }
 
-      private java.lang.Object custodian_ = "";
+      private java.lang.Object custodianInformation_ = "";
       /**
-       * <code>string custodian = 4;</code>
-       * @return The custodian.
+       * <code>string custodianInformation = 4;</code>
+       * @return The custodianInformation.
        */
-      public java.lang.String getCustodian() {
-        java.lang.Object ref = custodian_;
+      public java.lang.String getCustodianInformation() {
+        java.lang.Object ref = custodianInformation_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          custodian_ = s;
+          custodianInformation_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string custodian = 4;</code>
-       * @return The bytes for custodian.
+       * <code>string custodianInformation = 4;</code>
+       * @return The bytes for custodianInformation.
        */
       public com.google.protobuf.ByteString
-          getCustodianBytes() {
-        java.lang.Object ref = custodian_;
+          getCustodianInformationBytes() {
+        java.lang.Object ref = custodianInformation_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          custodian_ = b;
+          custodianInformation_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string custodian = 4;</code>
-       * @param value The custodian to set.
+       * <code>string custodianInformation = 4;</code>
+       * @param value The custodianInformation to set.
        * @return This builder for chaining.
        */
-      public Builder setCustodian(
+      public Builder setCustodianInformation(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        custodian_ = value;
+        custodianInformation_ = value;
         bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
-       * <code>string custodian = 4;</code>
+       * <code>string custodianInformation = 4;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCustodian() {
-        custodian_ = getDefaultInstance().getCustodian();
+      public Builder clearCustodianInformation() {
+        custodianInformation_ = getDefaultInstance().getCustodianInformation();
         bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
       /**
-       * <code>string custodian = 4;</code>
-       * @param value The bytes for custodian to set.
+       * <code>string custodianInformation = 4;</code>
+       * @param value The bytes for custodianInformation to set.
        * @return This builder for chaining.
        */
-      public Builder setCustodianBytes(
+      public Builder setCustodianInformationBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        custodian_ = value;
+        custodianInformation_ = value;
         bitField0_ |= 0x00000008;
         onChanged();
         return this;
@@ -1664,10 +1664,11 @@ public final class Smile {
     java.lang.String[] descriptorData = {
       "\n\013smile.proto\022\005smile\"D\n\030TempoSampleUpdat" +
       "eMessage\022(\n\014tempoSamples\030\001 \003(\0132\022.smile.T" +
-      "empoSample\"U\n\013TempoSample\022\r\n\005igoId\030\001 \001(\t" +
-      "\022\r\n\005cmoId\030\002 \001(\t\022\025\n\rembargoStatus\030\003 \001(\010\022\021" +
-      "\n\tcustodian\030\004 \001(\tB*Z(github.com/mskcc/ms" +
-      "kprotobuf/smile;smileb\006proto3"
+      "empoSample\"l\n\013TempoSample\022\021\n\tprimaryId\030\001" +
+      " \001(\t\022\025\n\rcmoSampleName\030\002 \001(\t\022\025\n\rembargoSt" +
+      "atus\030\003 \001(\010\022\034\n\024custodianInformation\030\004 \001(\t" +
+      "B*Z(github.com/mskcc/mskprotobuf/smile;s" +
+      "mileb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1684,7 +1685,7 @@ public final class Smile {
     internal_static_smile_TempoSample_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_smile_TempoSample_descriptor,
-        new java.lang.String[] { "IgoId", "CmoId", "EmbargoStatus", "Custodian", });
+        new java.lang.String[] { "PrimaryId", "CmoSampleName", "EmbargoStatus", "CustodianInformation", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

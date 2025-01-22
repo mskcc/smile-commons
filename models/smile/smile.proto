@@ -7,9 +7,8 @@ message TempoSampleUpdateMessage {
 }
 
 message TempoSample {
-  string igoId = 1;
-  string cmoId = 2;
+  string primaryId = 1;
+  string cmoSampleName = 2;
   bool embargoStatus = 3;
-  string custodian = 4;
+  string custodianInformation = 4;
 }
-
