@@ -1,6 +1,5 @@
 syntax = "proto3";
-package smile;
-option go_package = "github.com/mskcc/mskprotobuf/smile;smile";
+package org.mskcc.smile.commons.models;
 
 message TempoSampleUpdateMessage {
   repeated TempoSample tempoSamples = 1;
