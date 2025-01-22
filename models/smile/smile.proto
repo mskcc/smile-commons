@@ -1,0 +1,15 @@
+syntax = "proto3";
+package smile;
+option go_package = "github.com/mskcc/mskprotobuf/smile;smile";
+
+message TempoSampleUpdateMessage {
+  repeated TempoSample tempoSamples = 1;
+}
+
+message TempoSample {
+  string igoId = 1;
+  string cmoId = 2;
+  bool embargoStatus = 3;
+  string custodian = 4;
+}
+
