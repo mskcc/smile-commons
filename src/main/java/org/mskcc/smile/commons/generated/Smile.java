@@ -2,7 +2,7 @@
 // source: src/main/java/org/mskcc/smile/commons/proto/smile.proto
 // Protobuf Java Version: 4.26.1
 
-package org.mskcc.smile.commons.models;
+package org.mskcc.smile.commons.generated;
 
 public final class Smile {
   private Smile() {}
@@ -31,12 +31,12 @@ public final class Smile {
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
-    java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample> 
+    java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> 
         getTempoSamplesList();
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
-    org.mskcc.smile.commons.models.Smile.TempoSample getTempoSamples(int index);
+    org.mskcc.smile.commons.generated.Smile.TempoSample getTempoSamples(int index);
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
@@ -44,12 +44,12 @@ public final class Smile {
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
-    java.util.List<? extends org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder> 
+    java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
         getTempoSamplesOrBuilderList();
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
-    org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
+    org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
         int index);
   }
   /**
@@ -79,32 +79,32 @@ public final class Smile {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
+      return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_fieldAccessorTable
+      return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.class, org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.Builder.class);
+              org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.class, org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.Builder.class);
     }
 
     public static final int TEMPOSAMPLES_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
-    private java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample> tempoSamples_;
+    private java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> tempoSamples_;
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample> getTempoSamplesList() {
+    public java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> getTempoSamplesList() {
       return tempoSamples_;
     }
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder> 
+    public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
         getTempoSamplesOrBuilderList() {
       return tempoSamples_;
     }
@@ -119,14 +119,14 @@ public final class Smile {
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
     @java.lang.Override
-    public org.mskcc.smile.commons.models.Smile.TempoSample getTempoSamples(int index) {
+    public org.mskcc.smile.commons.generated.Smile.TempoSample getTempoSamples(int index) {
       return tempoSamples_.get(index);
     }
     /**
      * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
      */
     @java.lang.Override
-    public org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
+    public org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
         int index) {
       return tempoSamples_.get(index);
     }
@@ -171,10 +171,10 @@ public final class Smile {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage)) {
+      if (!(obj instanceof org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage)) {
         return super.equals(obj);
       }
-      org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage other = (org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage) obj;
+      org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage other = (org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage) obj;
 
       if (!getTempoSamplesList()
           .equals(other.getTempoSamplesList())) return false;
@@ -198,44 +198,44 @@ public final class Smile {
       return hash;
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(byte[] data)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(java.io.InputStream input)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -243,26 +243,26 @@ public final class Smile {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseDelimitedFrom(java.io.InputStream input)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseDelimitedFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -275,7 +275,7 @@ public final class Smile {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage prototype) {
+    public static Builder newBuilder(org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -296,18 +296,18 @@ public final class Smile {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:org.mskcc.smile.commons.models.TempoSampleUpdateMessage)
-        org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessageOrBuilder {
+        org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_fieldAccessorTable
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.class, org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.Builder.class);
+                org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.class, org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.Builder.class);
       }
 
       // Construct using org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.newBuilder()
@@ -337,17 +337,17 @@ public final class Smile {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSampleUpdateMessage_descriptor;
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage getDefaultInstanceForType() {
-        return org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.getDefaultInstance();
+      public org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage getDefaultInstanceForType() {
+        return org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.getDefaultInstance();
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage build() {
-        org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage result = buildPartial();
+      public org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage build() {
+        org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -355,15 +355,15 @@ public final class Smile {
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage buildPartial() {
-        org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage result = new org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage(this);
+      public org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage buildPartial() {
+        org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage result = new org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage(this);
         buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartialRepeatedFields(org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage result) {
+      private void buildPartialRepeatedFields(org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage result) {
         if (tempoSamplesBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             tempoSamples_ = java.util.Collections.unmodifiableList(tempoSamples_);
@@ -375,22 +375,22 @@ public final class Smile {
         }
       }
 
-      private void buildPartial0(org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage result) {
+      private void buildPartial0(org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage result) {
         int from_bitField0_ = bitField0_;
       }
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage) {
-          return mergeFrom((org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage)other);
+        if (other instanceof org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage) {
+          return mergeFrom((org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage other) {
-        if (other == org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage other) {
+        if (other == org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage.getDefaultInstance()) return this;
         if (tempoSamplesBuilder_ == null) {
           if (!other.tempoSamples_.isEmpty()) {
             if (tempoSamples_.isEmpty()) {
@@ -444,9 +444,9 @@ public final class Smile {
                 done = true;
                 break;
               case 10: {
-                org.mskcc.smile.commons.models.Smile.TempoSample m =
+                org.mskcc.smile.commons.generated.Smile.TempoSample m =
                     input.readMessage(
-                        org.mskcc.smile.commons.models.Smile.TempoSample.parser(),
+                        org.mskcc.smile.commons.generated.Smile.TempoSample.parser(),
                         extensionRegistry);
                 if (tempoSamplesBuilder_ == null) {
                   ensureTempoSamplesIsMutable();
@@ -473,22 +473,22 @@ public final class Smile {
       }
       private int bitField0_;
 
-      private java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample> tempoSamples_ =
+      private java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> tempoSamples_ =
         java.util.Collections.emptyList();
       private void ensureTempoSamplesIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          tempoSamples_ = new java.util.ArrayList<org.mskcc.smile.commons.models.Smile.TempoSample>(tempoSamples_);
+          tempoSamples_ = new java.util.ArrayList<org.mskcc.smile.commons.generated.Smile.TempoSample>(tempoSamples_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.mskcc.smile.commons.models.Smile.TempoSample, org.mskcc.smile.commons.models.Smile.TempoSample.Builder, org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder> tempoSamplesBuilder_;
+          org.mskcc.smile.commons.generated.Smile.TempoSample, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder, org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> tempoSamplesBuilder_;
 
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample> getTempoSamplesList() {
+      public java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> getTempoSamplesList() {
         if (tempoSamplesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(tempoSamples_);
         } else {
@@ -508,7 +508,7 @@ public final class Smile {
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public org.mskcc.smile.commons.models.Smile.TempoSample getTempoSamples(int index) {
+      public org.mskcc.smile.commons.generated.Smile.TempoSample getTempoSamples(int index) {
         if (tempoSamplesBuilder_ == null) {
           return tempoSamples_.get(index);
         } else {
@@ -519,7 +519,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder setTempoSamples(
-          int index, org.mskcc.smile.commons.models.Smile.TempoSample value) {
+          int index, org.mskcc.smile.commons.generated.Smile.TempoSample value) {
         if (tempoSamplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -536,7 +536,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder setTempoSamples(
-          int index, org.mskcc.smile.commons.models.Smile.TempoSample.Builder builderForValue) {
+          int index, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder builderForValue) {
         if (tempoSamplesBuilder_ == null) {
           ensureTempoSamplesIsMutable();
           tempoSamples_.set(index, builderForValue.build());
@@ -549,7 +549,7 @@ public final class Smile {
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public Builder addTempoSamples(org.mskcc.smile.commons.models.Smile.TempoSample value) {
+      public Builder addTempoSamples(org.mskcc.smile.commons.generated.Smile.TempoSample value) {
         if (tempoSamplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -566,7 +566,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder addTempoSamples(
-          int index, org.mskcc.smile.commons.models.Smile.TempoSample value) {
+          int index, org.mskcc.smile.commons.generated.Smile.TempoSample value) {
         if (tempoSamplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -583,7 +583,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder addTempoSamples(
-          org.mskcc.smile.commons.models.Smile.TempoSample.Builder builderForValue) {
+          org.mskcc.smile.commons.generated.Smile.TempoSample.Builder builderForValue) {
         if (tempoSamplesBuilder_ == null) {
           ensureTempoSamplesIsMutable();
           tempoSamples_.add(builderForValue.build());
@@ -597,7 +597,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder addTempoSamples(
-          int index, org.mskcc.smile.commons.models.Smile.TempoSample.Builder builderForValue) {
+          int index, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder builderForValue) {
         if (tempoSamplesBuilder_ == null) {
           ensureTempoSamplesIsMutable();
           tempoSamples_.add(index, builderForValue.build());
@@ -611,7 +611,7 @@ public final class Smile {
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
       public Builder addAllTempoSamples(
-          java.lang.Iterable<? extends org.mskcc.smile.commons.models.Smile.TempoSample> values) {
+          java.lang.Iterable<? extends org.mskcc.smile.commons.generated.Smile.TempoSample> values) {
         if (tempoSamplesBuilder_ == null) {
           ensureTempoSamplesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -651,14 +651,14 @@ public final class Smile {
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public org.mskcc.smile.commons.models.Smile.TempoSample.Builder getTempoSamplesBuilder(
+      public org.mskcc.smile.commons.generated.Smile.TempoSample.Builder getTempoSamplesBuilder(
           int index) {
         return getTempoSamplesFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
+      public org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder getTempoSamplesOrBuilder(
           int index) {
         if (tempoSamplesBuilder_ == null) {
           return tempoSamples_.get(index);  } else {
@@ -668,7 +668,7 @@ public final class Smile {
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public java.util.List<? extends org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder> 
+      public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
            getTempoSamplesOrBuilderList() {
         if (tempoSamplesBuilder_ != null) {
           return tempoSamplesBuilder_.getMessageOrBuilderList();
@@ -679,31 +679,31 @@ public final class Smile {
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public org.mskcc.smile.commons.models.Smile.TempoSample.Builder addTempoSamplesBuilder() {
+      public org.mskcc.smile.commons.generated.Smile.TempoSample.Builder addTempoSamplesBuilder() {
         return getTempoSamplesFieldBuilder().addBuilder(
-            org.mskcc.smile.commons.models.Smile.TempoSample.getDefaultInstance());
+            org.mskcc.smile.commons.generated.Smile.TempoSample.getDefaultInstance());
       }
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public org.mskcc.smile.commons.models.Smile.TempoSample.Builder addTempoSamplesBuilder(
+      public org.mskcc.smile.commons.generated.Smile.TempoSample.Builder addTempoSamplesBuilder(
           int index) {
         return getTempoSamplesFieldBuilder().addBuilder(
-            index, org.mskcc.smile.commons.models.Smile.TempoSample.getDefaultInstance());
+            index, org.mskcc.smile.commons.generated.Smile.TempoSample.getDefaultInstance());
       }
       /**
        * <code>repeated .org.mskcc.smile.commons.models.TempoSample tempoSamples = 1;</code>
        */
-      public java.util.List<org.mskcc.smile.commons.models.Smile.TempoSample.Builder> 
+      public java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample.Builder> 
            getTempoSamplesBuilderList() {
         return getTempoSamplesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.mskcc.smile.commons.models.Smile.TempoSample, org.mskcc.smile.commons.models.Smile.TempoSample.Builder, org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder> 
+          org.mskcc.smile.commons.generated.Smile.TempoSample, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder, org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
           getTempoSamplesFieldBuilder() {
         if (tempoSamplesBuilder_ == null) {
           tempoSamplesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              org.mskcc.smile.commons.models.Smile.TempoSample, org.mskcc.smile.commons.models.Smile.TempoSample.Builder, org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder>(
+              org.mskcc.smile.commons.generated.Smile.TempoSample, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder, org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder>(
                   tempoSamples_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -717,12 +717,12 @@ public final class Smile {
     }
 
     // @@protoc_insertion_point(class_scope:org.mskcc.smile.commons.models.TempoSampleUpdateMessage)
-    private static final org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage DEFAULT_INSTANCE;
+    private static final org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage();
+      DEFAULT_INSTANCE = new org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage();
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage getDefaultInstance() {
+    public static org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -758,7 +758,7 @@ public final class Smile {
     }
 
     @java.lang.Override
-    public org.mskcc.smile.commons.models.Smile.TempoSampleUpdateMessage getDefaultInstanceForType() {
+    public org.mskcc.smile.commons.generated.Smile.TempoSampleUpdateMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -839,15 +839,15 @@ public final class Smile {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
+      return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_fieldAccessorTable
+      return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.mskcc.smile.commons.models.Smile.TempoSample.class, org.mskcc.smile.commons.models.Smile.TempoSample.Builder.class);
+              org.mskcc.smile.commons.generated.Smile.TempoSample.class, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder.class);
     }
 
     public static final int PRIMARYID_FIELD_NUMBER = 1;
@@ -1036,10 +1036,10 @@ public final class Smile {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof org.mskcc.smile.commons.models.Smile.TempoSample)) {
+      if (!(obj instanceof org.mskcc.smile.commons.generated.Smile.TempoSample)) {
         return super.equals(obj);
       }
-      org.mskcc.smile.commons.models.Smile.TempoSample other = (org.mskcc.smile.commons.models.Smile.TempoSample) obj;
+      org.mskcc.smile.commons.generated.Smile.TempoSample other = (org.mskcc.smile.commons.generated.Smile.TempoSample) obj;
 
       if (!getPrimaryId()
           .equals(other.getPrimaryId())) return false;
@@ -1074,44 +1074,44 @@ public final class Smile {
       return hash;
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(byte[] data)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(java.io.InputStream input)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1119,26 +1119,26 @@ public final class Smile {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseDelimitedFrom(java.io.InputStream input)
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseDelimitedFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static org.mskcc.smile.commons.models.Smile.TempoSample parseFrom(
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1151,7 +1151,7 @@ public final class Smile {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(org.mskcc.smile.commons.models.Smile.TempoSample prototype) {
+    public static Builder newBuilder(org.mskcc.smile.commons.generated.Smile.TempoSample prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1172,18 +1172,18 @@ public final class Smile {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:org.mskcc.smile.commons.models.TempoSample)
-        org.mskcc.smile.commons.models.Smile.TempoSampleOrBuilder {
+        org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_fieldAccessorTable
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.mskcc.smile.commons.models.Smile.TempoSample.class, org.mskcc.smile.commons.models.Smile.TempoSample.Builder.class);
+                org.mskcc.smile.commons.generated.Smile.TempoSample.class, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder.class);
       }
 
       // Construct using org.mskcc.smile.commons.models.Smile.TempoSample.newBuilder()
@@ -1210,17 +1210,17 @@ public final class Smile {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.mskcc.smile.commons.models.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
+        return org.mskcc.smile.commons.generated.Smile.internal_static_org_mskcc_smile_commons_models_TempoSample_descriptor;
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSample getDefaultInstanceForType() {
-        return org.mskcc.smile.commons.models.Smile.TempoSample.getDefaultInstance();
+      public org.mskcc.smile.commons.generated.Smile.TempoSample getDefaultInstanceForType() {
+        return org.mskcc.smile.commons.generated.Smile.TempoSample.getDefaultInstance();
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSample build() {
-        org.mskcc.smile.commons.models.Smile.TempoSample result = buildPartial();
+      public org.mskcc.smile.commons.generated.Smile.TempoSample build() {
+        org.mskcc.smile.commons.generated.Smile.TempoSample result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1228,14 +1228,14 @@ public final class Smile {
       }
 
       @java.lang.Override
-      public org.mskcc.smile.commons.models.Smile.TempoSample buildPartial() {
-        org.mskcc.smile.commons.models.Smile.TempoSample result = new org.mskcc.smile.commons.models.Smile.TempoSample(this);
+      public org.mskcc.smile.commons.generated.Smile.TempoSample buildPartial() {
+        org.mskcc.smile.commons.generated.Smile.TempoSample result = new org.mskcc.smile.commons.generated.Smile.TempoSample(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(org.mskcc.smile.commons.models.Smile.TempoSample result) {
+      private void buildPartial0(org.mskcc.smile.commons.generated.Smile.TempoSample result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.primaryId_ = primaryId_;
@@ -1253,16 +1253,16 @@ public final class Smile {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.mskcc.smile.commons.models.Smile.TempoSample) {
-          return mergeFrom((org.mskcc.smile.commons.models.Smile.TempoSample)other);
+        if (other instanceof org.mskcc.smile.commons.generated.Smile.TempoSample) {
+          return mergeFrom((org.mskcc.smile.commons.generated.Smile.TempoSample)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(org.mskcc.smile.commons.models.Smile.TempoSample other) {
-        if (other == org.mskcc.smile.commons.models.Smile.TempoSample.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.mskcc.smile.commons.generated.Smile.TempoSample other) {
+        if (other == org.mskcc.smile.commons.generated.Smile.TempoSample.getDefaultInstance()) return this;
         if (!other.getPrimaryId().isEmpty()) {
           primaryId_ = other.primaryId_;
           bitField0_ |= 0x00000001;
@@ -1596,12 +1596,12 @@ public final class Smile {
     }
 
     // @@protoc_insertion_point(class_scope:org.mskcc.smile.commons.models.TempoSample)
-    private static final org.mskcc.smile.commons.models.Smile.TempoSample DEFAULT_INSTANCE;
+    private static final org.mskcc.smile.commons.generated.Smile.TempoSample DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.mskcc.smile.commons.models.Smile.TempoSample();
+      DEFAULT_INSTANCE = new org.mskcc.smile.commons.generated.Smile.TempoSample();
     }
 
-    public static org.mskcc.smile.commons.models.Smile.TempoSample getDefaultInstance() {
+    public static org.mskcc.smile.commons.generated.Smile.TempoSample getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1637,7 +1637,7 @@ public final class Smile {
     }
 
     @java.lang.Override
-    public org.mskcc.smile.commons.models.Smile.TempoSample getDefaultInstanceForType() {
+    public org.mskcc.smile.commons.generated.Smile.TempoSample getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 

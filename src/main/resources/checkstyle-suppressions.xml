@@ -5,5 +5,5 @@
     "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
-    <suppress files="src[\\/]main[\\/]java[\\/]org[\\/]mskcc[\\/]smile[\\/]commons[\\/]models[\\/]Smile\.java" checks=".*"/>
+    <suppress files="src[\\/]main[\\/]java[\\/]org[\\/]mskcc[\\/]smile[\\/]commons[\\/]generated[\\/].*\.java" checks=".*"/>
 </suppressions>
