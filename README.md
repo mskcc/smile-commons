@@ -1,6 +1,6 @@
 # SMILE Commons
 
-Centralized configurations for checkstyle plugin and dependency management. 
+Centralized configurations for checkstyle plugin and dependency management.
 
 ## OpenTelemetryUtils
 
@@ -17,7 +17,7 @@ import org.mskcc.smile.commons.OpenTelemetryUtils.TraceMetadata;
 @Autowired
 OpenTelemetryUtils openTelemetryUtils;
 
-// OpenTelemetry Tracer 
+// OpenTelemetry Tracer
 private static final Tracer tracer = GlobalOpenTelemetry.get().getTracer("org.mskcc.cmo.Classname");
 
 // Upstream service propagating context to downstream service via a Nats Message
@@ -50,3 +50,22 @@ public void onMessage(Message msg, Object message)
     }
 }
 ```
+## Updating Java Code Generated from Protobuf Files
+
+Java classes inside `./src/main/java/org/mskcc/smile/commons/generated/` are manually generated.
+
+To update existing or create new classes, follow these steps:
+- Obtain or construct the `.proto` file
+- Ensure that the correct `protoc` version is installed (see more in notes below)
+- Run `$ protoc [path to .proto file] --java_out=[directory to write the Java generated code to]`
+- Ensure the newly generated Java classes are saved at `./src/main/java/org/mskcc/smile/commons/generated/`
+- Update `pom.xml` if there are changes to the Protobuf Java version
+
+### Version of `protoc` to Use
+Per the [Protobuf docs](https://protobuf.dev/support/version-support/#java):
+> The protoc version can be inferred from the Protobuf Java minor version number. Example: Protobuf Java version 3.**25**.x uses protoc version **25**.x.".
+
+Based on this, follow these steps to determine the correct `protoc` version to use:
+- Note the Java version of the Java application needing the Protobuf Java classes (e.g. Java 21)
+- Find the Protobuf Java version that is compatible with the Java application (e.g. Protobuf Java 4.26.1 supports Java 21)
+- Determine the protoc version needed from the Protobuf Java minor version number (e.g. Protobuf Java 4.26.1 uses protoc 26.x)
