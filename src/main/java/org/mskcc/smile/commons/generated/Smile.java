@@ -31,7 +31,7 @@ public final class Smile {
     /**
      * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
      */
-    java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample>
+    java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample> 
         getTempoSamplesList();
     /**
      * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
@@ -44,7 +44,7 @@ public final class Smile {
     /**
      * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
      */
-    java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder>
+    java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
         getTempoSamplesOrBuilderList();
     /**
      * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
@@ -104,7 +104,7 @@ public final class Smile {
      * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder>
+    public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
         getTempoSamplesOrBuilderList() {
       return tempoSamples_;
     }
@@ -409,7 +409,7 @@ public final class Smile {
               tempoSamplesBuilder_ = null;
               tempoSamples_ = other.tempoSamples_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              tempoSamplesBuilder_ =
+              tempoSamplesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTempoSamplesFieldBuilder() : null;
             } else {
@@ -668,7 +668,7 @@ public final class Smile {
       /**
        * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
        */
-      public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder>
+      public java.util.List<? extends org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
            getTempoSamplesOrBuilderList() {
         if (tempoSamplesBuilder_ != null) {
           return tempoSamplesBuilder_.getMessageOrBuilderList();
@@ -694,12 +694,12 @@ public final class Smile {
       /**
        * <code>repeated .smile.TempoSample tempoSamples = 1;</code>
        */
-      public java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample.Builder>
+      public java.util.List<org.mskcc.smile.commons.generated.Smile.TempoSample.Builder> 
            getTempoSamplesBuilderList() {
         return getTempoSamplesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.mskcc.smile.commons.generated.Smile.TempoSample, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder, org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder>
+          org.mskcc.smile.commons.generated.Smile.TempoSample, org.mskcc.smile.commons.generated.Smile.TempoSample.Builder, org.mskcc.smile.commons.generated.Smile.TempoSampleOrBuilder> 
           getTempoSamplesFieldBuilder() {
         if (tempoSamplesBuilder_ == null) {
           tempoSamplesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -815,6 +815,30 @@ public final class Smile {
      */
     com.google.protobuf.ByteString
         getCustodianInformationBytes();
+
+    /**
+     * <code>string baitSet = 5;</code>
+     * @return The baitSet.
+     */
+    java.lang.String getBaitSet();
+    /**
+     * <code>string baitSet = 5;</code>
+     * @return The bytes for baitSet.
+     */
+    com.google.protobuf.ByteString
+        getBaitSetBytes();
+
+    /**
+     * <code>string genePanel = 6;</code>
+     * @return The genePanel.
+     */
+    java.lang.String getGenePanel();
+    /**
+     * <code>string genePanel = 6;</code>
+     * @return The bytes for genePanel.
+     */
+    com.google.protobuf.ByteString
+        getGenePanelBytes();
   }
   /**
    * Protobuf type {@code smile.TempoSample}
@@ -842,6 +866,8 @@ public final class Smile {
       cmoSampleName_ = "";
       accessLevel_ = "";
       custodianInformation_ = "";
+      baitSet_ = "";
+      genePanel_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -870,7 +896,7 @@ public final class Smile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs =
+        com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         primaryId_ = s;
@@ -886,7 +912,7 @@ public final class Smile {
         getPrimaryIdBytes() {
       java.lang.Object ref = primaryId_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b =
+        com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         primaryId_ = b;
@@ -909,7 +935,7 @@ public final class Smile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs =
+        com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         cmoSampleName_ = s;
@@ -925,7 +951,7 @@ public final class Smile {
         getCmoSampleNameBytes() {
       java.lang.Object ref = cmoSampleName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b =
+        com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         cmoSampleName_ = b;
@@ -948,7 +974,7 @@ public final class Smile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs =
+        com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         accessLevel_ = s;
@@ -964,7 +990,7 @@ public final class Smile {
         getAccessLevelBytes() {
       java.lang.Object ref = accessLevel_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b =
+        com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         accessLevel_ = b;
@@ -987,7 +1013,7 @@ public final class Smile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs =
+        com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         custodianInformation_ = s;
@@ -1003,10 +1029,88 @@ public final class Smile {
         getCustodianInformationBytes() {
       java.lang.Object ref = custodianInformation_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b =
+        com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         custodianInformation_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BAITSET_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object baitSet_ = "";
+    /**
+     * <code>string baitSet = 5;</code>
+     * @return The baitSet.
+     */
+    @java.lang.Override
+    public java.lang.String getBaitSet() {
+      java.lang.Object ref = baitSet_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        baitSet_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string baitSet = 5;</code>
+     * @return The bytes for baitSet.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getBaitSetBytes() {
+      java.lang.Object ref = baitSet_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        baitSet_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GENEPANEL_FIELD_NUMBER = 6;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object genePanel_ = "";
+    /**
+     * <code>string genePanel = 6;</code>
+     * @return The genePanel.
+     */
+    @java.lang.Override
+    public java.lang.String getGenePanel() {
+      java.lang.Object ref = genePanel_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        genePanel_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string genePanel = 6;</code>
+     * @return The bytes for genePanel.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getGenePanelBytes() {
+      java.lang.Object ref = genePanel_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        genePanel_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1039,6 +1143,12 @@ public final class Smile {
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodianInformation_)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 4, custodianInformation_);
       }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(baitSet_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 5, baitSet_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(genePanel_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 6, genePanel_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1059,6 +1169,12 @@ public final class Smile {
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(custodianInformation_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(4, custodianInformation_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(baitSet_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, baitSet_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(genePanel_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(6, genePanel_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1083,6 +1199,10 @@ public final class Smile {
           .equals(other.getAccessLevel())) return false;
       if (!getCustodianInformation()
           .equals(other.getCustodianInformation())) return false;
+      if (!getBaitSet()
+          .equals(other.getBaitSet())) return false;
+      if (!getGenePanel()
+          .equals(other.getGenePanel())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1102,6 +1222,10 @@ public final class Smile {
       hash = (53 * hash) + getAccessLevel().hashCode();
       hash = (37 * hash) + CUSTODIANINFORMATION_FIELD_NUMBER;
       hash = (53 * hash) + getCustodianInformation().hashCode();
+      hash = (37 * hash) + BAITSET_FIELD_NUMBER;
+      hash = (53 * hash) + getBaitSet().hashCode();
+      hash = (37 * hash) + GENEPANEL_FIELD_NUMBER;
+      hash = (53 * hash) + getGenePanel().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1237,6 +1361,8 @@ public final class Smile {
         cmoSampleName_ = "";
         accessLevel_ = "";
         custodianInformation_ = "";
+        baitSet_ = "";
+        genePanel_ = "";
         return this;
       }
 
@@ -1282,6 +1408,12 @@ public final class Smile {
         if (((from_bitField0_ & 0x00000008) != 0)) {
           result.custodianInformation_ = custodianInformation_;
         }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.baitSet_ = baitSet_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.genePanel_ = genePanel_;
+        }
       }
 
       @java.lang.Override
@@ -1314,6 +1446,16 @@ public final class Smile {
         if (!other.getCustodianInformation().isEmpty()) {
           custodianInformation_ = other.custodianInformation_;
           bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        if (!other.getBaitSet().isEmpty()) {
+          baitSet_ = other.baitSet_;
+          bitField0_ |= 0x00000010;
+          onChanged();
+        }
+        if (!other.getGenePanel().isEmpty()) {
+          genePanel_ = other.genePanel_;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -1362,6 +1504,16 @@ public final class Smile {
                 bitField0_ |= 0x00000008;
                 break;
               } // case 34
+              case 42: {
+                baitSet_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                genePanel_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -1404,7 +1556,7 @@ public final class Smile {
           getPrimaryIdBytes() {
         java.lang.Object ref = primaryId_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           primaryId_ = b;
@@ -1476,7 +1628,7 @@ public final class Smile {
           getCmoSampleNameBytes() {
         java.lang.Object ref = cmoSampleName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           cmoSampleName_ = b;
@@ -1548,7 +1700,7 @@ public final class Smile {
           getAccessLevelBytes() {
         java.lang.Object ref = accessLevel_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           accessLevel_ = b;
@@ -1620,7 +1772,7 @@ public final class Smile {
           getCustodianInformationBytes() {
         java.lang.Object ref = custodianInformation_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           custodianInformation_ = b;
@@ -1663,6 +1815,150 @@ public final class Smile {
         checkByteStringIsUtf8(value);
         custodianInformation_ = value;
         bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object baitSet_ = "";
+      /**
+       * <code>string baitSet = 5;</code>
+       * @return The baitSet.
+       */
+      public java.lang.String getBaitSet() {
+        java.lang.Object ref = baitSet_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          baitSet_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string baitSet = 5;</code>
+       * @return The bytes for baitSet.
+       */
+      public com.google.protobuf.ByteString
+          getBaitSetBytes() {
+        java.lang.Object ref = baitSet_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          baitSet_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string baitSet = 5;</code>
+       * @param value The baitSet to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBaitSet(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        baitSet_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string baitSet = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBaitSet() {
+        baitSet_ = getDefaultInstance().getBaitSet();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string baitSet = 5;</code>
+       * @param value The bytes for baitSet to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBaitSetBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        baitSet_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object genePanel_ = "";
+      /**
+       * <code>string genePanel = 6;</code>
+       * @return The genePanel.
+       */
+      public java.lang.String getGenePanel() {
+        java.lang.Object ref = genePanel_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          genePanel_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string genePanel = 6;</code>
+       * @return The bytes for genePanel.
+       */
+      public com.google.protobuf.ByteString
+          getGenePanelBytes() {
+        java.lang.Object ref = genePanel_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          genePanel_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string genePanel = 6;</code>
+       * @param value The genePanel to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGenePanel(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        genePanel_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string genePanel = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGenePanel() {
+        genePanel_ = getDefaultInstance().getGenePanel();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string genePanel = 6;</code>
+       * @param value The bytes for genePanel to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGenePanelBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        genePanel_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -1720,12 +2016,12 @@ public final class Smile {
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_smile_TempoSampleUpdateMessage_descriptor;
-  private static final
+  private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_smile_TempoSampleUpdateMessage_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_smile_TempoSample_descriptor;
-  private static final
+  private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_smile_TempoSample_fieldAccessorTable;
 
@@ -1739,11 +2035,11 @@ public final class Smile {
     java.lang.String[] descriptorData = {
       "\n\013smile.proto\022\005smile\"D\n\030TempoSampleUpdat" +
       "eMessage\022(\n\014tempoSamples\030\001 \003(\0132\022.smile.T" +
-      "empoSample\"j\n\013TempoSample\022\021\n\tprimaryId\030\001" +
-      " \001(\t\022\025\n\rcmoSampleName\030\002 \001(\t\022\023\n\013accessLev" +
-      "el\030\003 \001(\t\022\034\n\024custodianInformation\030\004 \001(\tB#" +
-      "\n!org.mskcc.smile.commons.generatedb\006pro" +
-      "to3"
+      "empoSample\"\216\001\n\013TempoSample\022\021\n\tprimaryId\030" +
+      "\001 \001(\t\022\025\n\rcmoSampleName\030\002 \001(\t\022\023\n\013accessLe" +
+      "vel\030\003 \001(\t\022\034\n\024custodianInformation\030\004 \001(\t\022" +
+      "\017\n\007baitSet\030\005 \001(\t\022\021\n\tgenePanel\030\006 \001(\tB#\n!o" +
+      "rg.mskcc.smile.commons.generatedb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1760,7 +2056,7 @@ public final class Smile {
     internal_static_smile_TempoSample_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_smile_TempoSample_descriptor,
-        new java.lang.String[] { "PrimaryId", "CmoSampleName", "AccessLevel", "CustodianInformation", });
+        new java.lang.String[] { "PrimaryId", "CmoSampleName", "AccessLevel", "CustodianInformation", "BaitSet", "GenePanel", });
     descriptor.resolveAllFeaturesImmutable();
   }
 
