@@ -67,5 +67,5 @@ Per the [Protobuf docs](https://protobuf.dev/support/version-support/#java):
 
 Based on this, follow these steps to determine the correct `protoc` version to use:
 - Note the Java version of the Java application needing the Protobuf Java classes (e.g. Java 21)
-- Find the Protobuf Java version that is compatible with the Java application (e.g. Protobuf Java 4.26.1 supports Java 21)
-- Determine the protoc version needed from the Protobuf Java minor version number (e.g. Protobuf Java 4.26.1 uses protoc 26.x)
+- Find the Protobuf Java version that is compatible with the Java application (e.g. Protobuf Java 4.29.3 supports Java 21)
+- Determine the protoc version needed from the Protobuf Java minor version number (e.g. Protobuf Java 4.**29**.3 uses protoc **29**.x)
