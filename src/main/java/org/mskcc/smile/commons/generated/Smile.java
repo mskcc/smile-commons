@@ -852,6 +852,36 @@ public final class Smile {
      */
     com.google.protobuf.ByteString
         getOncotreeCodeBytes();
+
+    /**
+     * <code>string cmoPatientId = 8;</code>
+     * @return The cmoPatientId.
+     */
+    java.lang.String getCmoPatientId();
+    /**
+     * <code>string cmoPatientId = 8;</code>
+     * @return The bytes for cmoPatientId.
+     */
+    com.google.protobuf.ByteString
+        getCmoPatientIdBytes();
+
+    /**
+     * <code>string dmpPatientId = 9;</code>
+     * @return The dmpPatientId.
+     */
+    java.lang.String getDmpPatientId();
+    /**
+     * <code>string dmpPatientId = 9;</code>
+     * @return The bytes for dmpPatientId.
+     */
+    com.google.protobuf.ByteString
+        getDmpPatientIdBytes();
+
+    /**
+     * <code>bool recapture = 10;</code>
+     * @return The recapture.
+     */
+    boolean getRecapture();
   }
   /**
    * Protobuf type {@code smile.TempoSample}
@@ -882,6 +912,8 @@ public final class Smile {
       baitSet_ = "";
       genePanel_ = "";
       oncotreeCode_ = "";
+      cmoPatientId_ = "";
+      dmpPatientId_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -1170,6 +1202,95 @@ public final class Smile {
       }
     }
 
+    public static final int CMOPATIENTID_FIELD_NUMBER = 8;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object cmoPatientId_ = "";
+    /**
+     * <code>string cmoPatientId = 8;</code>
+     * @return The cmoPatientId.
+     */
+    @java.lang.Override
+    public java.lang.String getCmoPatientId() {
+      java.lang.Object ref = cmoPatientId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cmoPatientId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string cmoPatientId = 8;</code>
+     * @return The bytes for cmoPatientId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCmoPatientIdBytes() {
+      java.lang.Object ref = cmoPatientId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cmoPatientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DMPPATIENTID_FIELD_NUMBER = 9;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object dmpPatientId_ = "";
+    /**
+     * <code>string dmpPatientId = 9;</code>
+     * @return The dmpPatientId.
+     */
+    @java.lang.Override
+    public java.lang.String getDmpPatientId() {
+      java.lang.Object ref = dmpPatientId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dmpPatientId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string dmpPatientId = 9;</code>
+     * @return The bytes for dmpPatientId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDmpPatientIdBytes() {
+      java.lang.Object ref = dmpPatientId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dmpPatientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RECAPTURE_FIELD_NUMBER = 10;
+    private boolean recapture_ = false;
+    /**
+     * <code>bool recapture = 10;</code>
+     * @return The recapture.
+     */
+    @java.lang.Override
+    public boolean getRecapture() {
+      return recapture_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1205,6 +1326,15 @@ public final class Smile {
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(oncotreeCode_)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 7, oncotreeCode_);
       }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoPatientId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 8, cmoPatientId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dmpPatientId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 9, dmpPatientId_);
+      }
+      if (recapture_ != false) {
+        output.writeBool(10, recapture_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1235,6 +1365,16 @@ public final class Smile {
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(oncotreeCode_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(7, oncotreeCode_);
       }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(cmoPatientId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(8, cmoPatientId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dmpPatientId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(9, dmpPatientId_);
+      }
+      if (recapture_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, recapture_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1264,6 +1404,12 @@ public final class Smile {
           .equals(other.getGenePanel())) return false;
       if (!getOncotreeCode()
           .equals(other.getOncotreeCode())) return false;
+      if (!getCmoPatientId()
+          .equals(other.getCmoPatientId())) return false;
+      if (!getDmpPatientId()
+          .equals(other.getDmpPatientId())) return false;
+      if (getRecapture()
+          != other.getRecapture()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1289,6 +1435,13 @@ public final class Smile {
       hash = (53 * hash) + getGenePanel().hashCode();
       hash = (37 * hash) + ONCOTREECODE_FIELD_NUMBER;
       hash = (53 * hash) + getOncotreeCode().hashCode();
+      hash = (37 * hash) + CMOPATIENTID_FIELD_NUMBER;
+      hash = (53 * hash) + getCmoPatientId().hashCode();
+      hash = (37 * hash) + DMPPATIENTID_FIELD_NUMBER;
+      hash = (53 * hash) + getDmpPatientId().hashCode();
+      hash = (37 * hash) + RECAPTURE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRecapture());
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1427,6 +1580,9 @@ public final class Smile {
         baitSet_ = "";
         genePanel_ = "";
         oncotreeCode_ = "";
+        cmoPatientId_ = "";
+        dmpPatientId_ = "";
+        recapture_ = false;
         return this;
       }
 
@@ -1481,6 +1637,15 @@ public final class Smile {
         if (((from_bitField0_ & 0x00000040) != 0)) {
           result.oncotreeCode_ = oncotreeCode_;
         }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.cmoPatientId_ = cmoPatientId_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.dmpPatientId_ = dmpPatientId_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.recapture_ = recapture_;
+        }
       }
 
       @java.lang.Override
@@ -1529,6 +1694,19 @@ public final class Smile {
           oncotreeCode_ = other.oncotreeCode_;
           bitField0_ |= 0x00000040;
           onChanged();
+        }
+        if (!other.getCmoPatientId().isEmpty()) {
+          cmoPatientId_ = other.cmoPatientId_;
+          bitField0_ |= 0x00000080;
+          onChanged();
+        }
+        if (!other.getDmpPatientId().isEmpty()) {
+          dmpPatientId_ = other.dmpPatientId_;
+          bitField0_ |= 0x00000100;
+          onChanged();
+        }
+        if (other.getRecapture() != false) {
+          setRecapture(other.getRecapture());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -1591,6 +1769,21 @@ public final class Smile {
                 bitField0_ |= 0x00000040;
                 break;
               } // case 58
+              case 66: {
+                cmoPatientId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                dmpPatientId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              case 80: {
+                recapture_ = input.readBool();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 80
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2112,6 +2305,182 @@ public final class Smile {
         return this;
       }
 
+      private java.lang.Object cmoPatientId_ = "";
+      /**
+       * <code>string cmoPatientId = 8;</code>
+       * @return The cmoPatientId.
+       */
+      public java.lang.String getCmoPatientId() {
+        java.lang.Object ref = cmoPatientId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          cmoPatientId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string cmoPatientId = 8;</code>
+       * @return The bytes for cmoPatientId.
+       */
+      public com.google.protobuf.ByteString
+          getCmoPatientIdBytes() {
+        java.lang.Object ref = cmoPatientId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cmoPatientId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string cmoPatientId = 8;</code>
+       * @param value The cmoPatientId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCmoPatientId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        cmoPatientId_ = value;
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string cmoPatientId = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCmoPatientId() {
+        cmoPatientId_ = getDefaultInstance().getCmoPatientId();
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string cmoPatientId = 8;</code>
+       * @param value The bytes for cmoPatientId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCmoPatientIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        cmoPatientId_ = value;
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dmpPatientId_ = "";
+      /**
+       * <code>string dmpPatientId = 9;</code>
+       * @return The dmpPatientId.
+       */
+      public java.lang.String getDmpPatientId() {
+        java.lang.Object ref = dmpPatientId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dmpPatientId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string dmpPatientId = 9;</code>
+       * @return The bytes for dmpPatientId.
+       */
+      public com.google.protobuf.ByteString
+          getDmpPatientIdBytes() {
+        java.lang.Object ref = dmpPatientId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dmpPatientId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string dmpPatientId = 9;</code>
+       * @param value The dmpPatientId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDmpPatientId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        dmpPatientId_ = value;
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dmpPatientId = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDmpPatientId() {
+        dmpPatientId_ = getDefaultInstance().getDmpPatientId();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dmpPatientId = 9;</code>
+       * @param value The bytes for dmpPatientId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDmpPatientIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        dmpPatientId_ = value;
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+
+      private boolean recapture_ ;
+      /**
+       * <code>bool recapture = 10;</code>
+       * @return The recapture.
+       */
+      @java.lang.Override
+      public boolean getRecapture() {
+        return recapture_;
+      }
+      /**
+       * <code>bool recapture = 10;</code>
+       * @param value The recapture to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRecapture(boolean value) {
+
+        recapture_ = value;
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool recapture = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRecapture() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        recapture_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:smile.TempoSample)
     }
 
@@ -2184,13 +2553,15 @@ public final class Smile {
     java.lang.String[] descriptorData = {
       "\n\013smile.proto\022\005smile\"D\n\030TempoSampleUpdat" +
       "eMessage\022(\n\014tempoSamples\030\001 \003(\0132\022.smile.T" +
-      "empoSample\"\244\001\n\013TempoSample\022\021\n\tprimaryId\030" +
+      "empoSample\"\343\001\n\013TempoSample\022\021\n\tprimaryId\030" +
       "\001 \001(\t\022\025\n\rcmoSampleName\030\002 \001(\t\022\023\n\013accessLe" +
       "vel\030\003 \001(\t\022\034\n\024custodianInformation\030\004 \001(\t\022" +
       "\017\n\007baitSet\030\005 \001(\t\022\021\n\tgenePanel\030\006 \001(\t\022\024\n\014o" +
-      "ncotreeCode\030\007 \001(\tB]\n!org.mskcc.smile.com" +
-      "mons.generatedZ8github.mskcc.org/cdsi/cd" +
-      "si-protobuf/smile/smile_types_v1b\006proto3"
+      "ncotreeCode\030\007 \001(\t\022\024\n\014cmoPatientId\030\010 \001(\t\022" +
+      "\024\n\014dmpPatientId\030\t \001(\t\022\021\n\trecapture\030\n \001(\010" +
+      "B]\n!org.mskcc.smile.commons.generatedZ8g" +
+      "ithub.mskcc.org/cdsi/cdsi-protobuf/smile" +
+      "/smile_types_v1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2207,7 +2578,7 @@ public final class Smile {
     internal_static_smile_TempoSample_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_smile_TempoSample_descriptor,
-        new java.lang.String[] { "PrimaryId", "CmoSampleName", "AccessLevel", "CustodianInformation", "BaitSet", "GenePanel", "OncotreeCode", });
+        new java.lang.String[] { "PrimaryId", "CmoSampleName", "AccessLevel", "CustodianInformation", "BaitSet", "GenePanel", "OncotreeCode", "CmoPatientId", "DmpPatientId", "Recapture", });
     descriptor.resolveAllFeaturesImmutable();
   }
 
