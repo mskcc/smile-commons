@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.mskcc.smile.commons.FileUtil;
 import org.mskcc.smile.commons.JsonComparator;
 import org.mskcc.smile.commons.model.MockJsonTestData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +34,6 @@ public class MockDataConfig {
     @Autowired
     private void setMockJsonTestDataResource() {
         this.mockJsonTestDataResource = new ClassPathResource(MOCKED_JSON_DATA_DIR);
-    }
-
-    @Autowired
-    private FileUtil fileUtil;
-
-    @Bean
-    public FileUtil fileUtil() {
-        return fileUtil;
     }
 
     @Autowired
