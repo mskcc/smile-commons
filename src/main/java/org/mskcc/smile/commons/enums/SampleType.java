@@ -17,6 +17,7 @@ public enum SampleType {
     POOLED_LIBRARY("Pooled Library"),
     CDNA("cDNA"),
     CDNA_LIBRARY("cDNA Library"),
+    DNA_CDNA_LIBRARY("DNA/cDNA Library"),
     OTHER("other");
 
     private static final Map<String, SampleType> valueToSampleType = new HashMap<>();
