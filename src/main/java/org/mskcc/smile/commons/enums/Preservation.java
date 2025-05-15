@@ -5,13 +5,21 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 public enum Preservation {
-    FROZEN("Frozen"),
-    FFPE("FFPE"),
+    DMSO_VIABLYFROZEN("DMSO-ViablyFrozen"),
+    EDTA("EDTA"),
     EDTA_STRECK("EDTA-Streck"),
+    FFPE("FFPE"),
+    FIXED_FROZEN("Fixed Frozen"),
     FRESH("Fresh"),
+    FROZEN("Frozen"),
     OCT("OCT"),
+    PAXGENE("PAXgene"),
+    RLT_BUFFER("RLT Buffer"),
+    RNALATER("RNALater"),
+    STRECK("Streck"),
     TRIZOL("Trizol"),
-    DMSO_VIABLYFROZEN("DMSO-ViablyFrozen");
+    TRIZOL_LS("Trizol LS"),
+    VIABLY_FROZEN("Viably Frozen");
 
     private static final Map<String, Preservation> nameToPreservation = new HashMap<>();
 

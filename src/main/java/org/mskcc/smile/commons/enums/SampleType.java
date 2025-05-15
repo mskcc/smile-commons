@@ -5,20 +5,33 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 public enum SampleType {
-    TISSUE("Tissue"),
-    CELLS("Cells"),
+    BLOCKS("Blocks"),
     BLOCKS_SLIDES("Blocks/Slides"),
     BLOOD("Blood"),
+    BONE_MARROW_BIOPSY("Bone Marrow Biopsy"),
+    BUCCAL_SWAB("Buccal Swab"),
     BUFFY_COAT("Buffy Coat"),
-    RNA("RNA"),
-    DNA("DNA"),
-    CFDNA("cfDNA"),
-    DNA_LIBRARY("DNA Library"),
-    POOLED_LIBRARY("Pooled Library"),
     CDNA("cDNA"),
     CDNA_LIBRARY("cDNA Library"),
+    CELLS("Cells"),
+    CFDNA("cfDNA"),
+    CSF("CSF"),
+    CURLS_PUNCHES("Curls/Punches"),
+    DNA("DNA"),
     DNA_CDNA_LIBRARY("DNA/cDNA Library"),
-    OTHER("other");
+    DNA_LIBRARY("DNA Library"),
+    FINGERNAILS("Fingernails"),
+    HMWDNA("hnwDNA"),
+    NUCLEI("Nuclei"),
+    OTHER("other"),
+    PLASMA("Plasma"),
+    POOLED_LIBRARY("Pooled Library"),
+    RNA("RNA"),
+    SALIVA("Saliva"),
+    SLIDES("Slides"),
+    TISSUE("Tissue"),
+    UHMWDNA("uhmwDNA"),
+    WHOLE_BLOOD("Whole Blood");
 
     private static final Map<String, SampleType> valueToSampleType = new HashMap<>();
 

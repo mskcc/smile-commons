@@ -6,19 +6,20 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum SpecimenType {
     BIOPSY("Biopsy"),
-    RESECTION("Resection"),
     BLOOD("Blood"),
     CELLLINE("CellLine"),
     CFDNA("cfDNA"),
     EXOSOME("Exosome"),
-    PDX("PDX"),
-    XENOGRAFT("Xenograft"),
-    XENOGRAFTDERIVEDCELLLINE("XenograftDerivedCellLine"),
-    RAPIDAUTOPSY("RapidAutopsy"),
     FINGERNAILS("Fingernails"),
+    NONPDX("Non-PDX"),
     ORGANOID("Organoid"),
+    OTHER("other"),
+    PDX("PDX"),
+    RAPIDAUTOPSY("RapidAutopsy"),
+    RESECTION("Resection"),
     SALIVA("Saliva"),
-    OTHER("other");
+    XENOGRAFT("Xenograft"),
+    XENOGRAFTDERIVEDCELLLINE("XenograftDerivedCellLine");
 
     private static final Map<String, SpecimenType> valueToSpecimenType = new HashMap<>();
 
