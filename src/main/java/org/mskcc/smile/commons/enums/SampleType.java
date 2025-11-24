@@ -31,7 +31,8 @@ public enum SampleType {
     SLIDES("Slides"),
     TISSUE("Tissue"),
     UHMWDNA("uhmwDNA"),
-    WHOLE_BLOOD("Whole Blood");
+    WHOLE_BLOOD("Whole Blood"),
+    STOOL("Stool");
 
     private static final Map<String, SampleType> valueToSampleType = new HashMap<>();
 
