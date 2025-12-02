@@ -30,8 +30,8 @@ public enum SampleOrigin {
     TISSUE("Tissue"),
     URINE("Urine"),
     VIABLY_FROZEN_CELLS("Viably Frozen Cells"),
-    WHOLE_BLOOD("Whole Blood"),
-    STOOL("Stool");
+    WHOLE_BLOOD("Whole Blood");
+    // STOOL("Stool");
 
     private static final Map<String, SampleOrigin> valueToSampleOrigin = new HashMap<>();
 

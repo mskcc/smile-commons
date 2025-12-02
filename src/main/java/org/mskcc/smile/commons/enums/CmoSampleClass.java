@@ -15,8 +15,8 @@ public enum CmoSampleClass {
     PRIMARY("Primary"),
     RECURRENCE("Recurrence"),
     TUMOR("Tumor"),
-    UNKNOWN_TUMOR("Unknown Tumor"),
-    MICROBIOME("Microbiome");
+    UNKNOWN_TUMOR("Unknown Tumor");
+    // MICROBIOME("Microbiome");
 
     private static final Map<String, CmoSampleClass> valueToCmoSampleClass = new HashMap<>();
 
