@@ -889,10 +889,16 @@ public final class Smile {
         getDmpPatientIdBytes();
 
     /**
-     * <code>bool recapture = 11;</code>
+     * <code>string recapture = 11;</code>
      * @return The recapture.
      */
-    boolean getRecapture();
+    java.lang.String getRecapture();
+    /**
+     * <code>string recapture = 11;</code>
+     * @return The bytes for recapture.
+     */
+    com.google.protobuf.ByteString
+        getRecaptureBytes();
   }
   /**
    * Protobuf type {@code smile.TempoSample}
@@ -926,6 +932,7 @@ public final class Smile {
       oncotreeCode_ = "";
       cmoPatientId_ = "";
       dmpPatientId_ = "";
+      recapture_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -1332,14 +1339,42 @@ public final class Smile {
     }
 
     public static final int RECAPTURE_FIELD_NUMBER = 11;
-    private boolean recapture_ = false;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object recapture_ = "";
     /**
-     * <code>bool recapture = 11;</code>
+     * <code>string recapture = 11;</code>
      * @return The recapture.
      */
     @java.lang.Override
-    public boolean getRecapture() {
-      return recapture_;
+    public java.lang.String getRecapture() {
+      java.lang.Object ref = recapture_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        recapture_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string recapture = 11;</code>
+     * @return The bytes for recapture.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRecaptureBytes() {
+      java.lang.Object ref = recapture_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        recapture_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1386,8 +1421,8 @@ public final class Smile {
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dmpPatientId_)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 10, dmpPatientId_);
       }
-      if (recapture_ != false) {
-        output.writeBool(11, recapture_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(recapture_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 11, recapture_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1428,9 +1463,8 @@ public final class Smile {
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dmpPatientId_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(10, dmpPatientId_);
       }
-      if (recapture_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(11, recapture_);
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(recapture_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(11, recapture_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1467,8 +1501,8 @@ public final class Smile {
           .equals(other.getCmoPatientId())) return false;
       if (!getDmpPatientId()
           .equals(other.getDmpPatientId())) return false;
-      if (getRecapture()
-          != other.getRecapture()) return false;
+      if (!getRecapture()
+          .equals(other.getRecapture())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1501,8 +1535,7 @@ public final class Smile {
       hash = (37 * hash) + DMPPATIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getDmpPatientId().hashCode();
       hash = (37 * hash) + RECAPTURE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getRecapture());
+      hash = (53 * hash) + getRecapture().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1644,7 +1677,7 @@ public final class Smile {
         oncotreeCode_ = "";
         cmoPatientId_ = "";
         dmpPatientId_ = "";
-        recapture_ = false;
+        recapture_ = "";
         return this;
       }
 
@@ -1775,8 +1808,10 @@ public final class Smile {
           bitField0_ |= 0x00000200;
           onChanged();
         }
-        if (other.getRecapture() != false) {
-          setRecapture(other.getRecapture());
+        if (!other.getRecapture().isEmpty()) {
+          recapture_ = other.recapture_;
+          bitField0_ |= 0x00000400;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -1854,11 +1889,11 @@ public final class Smile {
                 bitField0_ |= 0x00000200;
                 break;
               } // case 82
-              case 88: {
-                recapture_ = input.readBool();
+              case 90: {
+                recapture_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000400;
                 break;
-              } // case 88
+              } // case 90
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2596,34 +2631,74 @@ public final class Smile {
         return this;
       }
 
-      private boolean recapture_ ;
+      private java.lang.Object recapture_ = "";
       /**
-       * <code>bool recapture = 11;</code>
+       * <code>string recapture = 11;</code>
        * @return The recapture.
        */
-      @java.lang.Override
-      public boolean getRecapture() {
-        return recapture_;
+      public java.lang.String getRecapture() {
+        java.lang.Object ref = recapture_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          recapture_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>bool recapture = 11;</code>
+       * <code>string recapture = 11;</code>
+       * @return The bytes for recapture.
+       */
+      public com.google.protobuf.ByteString
+          getRecaptureBytes() {
+        java.lang.Object ref = recapture_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          recapture_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string recapture = 11;</code>
        * @param value The recapture to set.
        * @return This builder for chaining.
        */
-      public Builder setRecapture(boolean value) {
-
+      public Builder setRecapture(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
         recapture_ = value;
         bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
       /**
-       * <code>bool recapture = 11;</code>
+       * <code>string recapture = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearRecapture() {
+        recapture_ = getDefaultInstance().getRecapture();
         bitField0_ = (bitField0_ & ~0x00000400);
-        recapture_ = false;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string recapture = 11;</code>
+       * @param value The bytes for recapture to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRecaptureBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        recapture_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -4389,7 +4464,7 @@ public final class Smile {
       "ianInformation\030\005 \001(\t\022\017\n\007baitSet\030\006 \001(\t\022\021\n" +
       "\tgenePanel\030\007 \001(\t\022\024\n\014oncotreeCode\030\010 \001(\t\022\024" +
       "\n\014cmoPatientId\030\t \001(\t\022\024\n\014dmpPatientId\030\n \001" +
-      "(\t\022\021\n\trecapture\030\013 \001(\010\"\243\001\n\021TempoCohortUpd" +
+      "(\t\022\021\n\trecapture\030\013 \001(\t\"\243\001\n\021TempoCohortUpd" +
       "ate\022\020\n\010cohortId\030\001 \001(\t\022\014\n\004date\030\002 \001(\t\022\014\n\004t" +
       "ype\030\003 \001(\t\022\020\n\010endUsers\030\004 \003(\t\022\017\n\007pmUsers\030\005" +
       " \003(\t\022\024\n\014projectTitle\030\006 \001(\t\022\027\n\017projectSub" +
