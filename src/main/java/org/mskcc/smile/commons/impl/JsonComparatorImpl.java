@@ -56,6 +56,7 @@ public class JsonComparatorImpl implements JsonComparator {
         "igoComplete",
         "igoSampleId",
         "strand",
+        "ilabRequestId",
         // SampleMetadata fields
         "baitSet",
         "cfDNA2dBarcode",
@@ -87,7 +88,8 @@ public class JsonComparatorImpl implements JsonComparator {
         "qcReports",
         "status",
         "cmoSampleIdFields",
-        "runs"
+        "runs",
+        "sampleStatus"
     };
 
     public final String[] GENERIC_IGNORED_FIELDS = new String[]{
