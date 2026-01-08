@@ -307,6 +307,41 @@ public class JsonComparatorTest {
                 tarJson.getJsonString());
         Assertions.assertFalse(isConsistent);
     }
+    
+    /**
+     * Tests that IGO-specific updates are recognized (ilabRequestId, deliveryDate) at the request level
+     * as well as the sample level (sampleStatus).
+     * @throws Exception 
+     */
+//    @Test public void testNewIgoSupportedFieldsComparison() throws Exception {
+//        MockJsonTestData igoSchema = mockedJsonDataMap.get(
+//                "mockIgoSchemaUpdatedRequest");
+//        MockJsonTestData universalSchema = mockedJsonDataMap.get(
+//                "mockPublishedIgoSchemaUpdatedRequest");
+//        
+//        // test new igo request/sample with universal schema from smile (deliveryDate v igoDeliveryDate)
+//        Assertions.assertTrue(jsonComparator.isConsistent(igoSchema.getJsonString(), universalSchema.getJsonString()));
+//        Assertions.assertTrue(jsonComparator.isConsistentByIgoProperties(igoSchema.getJsonString(), universalSchema.getJsonString()));
+//        
+//        // test that update to igoSampleStatus is recognized by both IGO and non-IGO consistency checks
+//        MockJsonTestData universalSchemaIgoUpdates = mockedJsonDataMap.get(
+//                "mockPublishedIgoSchemaUpdatedRequestWithIgoDataChanges");
+//        Assertions.assertFalse(jsonComparator.isConsistent(universalSchema.getJsonString(), universalSchemaIgoUpdates.getJsonString()));
+//        Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(universalSchema.getJsonString(), universalSchemaIgoUpdates.getJsonString()));
+//        
+//        // test that update to a non-IGO property is recognized but not for the IGO-specific consistency check
+//        MockJsonTestData universalSchemaNonIgoUpdates = mockedJsonDataMap.get(
+//                "mockPublishedIgoSchemaUpdatedRequestWithNonIgoDataChanges");
+//        Assertions.assertFalse(jsonComparator.isConsistent(universalSchema.getJsonString(), universalSchemaNonIgoUpdates.getJsonString()));
+//        Assertions.assertTrue(jsonComparator.isConsistentByIgoProperties(universalSchema.getJsonString(), universalSchemaNonIgoUpdates.getJsonString()));
+//        
+//        
+//        // test that updates to both IGO and non-IGO properties are recognized by both types of consistency checks
+//        MockJsonTestData universalSchemaMixedUpdates = mockedJsonDataMap.get(
+//                "mockPublishedIgoSchemaUpdatedRequestWithMixedDataChanges");
+//        Assertions.assertFalse(jsonComparator.isConsistent(universalSchema.getJsonString(), universalSchemaMixedUpdates.getJsonString()));
+//        Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(universalSchema.getJsonString(), universalSchemaMixedUpdates.getJsonString()));
+//    }
 
     private String getErrorMessage(Map<String, String> errorsMap) {
         StringBuilder builder = new StringBuilder();
