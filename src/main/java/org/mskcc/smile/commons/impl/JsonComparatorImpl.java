@@ -48,6 +48,7 @@ public class JsonComparatorImpl implements JsonComparator {
     public final String[] IGO_ACCEPTED_FIELDS = new String[]{
         //RequestMetadata fields
         "deliveryDate",
+        "igoDeliveryDate",
         "isCmoRequest",
         "libraryType",
         "pooledNormals",
@@ -89,7 +90,8 @@ public class JsonComparatorImpl implements JsonComparator {
         "status",
         "cmoSampleIdFields",
         "runs",
-        "sampleStatus"
+        "sampleStatus",
+        "igoSampleStatus"
     };
 
     public final String[] GENERIC_IGNORED_FIELDS = new String[]{
@@ -107,6 +109,7 @@ public class JsonComparatorImpl implements JsonComparator {
         map.put("projectId", "igoProjectId");
         map.put("requestId", "igoRequestId");
         map.put("recipe", "genePanel");
+        map.put("deliveryDate", "igoDeliveryDate");
         return map;
     }
 
@@ -117,6 +120,7 @@ public class JsonComparatorImpl implements JsonComparator {
         map.put("oncoTreeCode", "oncotreeCode");
         map.put("requestId", "igoRequestId");
         map.put("igoId", "primaryId");
+        map.put("sampleStatus", "igoSampleStatus");
         return map;
     }
 
