@@ -28,6 +28,8 @@ import org.springframework.stereotype.Component;
 public class JsonComparatorImpl implements JsonComparator {
     private final ObjectMapper mapper = new ObjectMapper();
 
+    public final List<String> LONG_TYPE_STD_FIELDS = Arrays.asList("igoDeliveryDate");
+
     public final String[] DEFAULT_IGNORED_FIELDS = new String[]{
         "smileRequestId",
         "smileSampleId",
@@ -43,11 +45,14 @@ public class JsonComparatorImpl implements JsonComparator {
         "genePanel",
         "additionalProperties",
         "cmoInfoIgoId",
-        "date"};
+        "date",
+        "altid",
+        "sampleStatus"};
 
     public final String[] IGO_ACCEPTED_FIELDS = new String[]{
         //RequestMetadata fields
         "deliveryDate",
+        "igoDeliveryDate",
         "isCmoRequest",
         "libraryType",
         "pooledNormals",
@@ -56,6 +61,7 @@ public class JsonComparatorImpl implements JsonComparator {
         "igoComplete",
         "igoSampleId",
         "strand",
+        "ilabRequestId",
         // SampleMetadata fields
         "baitSet",
         "cfDNA2dBarcode",
@@ -87,7 +93,9 @@ public class JsonComparatorImpl implements JsonComparator {
         "qcReports",
         "status",
         "cmoSampleIdFields",
-        "runs"
+        "runs",
+        "sampleStatus",
+        "igoSampleStatus"
     };
 
     public final String[] GENERIC_IGNORED_FIELDS = new String[]{
@@ -105,6 +113,7 @@ public class JsonComparatorImpl implements JsonComparator {
         map.put("projectId", "igoProjectId");
         map.put("requestId", "igoRequestId");
         map.put("recipe", "genePanel");
+        map.put("deliveryDate", "igoDeliveryDate");
         return map;
     }
 
@@ -403,7 +412,8 @@ public class JsonComparatorImpl implements JsonComparator {
     private Boolean jsonHasQcAndOrLibrariesAndOrStatusFields(String jsonString)
             throws JsonProcessingException {
         JsonNode jsonNode = mapper.readTree(jsonString);
-        return jsonNode.has("libraries") || jsonNode.has("qcReports") || jsonNode.has("status");
+        return jsonNode.has("libraries") || jsonNode.has("qcReports")
+                || (jsonNode.has("status") && !jsonNode.has("samples"));
     }
 
     /**
@@ -599,9 +609,12 @@ public class JsonComparatorImpl implements JsonComparator {
         // updating and removal needs to be done separately from iteration above
         // to avoid a java.util.ConcurrentModificationException
         for (String field : fieldsToUpdate) {
-            String value = node.get(field).asText();
             String stdJsonProp = jsonPropsMap.get(field);
-            node.put(stdJsonProp, value);
+            if (LONG_TYPE_STD_FIELDS.contains(stdJsonProp)) {
+                node.put(stdJsonProp, node.get(field).asLong());
+            } else {
+                node.put(stdJsonProp, node.get(field).asText());
+            }
             node.remove(field);
         }
         return node;

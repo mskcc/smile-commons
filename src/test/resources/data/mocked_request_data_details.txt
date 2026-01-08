@@ -42,3 +42,8 @@ sampleMixedUpdates	lims_update_handling/sample_mixed_updates.json	Sample from 's
 mockCohortCompleteCCSPPPQQQQ	tempo/cohort_complete_CCS_PPPQQQQ.json	Mocked Cohort complete JSON with cohort ID CCS_PPPQQQQ. Has 4 samples associated with it.
 mockCohortCompleteCCSPPPQQQQ2	tempo/cohort_complete_CCS_PPPQQQQ_2.json	Mocked Cohort complete JSON with cohort ID CCS_PPPQQQQ_2. Has 2 samples associated with it.
 mockCohortCompleteCCSPPPQQQQUpdated	tempo/cohort_complete_CCS_PPPQQQQ_updated.json	Mocked updated Cohort complete JSON with cohort ID CCS_PPPQQQQ. Has 4 samples associated with it.
+mockIgoSchemaUpdatedRequest	lims_schema_update/mocked_request_new_igo_schema.json	Mock incoming request json with new IGO schema including 2 request-level fields and 1 sample-level field.
+mockPublishedIgoSchemaUpdatedRequest	lims_schema_update/mocked_request_igo_to_universal_schema.json	Mock request from 'mockIgoSchemaUpdatedRequest' transformed to universal schema.
+mockPublishedIgoSchemaUpdatedRequestWithIgoDataChanges	lims_schema_update/mocked_request_universal_schema_igo_data_changes.json	Mock request from 'mockPublishedIgoSchemaUpdatedRequest' with IGO-specific updates.
+mockPublishedIgoSchemaUpdatedRequestWithNonIgoDataChanges	lims_schema_update/mocked_request_universal_schema_non_igo_data_changes.json	Mock request from 'mockPublishedIgoSchemaUpdatedRequest' with non-IGO updates.
+mockPublishedIgoSchemaUpdatedRequestWithMixedDataChanges	lims_schema_update/mocked_request_universal_schema_mixed_data_changes.json	Mock request from 'mockPublishedIgoSchemaUpdatedRequest' with mix of IGO and non-IGO updates.
