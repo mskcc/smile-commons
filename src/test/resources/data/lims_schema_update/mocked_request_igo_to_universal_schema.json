@@ -25,7 +25,18 @@
     "validationReport": "{}"
   },
   "requestJson": "{\"ilabRequestId\":\"IGO-658741\",\"requestId\":\"MOCKREQUEST1_B\",\"projectId\":\"MOCKREQUEST1\",\"dataAccessEmails\":\"\",\"dataAnalystEmail\":\"dexterp@mskcc.org\",\"dataAnalystName\":\"Poin Dexter\",\"investigatorEmail\":\"NEWINVESTIGATOREMAIL@mskcc.org\",\"investigatorName\":\"John Smith\",\"labHeadEmail\":\"request1pi@mskcc.org\",\"labHeadName\":\"Foo Bar\",\"libraryType\":null,\"otherContactEmails\":\"dexterp@mskcc.org\",\"piEmail\":\"request1pi@mskcc.org\",\"projectManagerName\":\"Bar, Foo\",\"qcAccessEmails\":\"\",\"recipe\":\"GENESET101\",\"strand\":null,\"deliveryDate\":1757388036044,\"bicAnalysis\":false,\"isCmoRequest\":true,\"samples\":[{\"igoId\":\"MOCKREQUEST1_B_1\",\"cmoPatientId\":\"C-MP789JR\",\"cmoSampleName\":\"C-MP789JR-X001-d\",\"sampleName\":\"XXX002_P3_12345_L1\",\"altid\":null,\"baitSet\":\"GENESET101_BAITS\",\"cfDNA2dBarcode\":null,\"cmoInfoIgoId\":null,\"cmoSampleClass\":\"Primary\",\"collectionYear\":\"\",\"investigatorSampleId\":\"XXX002_P3_12345_L1\",\"oncoTreeCode\":\"CLL\",\"preservation\":\"Frozen\",\"sampleOrigin\":\"Tissue\",\"sex\":\"F\",\"species\":\"Human\",\"specimenType\":\"PDX\",\"tissueLocation\":\"\",\"tubeId\":\"\",\"tumorOrNormal\":\"UpdatedTumor\",\"igoComplete\":true,\"qcReports\":[],\"libraries\":[{\"barcodeId\":\"IDT29\",\"barcodeIndex\":\"ATTGAGGA\",\"libraryIgoId\":\"MOCKREQUEST1_B_1_1_1_1\",\"libraryVolume\":35.0,\"libraryConcentrationNgul\":34.8,\"dnaInputNg\":null,\"captureConcentrationNm\":\"11.49425287356322\",\"captureInputNg\":\"400.0\",\"captureName\":\"Pool-MOCKREQUEST1_B-Tube7_1\",\"runs\":[{\"runMode\":\"HiSeq High Output\",\"runId\":\"RUNID_0123\",\"flowCellId\":\"X5KL2KKAY\",\"readLength\":\"\",\"runDate\":\"2018-06-05\",\"flowCellLanes\":[5],\"fastqs\":[\"/FASTQ/Project_MOCKREQUEST1_B/Sample_XXX002_P3_12345_L1_IGO_MOCKREQUEST1_B_1/XXX002_P3_12345_L1_IGO_MOCKREQUEST1_B_1_S82_R1_001.fastq.gz\",\"/FASTQ/Project_MOCKREQUEST1_B/Sample_XXX002_P3_12345_L1_IGO_MOCKREQUEST1_B_1/XXX002_P3_12345_L1_IGO_MOCKREQUEST1_B_1_S82_R2_001.fastq.gz\"]}]}],\"cmoSampleIdFields\":{\"naToExtract\":\"\",\"sampleType\":\"Tissue\",\"normalizedPatientId\":\"MRN_REDACTED\",\"recipe\":\"GENESET101_BAITS\"},\"sampleStatus\":\"IGO sample status PASSED\"}],\"pooledNormals\":[]}",
-  "pooledNormals": [],
+  "pooledNormals": [
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FFPEPOOLEDNORMAL_IGO_GENESET101_TAGCTTGA/FFPEPOOLEDNORMAL_IGO_GENESET101_TAGCTTGA_S23_R1_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FFPEPOOLEDNORMAL_IGO_GENESET101_TAGCTTGA/FFPEPOOLEDNORMAL_IGO_GENESET101_TAGCTTGA_S23_R2_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_AMBIGUOUS_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_AMBIGUOUS_TTAGGCTG_S86_R1_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_AMBIGUOUS_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_AMBIGUOUS_TTAGGCTG_S86_R2_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_HEMESET_v1_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_HEMESET_v1_TTAGGCTG_S147_R1_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_HEMESET_v1_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_HEMESET_v1_TTAGGCTG_S147_R2_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_GENESET101_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_GENESET101_TTAGGCTG_S196_R1_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_FROZENPOOLEDNORMAL_IGO_GENESET101_TTAGGCTG/FROZENPOOLEDNORMAL_IGO_GENESET101_TTAGGCTG_S196_R2_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT/MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT_S61_R1_001.fastq.gz",
+    "/FASTQ/Project_POOLEDNORMALS/Sample_MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT/MOUSEPOOLEDNORMAL_IGO_AMBIGUOUS_GGCGTCAT_S61_R2_001.fastq.gz"
+  ],
   "samples": [
     {
       "smileSampleId": "c47ffd66-e724-4b7a-a665-c7e3d26d963e",
