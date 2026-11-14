@@ -1,18 +1,19 @@
 package org.mskcc.smile.commons.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.LongNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.mskcc.smile.commons.JsonComparator;
@@ -21,602 +22,306 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.stereotype.Component;
 
 /**
+ * Decides whether two JSON documents carry the same metadata.
+ *
+ * <p>Inputs may be in IGO's raw schema or SMILE's universal schema (or one of each). Both are
+ * first converted to the universal schema ({@link #toUniversalSchema}), then reduced to a
+ * canonical form ({@link #normalizeRecord}) and compared structurally. A "record" is the root
+ * document or an element of its {@code samples} array; schema conversion and IGO-ownership
+ * projection apply per record, while ignored fields and empty-value removal apply at every depth.
  *
  * @author ochoaa
  */
 @Component
 public class JsonComparatorImpl implements JsonComparator {
-    private final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String SAMPLES = "samples";
+    /** SmileRequest serializes its samples as SmileSample objects under this key. */
+    private static final String SMILE_SAMPLES = "smileSampleList";
+    /** SmileSample's serialized current metadata (its sampleMetadataList holds the full history). */
+    private static final String LATEST_SAMPLE_METADATA = "latestSampleMetadata";
 
-    public final List<String> LONG_TYPE_STD_FIELDS = Arrays.asList("igoDeliveryDate");
+    private static final Set<String> DEFAULT_IGNORED_FIELDS = Set.of(
+            "smileRequestId", "smileSampleId", "smilePatientId", "requestJson", "importDate",
+            "cmoSampleName", "sampleAliases", "patientAliases", "datasource", "genePanel",
+            "additionalProperties", "cmoInfoIgoId", "date", "sampleStatus");
 
-    public final String[] DEFAULT_IGNORED_FIELDS = new String[]{
-        "smileRequestId",
-        "smileSampleId",
-        "smilePatientId",
-        "requestJson",
-        "samples",
-        "importDate",
-        "cmoSampleName",
-        "sampleAliases",
-        "datasource",
-        "patientAliases",
-        "sampleAliases",
-        "genePanel",
-        "additionalProperties",
-        "cmoInfoIgoId",
-        "date",
-        "altid",
-        "sampleStatus"};
+    private static final Set<String> GENERIC_IGNORED_FIELDS = Set.of("date", SAMPLES);
 
-    public final String[] IGO_ACCEPTED_FIELDS = new String[]{
-        //RequestMetadata fields
-        "deliveryDate",
-        "igoDeliveryDate",
-        "isCmoRequest",
-        "libraryType",
-        "pooledNormals",
-        "genePanel",
-        "igoRequestId",
-        "igoComplete",
-        "igoSampleId",
-        "strand",
-        "ilabRequestId",
-        // SampleMetadata fields
-        "baitSet",
-        "cfDNA2dBarcode",
-        "recipe",
-        "genePanel",
-        "primaryId",
-        "igoId",
-        "barcodeId",
-        "barcodeIndex",
-        "captureConcentrationNm",
-        "captureInputNg",
-        "captureName",
-        "dnaInputNg",
-        "libraryConcentrationNgul",
-        "libraryIgoId",
-        "libraryVolume",
-        "fastqs",
-        "flowCellId",
-        "flowCellLanes",
-        "readLength",
-        "runDate",
-        "runId",
-        "runMode",
-        "IGORecommendation",
-        "comments",
-        "investigatorDecision",
-        "qcReportType",
-        "libraries",
-        "qcReports",
-        "status",
-        "cmoSampleIdFields",
-        "runs",
-        "sampleStatus",
-        "igoSampleStatus"
+    /** Record-level fields added by the SMILE pipeline rather than IGO; see alignPipelineFields. */
+    private static final Set<String> PIPELINE_FIELDS = Set.of("status");
+
+    /*
+     * IGO-owned data, as universal-schema paths. Only these are compared when an update arrives
+     * from IGO (LIMS); everything else may carry Project Manager edits made via the Dashboard,
+     * which IGO never sees and must not override. Keep in sync with smile-server's
+     * SmileSample.applyIgoLimsUpdates and SmileRequest.applyIgoRequestMetadataUpdates.
+     */
+    private static final Set<String> IGO_OWNED_SAMPLE_PATHS = Set.of(
+            "primaryId", "species", "genePanel", "baitSet", "igoComplete", "cmoSampleIdFields",
+            "qcReports", "libraries", // libraries carry runs, which carry fastqs
+            "additionalProperties.altId", "additionalProperties.igoSampleStatus");
+    private static final Set<String> IGO_OWNED_REQUEST_PATHS = Set.of(
+            "igoRequestId", "genePanel", "strand", "libraryType", "isCmoRequest", "pooledNormals",
+            "igoDeliveryDate", "ilabRequestId");
+
+    /** IGO raw property -> universal-schema path (mirrors SampleMetadata(IgoSampleManifest)). */
+    private static final Map<String, String> SAMPLE_FIELD_MOVES = Map.of(
+            "igoId", "primaryId",
+            "requestId", "igoRequestId",
+            "cmoSampleClass", "sampleType",
+            "specimenType", "sampleClass",
+            "oncoTreeCode", "oncotreeCode",
+            "altid", "additionalProperties.altId");
+    /** IGO raw property -> universal-schema path (mirrors SmileRequest IGO constructors). */
+    private static final Map<String, String> REQUEST_FIELD_MOVES = Map.of(
+            "projectId", "igoProjectId",
+            "requestId", "igoRequestId",
+            "recipe", "genePanel",
+            "deliveryDate", "igoDeliveryDate");
+    private static final Set<String> LONG_FIELDS = Set.of("igoDeliveryDate");
+
+    /**
+     * How a comparison treats fields.
+     * @param ignored fields dropped at every depth (record level is skipped when igoOwnedOnly)
+     * @param igoOwnedOnly compare only IGO-owned paths of each record
+     * @param standardize whether to convert IGO raw schema to the universal schema first
+     */
+    private record Profile(Set<String> ignored, boolean igoOwnedOnly, boolean standardize) {}
+
+    private static final Profile ALL_FIELDS = new Profile(DEFAULT_IGNORED_FIELDS, false, true);
+    private static final Profile IGO_OWNED = new Profile(DEFAULT_IGNORED_FIELDS, true, true);
+    private static final Profile GENERIC = new Profile(GENERIC_IGNORED_FIELDS, false, false);
+
+    /** Scalars are equal if textually equal, or if both numeric with the same value. */
+    private static final Comparator<JsonNode> SCALAR_COMPARATOR = (a, b) -> {
+        if (a.equals(b)) {
+            return 0;
+        }
+        if (a.isNumber() && b.isNumber()) {
+            return a.decimalValue().compareTo(b.decimalValue());
+        }
+        return 1;
     };
-
-    public final String[] GENERIC_IGNORED_FIELDS = new String[]{
-        "date",
-        "samples"
-    };
-
-    private final Map<String, String> STD_IGO_REQUEST_JSON_PROPS_MAP =
-            initStandardizedIgoRequestJsonPropsMap();
-    private final Map<String, String> STD_IGO_SAMPLE_JSON_PROPS_MAP =
-            initStandardizedIgoSampleJsonPropsMap();
-
-    private Map<String, String> initStandardizedIgoRequestJsonPropsMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("projectId", "igoProjectId");
-        map.put("requestId", "igoRequestId");
-        map.put("recipe", "genePanel");
-        map.put("deliveryDate", "igoDeliveryDate");
-        return map;
-    }
-
-    private Map<String, String> initStandardizedIgoSampleJsonPropsMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("cmoSampleClass", "sampleType");
-        map.put("specimenType", "sampleClass");
-        map.put("oncoTreeCode", "oncotreeCode");
-        map.put("requestId", "igoRequestId");
-        map.put("igoId", "primaryId");
-        return map;
-    }
 
     @Override
     public Boolean isConsistentByIgoProperties(String referenceJson, String targetJson) throws Exception {
-        return isConsistent(referenceJson, targetJson, DEFAULT_IGNORED_FIELDS, "igo");
+        return compare(referenceJson, targetJson, IGO_OWNED);
     }
 
     @Override
     public Boolean isConsistent(String referenceJson, String targetJson) throws Exception {
-        return isConsistent(referenceJson, targetJson,  DEFAULT_IGNORED_FIELDS, "new");
+        return compare(referenceJson, targetJson, ALL_FIELDS);
     }
 
     /**
-     * Accepted values of String comparisonType are new, igo and dashboard
-     * @param referenceJson
-     * @param targetJson
-     * @param ignoredFields
-     * @param comparisonType
-     * @return Boolean
-     * @throws Exception
+     * Comparison with caller-supplied ignored fields.
+     * @param comparisonType "igo" compares only IGO-owned fields; any other value compares all
      */
     @Override
     public Boolean isConsistent(String referenceJson, String targetJson, String[] ignoredFields,
             String comparisonType) throws Exception {
-        Boolean consistencyCheckStatus = Boolean.TRUE;
-
-        // filter reference and target request jsons and compare
-        String filteredReferenceJson = standardizeAndFilterRequestJson(referenceJson,
-                ignoredFields, comparisonType);
-        String filteredTargetJson = standardizeAndFilterRequestJson(targetJson,
-                ignoredFields, comparisonType);
-        if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
-            consistencyCheckStatus = Boolean.FALSE;
-        }
-
-        // checks qcreports, libraries and status (case where sample metadata is compared directly)
-        if (jsonHasQcAndOrLibrariesAndOrStatusFields(referenceJson)
-                || jsonHasQcAndOrLibrariesAndOrStatusFields(targetJson)) {
-            if (!isConsistentSampleMetadata(referenceJson, targetJson, comparisonType)) {
-                consistencyCheckStatus = Boolean.FALSE;
-            }
-        }
-
-        // filter reference and target sample list jsons and compare if applicable
-        if (jsonHasSamplesField(referenceJson) || jsonHasSamplesField(targetJson)) {
-            String filteredReferenceSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(referenceJson, ignoredFields, comparisonType);
-            String filteredTargetSamplesJson =
-                    standardizeAndFilterRequestSamplesJson(targetJson, ignoredFields, comparisonType);
-
-            if (!isMatchingJsons(filteredReferenceSamplesJson, filteredTargetSamplesJson)) {
-                consistencyCheckStatus = Boolean.FALSE;
-            }
-
-            JsonNode refSamplesJsonNode = mapper.readTree(referenceJson).get("samples");
-            ArrayNode refSamplesArrayNode = (ArrayNode) refSamplesJsonNode;
-            Iterator<JsonNode> itrRef = refSamplesArrayNode.elements();
-
-            // Iterating through a list of samples from referenceJson
-            while (itrRef.hasNext()) {
-                JsonNode refSampleNode = itrRef.next();
-                String primaryId = findPrimaryIdFromJsonNode(refSampleNode);
-                if (primaryId != null) {
-                    JsonNode tarSampleNode = findSampleNodeFromSampleArray(targetJson, primaryId);
-                    // Compares status, libraries and qcReports.
-                    // Runs still need to be addressed
-                    if (!isConsistentSampleMetadata(refSampleNode, tarSampleNode, comparisonType)) {
-                        consistencyCheckStatus = Boolean.FALSE;
-                    }
-                }
-            }
-        }
-        return consistencyCheckStatus;
+        Set<String> ignored = (ignoredFields == null)
+                ? Set.of() : new HashSet<>(Arrays.asList(ignoredFields));
+        return compare(referenceJson, targetJson,
+                new Profile(ignored, "igo".equals(comparisonType), true));
     }
 
     @Override
     public Boolean isConsistentGenericComparison(String referenceJson, String targetJson) throws Exception {
-        Boolean consistencyCheckStatus = Boolean.TRUE;
-        String filteredReferenceJson = filterGenericJson(referenceJson);
-        String filteredTargetJson = filterGenericJson(targetJson);
-        if (!isMatchingJsons(filteredReferenceJson, filteredTargetJson)) {
-            consistencyCheckStatus = Boolean.FALSE;
+        return compare(referenceJson, targetJson, GENERIC);
+    }
+
+    private Boolean compare(String referenceJson, String targetJson, Profile profile)
+            throws JsonProcessingException {
+        JsonNode ref = normalizeRecord(MAPPER.readTree(referenceJson), profile);
+        JsonNode tar = normalizeRecord(MAPPER.readTree(targetJson), profile);
+        if (profile.standardize()) {
+            alignPipelineFields(ref, tar);
         }
-        return consistencyCheckStatus;
-    }
-
-    private Boolean isConsistentSampleMetadata(String referenceJson, String targetJson,
-            String comparisonType) throws JsonProcessingException {
-        return isConsistentSampleMetadata(mapper.readTree(referenceJson),
-                mapper.readTree(targetJson), comparisonType);
-    }
-
-    private Boolean isConsistentSampleMetadata(JsonNode referenceNode,
-            JsonNode targetNode, String comparisonType) throws JsonProcessingException {
-        if (!isMatchingJsonByFieldName(referenceNode, targetNode, "qcReports", comparisonType)
-                            || !isMatchingJsonByFieldName(referenceNode, targetNode,
-                                    "libraries", comparisonType)
-                            || !isMatchingJsonByFieldName(referenceNode, targetNode,
-                                            "status", comparisonType)) {
-            return Boolean.FALSE;
+        boolean matches = (ref == null) ? tar == null : tar != null && ref.equals(SCALAR_COMPARATOR, tar);
+        if (!matches) {
+            printDifferences(ref, tar);
         }
-        return Boolean.TRUE;
+        return matches;
     }
 
-    private JsonNode findSampleNodeFromSampleArray(String targetJson, String primaryId)
-            throws JsonMappingException, JsonProcessingException {
-        JsonNode tarSamplesJsonNode = mapper.readTree(targetJson).get("samples");
-        ArrayNode tarSamplesArrayNode = (ArrayNode) tarSamplesJsonNode;
-        Iterator<JsonNode> itrTar = tarSamplesArrayNode.elements();
+    /**
+     * Prints JSONAssert's expected/got report for two normalized documents, so it lists only the
+     * differences that count, at their normalized paths. Falls back to printing both documents
+     * when JSONAssert cannot describe the mismatch.
+     */
+    private static void printDifferences(JsonNode ref, JsonNode tar) {
+        try {
+            JSONAssert.assertEquals(String.valueOf(ref), String.valueOf(tar), JSONCompareMode.STRICT);
+        } catch (AssertionError ae) {
+            System.out.println(ae.getLocalizedMessage());
+            return;
+        } catch (JSONException e) {
+            // fall through to the plain report
+        }
+        System.out.println("JSON mismatch\n  reference: " + ref + "\n  target:    " + tar);
+    }
 
-        while (itrTar.hasNext()) {
-            JsonNode sampleNode = itrTar.next();
-            String tarPrimaryId =  findPrimaryIdFromJsonNode(sampleNode);
-            if (primaryId.equals(tarPrimaryId)) {
-                return sampleNode;
+    /**
+     * Fields such as status are added by the SMILE pipeline (smile-request-filter,
+     * smile-label-generator), never by IGO, so raw IGO JSON lacks them. A pipeline field present on
+     * only one side of a record pair means "not yet processed", not "different", and is dropped
+     * from both; when both sides carry it, it is compared as usual. Samples are paired by position,
+     * which matches primary id order since normalizeSamples sorts them.
+     */
+    private static void alignPipelineFields(JsonNode ref, JsonNode tar) {
+        if (!(ref instanceof ObjectNode refRecord) || !(tar instanceof ObjectNode tarRecord)) {
+            return;
+        }
+        for (String field : PIPELINE_FIELDS) {
+            if (refRecord.has(field) != tarRecord.has(field)) {
+                refRecord.remove(field);
+                tarRecord.remove(field);
             }
         }
-        return null;
+        JsonNode refSamples = refRecord.path(SAMPLES);
+        JsonNode tarSamples = tarRecord.path(SAMPLES);
+        for (int i = 0; i < Math.min(refSamples.size(), tarSamples.size()); i++) {
+            alignPipelineFields(refSamples.get(i), tarSamples.get(i));
+        }
     }
 
-    private Boolean isMatchingJsonByFieldName(JsonNode refNode, JsonNode tarNode,
-            String fieldName, String comparisonType) throws JsonProcessingException {
-        // Case 1: target and reference have the field
-        if (refNode.has(fieldName) && tarNode.has(fieldName)) {
-            // Case 1a: target and reference have an empty field
-            if (refNode.get(fieldName).isEmpty() && refNode.get(fieldName).isEmpty()) {
-                return Boolean.TRUE;
+    private JsonNode normalizeRecord(JsonNode node, Profile profile) {
+        if (node == null || !node.isObject()) {
+            return normalizeValue(node, profile);
+        }
+        ObjectNode record = profile.standardize()
+                ? toUniversalSchema((ObjectNode) node) : (ObjectNode) node;
+        ObjectNode out = MAPPER.createObjectNode();
+        // raw request JSON uses "samples", a serialized SmileRequest uses "smileSampleList";
+        // both normalize to "samples" so either shape can be compared with the other
+        JsonNode samples = record.has(SAMPLES) ? record.get(SAMPLES) : record.get(SMILE_SAMPLES);
+        if (samples != null && !profile.ignored().contains(SAMPLES)) {
+            putIfPresent(out, SAMPLES, normalizeSamples(samples, profile));
+        }
+        if (profile.igoOwnedOnly()) {
+            // projection keyed by path, e.g. "additionalProperties.altId"
+            for (String path : isSample(record) ? IGO_OWNED_SAMPLE_PATHS : IGO_OWNED_REQUEST_PATHS) {
+                putIfPresent(out, path, normalizeValue(record.at("/" + path.replace('.', '/')), profile));
             }
-
-            // Case 1b: target or reference have an empty field
-            if (refNode.get(fieldName).isEmpty() || refNode.get(fieldName).isEmpty()) {
-                return Boolean.FALSE;
+            return out;
+        }
+        for (Map.Entry<String, JsonNode> entry : record.properties()) {
+            String field = entry.getKey();
+            if (!field.equals(SAMPLES) && !field.equals(SMILE_SAMPLES)
+                    && !profile.ignored().contains(field)) {
+                putIfPresent(out, field, normalizeValue(entry.getValue(), profile));
             }
+        }
+        return out;
+    }
 
-            // Case 1c: filter the ref and target jsons first then compare
-            JsonNode unfilteredRefNode = convertToMapJsonNode(fieldName, refNode);
-            JsonNode unfilteredTarNode = convertToMapJsonNode(fieldName, tarNode);
+    private static void putIfPresent(ObjectNode node, String field, JsonNode value) {
+        if (value != null) {
+            node.set(field, value);
+        }
+    }
 
-            JsonNode filteredRefNode = filterJsonNode(
-                    (ObjectNode) unfilteredRefNode, DEFAULT_IGNORED_FIELDS, comparisonType);
-            JsonNode filteredTarNode = filterJsonNode(
-                    (ObjectNode) unfilteredTarNode, DEFAULT_IGNORED_FIELDS, comparisonType);
-            if (!isMatchingJsons(mapper.writeValueAsString(filteredRefNode),
-                    mapper.writeValueAsString(filteredTarNode))) {
-                return Boolean.FALSE;
-            }
+    private static boolean isSample(JsonNode record) {
+        return record.has("primaryId") || record.has("igoId");
+    }
 
-            if (fieldName.equals("libraries")) {
-                ArrayNode librariesRefArrayNode = (ArrayNode) refNode.get(fieldName);
-                Iterator<JsonNode> itrLibRef = librariesRefArrayNode.elements();
+    /**
+     * Normalizes each sample as a record and orders them by primary id. A SmileSample element is
+     * reduced to its latest metadata, since its metadata history is not part of the request's data.
+     */
+    private JsonNode normalizeSamples(JsonNode samples, Profile profile) {
+        if (!samples.isArray()) {
+            return normalizeValue(samples, profile);
+        }
+        List<JsonNode> sorted = new ArrayList<>();
+        samples.forEach(sample -> sorted.add(sample.has(LATEST_SAMPLE_METADATA)
+                ? sample.get(LATEST_SAMPLE_METADATA) : sample));
+        sorted.sort(Comparator.comparing(JsonComparatorImpl::sampleId));
+        ArrayNode out = MAPPER.createArrayNode();
+        sorted.forEach(sample -> out.add(normalizeRecord(sample, profile)));
+        return out.isEmpty() ? null : out;
+    }
 
-                ArrayNode librariesTarArrayNode = (ArrayNode) tarNode.get(fieldName);
-                Iterator<JsonNode> itrLibTar = librariesTarArrayNode.elements();
+    private static String sampleId(JsonNode sample) {
+        return sample.path("primaryId").asText(sample.path("igoId").asText(""));
+    }
 
-                if (librariesRefArrayNode.size() != librariesTarArrayNode.size()) {
-                    return Boolean.FALSE;
-                }
-
-                // Assumption: corresponding library elements from ref and tar are in the same index
-                while (itrLibRef.hasNext() && itrLibTar.hasNext()) {
-                    JsonNode refLibNext = itrLibRef.next();
-                    JsonNode tarLibNext = itrLibTar.next();
-
-                    if (!isMatchingJsonByFieldName(refLibNext,
-                            tarLibNext, "runs", comparisonType)) {
-                        return Boolean.FALSE;
+    /** Returns null for null/blank/empty values so the caller can drop the field. */
+    private JsonNode normalizeValue(JsonNode value, Profile profile) {
+        if (value == null || value.isNull() || value.isMissingNode()) {
+            return null;
+        }
+        if (value.isTextual()) {
+            String text = value.asText();
+            return (StringUtils.isBlank(text) || text.equalsIgnoreCase("null") || text.equals("[]"))
+                    ? null : value;
+        }
+        if (value.isObject()) {
+            ObjectNode out = MAPPER.createObjectNode();
+            for (Map.Entry<String, JsonNode> entry : value.properties()) {
+                if (!profile.ignored().contains(entry.getKey())) {
+                    JsonNode child = normalizeValue(entry.getValue(), profile);
+                    if (child != null) {
+                        out.set(entry.getKey(), child);
                     }
                 }
             }
-            // compare status nodes
-            return Boolean.TRUE;
+            return out.isEmpty() ? null : out;
         }
-        // Case 2: target and reference do not have the field
-        if (!refNode.has(fieldName) && !tarNode.has(fieldName)) {
-            return Boolean.TRUE;
+        if (value.isArray()) {
+            // element positions are significant, so empty elements become nulls rather than vanishing
+            ArrayNode out = MAPPER.createArrayNode();
+            value.forEach(element -> {
+                JsonNode child = normalizeValue(element, profile);
+                out.add(child == null ? NullNode.getInstance() : child);
+            });
+            return out.isEmpty() ? null : out;
         }
-        // Case 3: One of them is missing the field
-        return Boolean.FALSE;
+        return value;
     }
 
     /**
-     * Helper function to treat possible array node json comparisons as instances of regular JSONs.
-     * @param fieldName
-     * @param node
-     * @return JsonNode
-     * @throws JsonProcessingException
+     * Converts a record from IGO's raw schema to SMILE's universal schema; universal-schema input
+     * passes through unchanged. Which moves apply is chosen by the record's shape (sample if it
+     * has a primaryId or igoId) rather than by where it appears in the document.
      */
-    private JsonNode convertToMapJsonNode(String fieldName, JsonNode node) throws JsonProcessingException {
-        Map<String, String> map = new HashMap<>();
-        if (!node.has(fieldName)) {
-            return null;
-        }
-        map.put(fieldName, node.get(fieldName).toString());
-        String convertedMapAsString = mapper.writeValueAsString(map);
-        return mapper.readTree(convertedMapAsString);
-    }
-
-    /**
-     * Helps find primaryId or igoId from sampleMetadata Node
-     * @param sampleNode
-     * @return
-     */
-    private String findPrimaryIdFromJsonNode(JsonNode sampleNode) {
-        return (sampleNode.get("primaryId") == null)
-                ? sampleNode.get("igoId").toString() : sampleNode.get("primaryId").toString();
-    }
-
-    /**
-     * Given an input jsonString and an array of ignoredFields, returns a JSON
-     * with (1) the fields to ignore removed, (2) json fields with null or empty values
-     * removed, and (3) standardize json property names.
-     * @param jsonString
-     * @param ignoredFields
-     * @return String
-     * @throws JsonProcessingException
-     */
-    private String standardizeAndFilterRequestJson(String jsonString, String[] ignoredFields,
-            String comparisonType) throws JsonProcessingException {
-        JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
-        JsonNode stdJsonNode = standardizeJsonProperties(
-                (ObjectNode) unfilteredJsonNode, STD_IGO_REQUEST_JSON_PROPS_MAP);
-        JsonNode stdFilteredJsonNode = filterJsonNode((ObjectNode) stdJsonNode,
-                ignoredFields, comparisonType);
-        return mapper.writeValueAsString(stdFilteredJsonNode);
-    }
-
-    /**
-     * Given an input jsonString, returns a JSON with (1) generic fields ignored and (2) null
-     * or empty values removed.
-     * @param jsonString
-     * @return String
-     * @throws JsonProcessingException
-     */
-    private String filterGenericJson(String jsonString) throws JsonProcessingException {
-        JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
-        JsonNode filteredJsonNode = filterGenericJsonNode((ObjectNode) unfilteredJsonNode);
-        return mapper.writeValueAsString(filteredJsonNode);
-    }
-
-    /**
-     * Given an input jsonString and an array of ignoredFields, returns a JSON
-     * with (1) the fields to ignore removed, (2) json fields with null or empty values
-     * removed, and (3) standardize json property names.
-     * @param jsonString
-     * @param ignoredFields
-     * @return String
-     * @throws JsonProcessingException
-     */
-    private String standardizeAndFilterRequestSamplesJson(String jsonString, String[] ignoredFields,
-            String comparisonType) throws JsonProcessingException {
-        if (!jsonHasSamplesField(jsonString)) {
-            return null;
-        }
-        JsonNode unfilteredJsonNode = mapper.readTree(jsonString);
-        Map<String, JsonNode> unorderedSamplesMap = new HashMap<>();
-
-        // iterate through array of sample json nodes and (1) standardize the json
-        // props and (2) filter and remove null/empty values
-        ArrayNode samplesArrayNode = (ArrayNode) unfilteredJsonNode.get("samples");
-        Iterator<JsonNode> itr = samplesArrayNode.elements();
-        while (itr.hasNext()) {
-            JsonNode stdSampleNode = standardizeJsonProperties(
-                    (ObjectNode) itr.next(), STD_IGO_SAMPLE_JSON_PROPS_MAP);
-            JsonNode stdFilteredSampleNode = filterJsonNode((ObjectNode) stdSampleNode,
-                    ignoredFields, comparisonType);
-
-            String sid = findPrimaryIdFromJsonNode(stdFilteredSampleNode);
-            unorderedSamplesMap.put(sid, stdFilteredSampleNode);
-        }
-        // order array of sample nodes by their primary id
-        LinkedHashMap<String, JsonNode> orderedSamplesMap = new LinkedHashMap<>();
-        unorderedSamplesMap.entrySet()
-            .stream()
-            .sorted(Map.Entry.comparingByKey())
-            .forEachOrdered(x -> orderedSamplesMap.put(x.getKey(), x.getValue()));
-
-        // create ordered array of request sample json nodes and return as string
-        ArrayNode sortedRequestSamplesArrayNode = mapper.createArrayNode();
-        orderedSamplesMap.entrySet().forEach((entry) -> {
-            sortedRequestSamplesArrayNode.add(entry.getValue());
-        });
-        return mapper.writeValueAsString(sortedRequestSamplesArrayNode);
-    }
-
-    private Boolean jsonHasQcAndOrLibrariesAndOrStatusFields(String jsonString)
-            throws JsonProcessingException {
-        JsonNode jsonNode = mapper.readTree(jsonString);
-        return jsonNode.has("libraries") || jsonNode.has("qcReports")
-                || (jsonNode.has("status") && !jsonNode.has("samples"));
-    }
-
-    /**
-     * Helper function to return a Boolean based on presence of 'samples' field in
-     * the input JSON.
-     * @param jsonString
-     * @return Boolean
-     * @throws JsonProcessingException
-     */
-    private Boolean jsonHasSamplesField(String jsonString) throws JsonProcessingException {
-        JsonNode jsonNode = mapper.readTree(jsonString);
-        return jsonNode.has("samples");
-    }
-
-    /**
-     * Returns Boolean based on results of JSONAssert.
-     * @param referenceJson
-     * @param targetJson
-     * @return
-     */
-    private Boolean isMatchingJsons(String referenceJson, String targetJson) {
-        if (referenceJson == null ? targetJson == null : referenceJson.equals(targetJson)) {
-            return Boolean.TRUE;
-        }
-
-        try {
-            JSONAssert.assertEquals(referenceJson, targetJson, JSONCompareMode.STRICT);
-        } catch (JSONException e) {
-            return Boolean.FALSE;
-        } catch (AssertionError ae) {
-            System.out.println(ae.getLocalizedMessage());
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private JsonNode filterGenericJsonNode(ObjectNode node) throws JsonProcessingException {
-        List<String> fieldsToRemove = new ArrayList<>();
-        fieldsToRemove.addAll(Arrays.asList(GENERIC_IGNORED_FIELDS));
-
-        Iterator<String> itr = node.fieldNames();
-        while (itr.hasNext()) {
-            String field = itr.next();
-            String value = node.get(field).toString();
-
-            if (StringUtils.isBlank(value) || value.equalsIgnoreCase("null")
-                    || value.equalsIgnoreCase("[]")) {
-                fieldsToRemove.add(field);
+    private ObjectNode toUniversalSchema(ObjectNode node) {
+        ObjectNode out = node.deepCopy();
+        boolean sample = isSample(out);
+        (sample ? SAMPLE_FIELD_MOVES : REQUEST_FIELD_MOVES).forEach((from, to) -> move(out, from, to));
+        if (sample) {
+            // IGO's sampleStatus is a string; the universal sampleStatus is a different (object) field
+            if (out.path("sampleStatus").isTextual()) {
+                move(out, "sampleStatus", "additionalProperties.igoSampleStatus");
+            }
+            // universal genePanel duplicates IGO's cmoSampleIdFields.recipe
+            JsonNode recipe = out.path("cmoSampleIdFields").path("recipe");
+            if (!out.hasNonNull("genePanel") && recipe.isValueNode()) {
+                out.set("genePanel", recipe);
             }
         }
-        // remove compiled fields to remove list from input node
-        // and return cleaned up node
-        if (!fieldsToRemove.isEmpty()) {
-            for (String field : fieldsToRemove) {
-                node.remove(field);
-            }
-        }
-        return node;
+        return out;
     }
 
-    /**
-     * Returns a JsonNode with the given json properties matching 'ignoredFields'
-     * removed from the node as well as any properties with null or empty values.
-     * @param node
-     * @param ignoredFields
-     * @return JsonNode
-     */
-    private JsonNode filterJsonNode(ObjectNode node, String[] ignoredFields,
-            String comparisonType) throws JsonProcessingException {
-        List<String> fieldsToRemove = new ArrayList<>();
-        List<String> igoUpdatesRejectedFields = Arrays.asList(IGO_ACCEPTED_FIELDS);
-
-        // if ignored fields is not null then add to list of fields to remove
-        if (ignoredFields != null) {
-            fieldsToRemove.addAll(Arrays.asList(ignoredFields));
+    /** Moves a field to a universal-schema path (at most one level of nesting). */
+    private static void move(ObjectNode node, String from, String toPath) {
+        JsonNode value = node.remove(from);
+        if (value == null) {
+            return;
         }
-
-        JsonNode modifiedQcReportsNode = null;
-        JsonNode modifiedLibrariesNode = null;
-        JsonNode modifiedStatusNode = null; // this is for special case handling
-        // append list of fields to remove from node that contain null or empty values
-        Iterator<String> itr = node.fieldNames();
-        while (itr.hasNext()) {
-            String field = itr.next();
-            String value = node.get(field).asText();
-
-            // special handling for metadata updates
-            if (comparisonType.equals("igo")
-                    && !igoUpdatesRejectedFields.contains(field)) {
-                fieldsToRemove.add(field);
-            }
-
-            if (StringUtils.isBlank(value) || value.equalsIgnoreCase("null")
-                    || value.equalsIgnoreCase("[]")) {
-                fieldsToRemove.add(field);
-            } else if (field.equals("libraries")) {
-                // special handling for libraries
-                modifiedLibrariesNode = filterArrayNodeChildrenByList(value, comparisonType);
-            } else if (field.equals("qcReports")) {
-                // special handling for qcReports
-                modifiedQcReportsNode = filterArrayNodeChildrenByList(value, comparisonType);
-            } else if (field.equals("status")) {
-                // special handling for status
-                modifiedStatusNode = filterArrayNodeChildrenByMap(value, comparisonType);
-            }
+        if (LONG_FIELDS.contains(toPath) && value.isValueNode() && !value.isNull()) {
+            value = LongNode.valueOf(value.asLong());
         }
-
-        // remove compiled fields to remove list from input node
-        // and return cleaned up node
-        if (!fieldsToRemove.isEmpty()) {
-            for (String field : fieldsToRemove) {
-                node.remove(field);
-            }
+        int dot = toPath.indexOf('.');
+        if (dot < 0) {
+            node.set(toPath, value);
+            return;
         }
-
-        // update the modified libraries node if not null
-        if (modifiedLibrariesNode != null) {
-            node.remove("libraries");
-            node.put("libraries", modifiedLibrariesNode);
-        }
-        if (modifiedQcReportsNode != null) {
-            node.remove("qcReports");
-            node.put("qcReports", modifiedQcReportsNode);
-        }
-        if (modifiedStatusNode != null) {
-            node.remove("status");
-            node.put("status", modifiedStatusNode);
-        }
-        return node;
-    }
-
-    /**
-     * Given a parent node as a string, returns a filtered JsonNode.
-     * This is special case handling specific to 'libraries' and other
-     * child properties of samples that are actually array nodes
-     * This maps the parentNode to List.class
-     * @param parentNode
-     * @return JsonNode
-     * @throws JsonProcessingException
-     */
-    private JsonNode filterArrayNodeChildrenByList(String parentNode, String comparisonType)
-            throws JsonProcessingException {
-        List<Object> filteredParentNode = new ArrayList<>();
-        List<Object> childrenObjects = mapper.readValue(parentNode, List.class);
-        for (Object childObj : childrenObjects) {
-            String childObjString = mapper.writeValueAsString(childObj);
-            JsonNode filteredChildNode = filterJsonNode((ObjectNode)
-                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
-            filteredParentNode.add(filteredChildNode);
-        }
-        return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
-    }
-
-    /**
-     * Given a parent node as a string, returns a filtered JsonNode.
-     * This is special case handling specific to 'status' and other
-     * child properties of samples that are actually array nodes
-     * This maps the parentNode to Map.class
-     * @param parentNode
-     * @return JsonNode
-     * @throws JsonProcessingException
-     */
-    private JsonNode filterArrayNodeChildrenByMap(String parentNode, String comparisonType)
-            throws JsonProcessingException {
-        Map<String,Object> filteredParentNode = new HashMap<>();
-        Map<String,String> childrenObjects = mapper.readValue(parentNode, Map.class);
-        for (Map.Entry<String, String> childObj : childrenObjects.entrySet()) {
-            String childObjString = mapper.writeValueAsString(childObj);
-            JsonNode filteredChildNode = filterJsonNode((ObjectNode)
-                    mapper.readTree(childObjString), DEFAULT_IGNORED_FIELDS, comparisonType);
-            filteredParentNode.put(childObj.getKey(), filteredChildNode);
-        }
-        return mapper.readTree(mapper.writeValueAsString(filteredParentNode));
-    }
-
-    /**
-     * Returns a JsonNode with standardized properties based on the provided jsonPropsMap.
-     * @param node
-     * @param jsonPropsMap
-     * @return JsonNode
-     */
-    private JsonNode standardizeJsonProperties(ObjectNode node, Map<String, String> jsonPropsMap) {
-        // append list of fields that need to be updated
-        List<String> fieldsToUpdate = new ArrayList<>();
-
-        Iterator<String> itr = node.fieldNames();
-        while (itr.hasNext()) {
-            String field = itr.next();
-            if (jsonPropsMap.containsKey(field)) {
-                fieldsToUpdate.add(field);
-            }
-        }
-        // updating and removal needs to be done separately from iteration above
-        // to avoid a java.util.ConcurrentModificationException
-        for (String field : fieldsToUpdate) {
-            String stdJsonProp = jsonPropsMap.get(field);
-            if (LONG_TYPE_STD_FIELDS.contains(stdJsonProp)) {
-                node.put(stdJsonProp, node.get(field).asLong());
-            } else {
-                node.put(stdJsonProp, node.get(field).asText());
-            }
-            node.remove(field);
-        }
-        return node;
+        String parentField = toPath.substring(0, dot);
+        ObjectNode parent = (node.get(parentField) instanceof ObjectNode existing)
+                ? existing : node.putObject(parentField);
+        parent.set(toPath.substring(dot + 1), value);
     }
 }

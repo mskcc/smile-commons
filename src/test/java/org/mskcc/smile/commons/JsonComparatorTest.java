@@ -239,6 +239,8 @@ public class JsonComparatorTest {
 
     /**
      * Tests that the comparator can detect changes in general as well as IGO-specific properties.
+     * The fixture changes cmoPatientId (Dashboard-owned) and cmoSampleIdFields.recipe (IGO-owned,
+     * the source of genePanel), so both checks must report an update.
      * @throws Exception
      */
     @Test public void testSampleHasMixedIgoAndNonIgoUpdates() throws Exception {
@@ -249,7 +251,7 @@ public class JsonComparatorTest {
         Assertions.assertFalse(mixedUpdatesSampleCheck1);
         Boolean mixedUpdatesSampleCheck2 = jsonComparator.isConsistentByIgoProperties(
                 refSample.getJsonString(), mixedUpdatesSample.getJsonString());
-        Assertions.assertTrue(mixedUpdatesSampleCheck2);
+        Assertions.assertFalse(mixedUpdatesSampleCheck2);
     }
 
     /**
@@ -348,6 +350,108 @@ public class JsonComparatorTest {
                 universalSchemaMixedUpdates.getJsonString()));
         Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(universalSchema.getJsonString(),
                 universalSchemaMixedUpdates.getJsonString()));
+    }
+
+    // IGO raw schema: igoId, top-level altid and sampleStatus string
+    private static final String IGO_RAW_SAMPLE = "{\"igoId\":\"S1\",\"cmoPatientId\":\"C-IGO\","
+            + "\"altid\":\"ALT-1\",\"sampleStatus\":\"PASSED\","
+            + "\"cmoSampleIdFields\":{\"recipe\":\"WES\"},"
+            + "\"libraries\":[{\"barcodeId\":\"B1\",\"runs\":[{\"runId\":\"R1\",\"fastqs\":[\"a.fq\"]}]}]}";
+    // same sample in SMILE's universal schema, with a Project Manager cmoPatientId correction
+    private static final String UNIVERSAL_SAMPLE = "{\"primaryId\":\"S1\",\"cmoPatientId\":\"C-PM\","
+            + "\"genePanel\":\"WES\",\"cmoSampleIdFields\":{\"recipe\":\"WES\"},"
+            + "\"additionalProperties\":{\"altId\":\"ALT-1\",\"igoSampleStatus\":\"PASSED\","
+            + "\"isCmoSample\":\"true\"},"
+            + "\"libraries\":[{\"barcodeId\":\"B1\",\"runs\":[{\"runId\":\"R1\",\"fastqs\":[\"a.fq\"]}]}]}";
+
+    /**
+     * IGO raw and universal schemas carrying the same IGO-owned data are consistent, and a
+     * Dashboard edit to a non-IGO field (cmoPatientId) is not treated as an IGO update.
+     */
+    @Test
+    public void testIgoRawVsUniversalSchemaIgnoresDashboardEdits() throws Exception {
+        Assertions.assertTrue(jsonComparator.isConsistentByIgoProperties(
+                IGO_RAW_SAMPLE, UNIVERSAL_SAMPLE));
+        Assertions.assertFalse(jsonComparator.isConsistent(IGO_RAW_SAMPLE, UNIVERSAL_SAMPLE));
+    }
+
+    /**
+     * ALT ID is top-level in IGO's schema and nested under additionalProperties in the universal
+     * schema; a change from IGO must be detected.
+     */
+    @Test
+    public void testIgoAltIdUpdateDetectedAcrossSchemas() throws Exception {
+        String igoUpdate = IGO_RAW_SAMPLE.replace("ALT-1", "ALT-2");
+        Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(igoUpdate, UNIVERSAL_SAMPLE));
+    }
+
+    /**
+     * Fastq paths (nested under libraries[].runs[]) are IGO-owned; a change must be detected.
+     */
+    @Test
+    public void testIgoFastqUpdateDetectedAcrossSchemas() throws Exception {
+        String igoUpdate = IGO_RAW_SAMPLE.replace("a.fq", "b.fq");
+        Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(igoUpdate, UNIVERSAL_SAMPLE));
+    }
+
+    /**
+     * Raw IGO JSON never carries status (added by smile-request-filter/smile-label-generator), so
+     * status present on only one side is not a difference; status present on both is compared.
+     */
+    @Test
+    public void testPipelineStatusComparedOnlyWhenBothSidesHaveIt() throws Exception {
+        String rawIgo = "{\"requestId\":\"R\",\"strand\":\"x\",\"samples\":[{\"igoId\":\"A\"}]}";
+        String validated = "{\"igoRequestId\":\"R\",\"strand\":\"x\","
+                + "\"status\":{\"validationStatus\":true},"
+                + "\"samples\":[{\"primaryId\":\"A\",\"status\":{\"validationStatus\":true}}]}";
+        Assertions.assertTrue(jsonComparator.isConsistent(rawIgo, validated));
+        Assertions.assertTrue(jsonComparator.isConsistent(validated, rawIgo));
+        String revalidated = validated.replaceFirst("true", "false");
+        Assertions.assertFalse(jsonComparator.isConsistent(validated, revalidated));
+    }
+
+    /**
+     * A serialized SmileRequest carries its samples as SmileSample objects under smileSampleList.
+     * Samples are compared (by latest metadata, in primary id order), so list order and metadata
+     * history do not matter but a change to a sample's current metadata does.
+     */
+    @Test
+    public void testSmileRequestSamplesComparedByLatestMetadata() throws Exception {
+        String existing = "{\"igoRequestId\":\"R\",\"smileSampleList\":["
+                + "{\"smileSampleId\":\"u2\",\"latestSampleMetadata\":{\"primaryId\":\"B\",\"sex\":\"M\"},"
+                + "\"sampleMetadataList\":[{\"primaryId\":\"B\",\"sex\":\"F\"},"
+                + "{\"primaryId\":\"B\",\"sex\":\"M\"}]},"
+                + "{\"smileSampleId\":\"u1\",\"latestSampleMetadata\":{\"primaryId\":\"A\",\"sex\":\"F\"},"
+                + "\"sampleMetadataList\":[{\"primaryId\":\"A\",\"sex\":\"F\"}]}]}";
+        String incoming = "{\"igoRequestId\":\"R\",\"smileSampleList\":["
+                + "{\"latestSampleMetadata\":{\"primaryId\":\"A\",\"sex\":\"F\"},"
+                + "\"sampleMetadataList\":[{\"primaryId\":\"A\",\"sex\":\"F\"}]},"
+                + "{\"latestSampleMetadata\":{\"primaryId\":\"B\",\"sex\":\"M\"},"
+                + "\"sampleMetadataList\":[{\"primaryId\":\"B\",\"sex\":\"M\"}]}]}";
+        Assertions.assertTrue(jsonComparator.isConsistent(existing, incoming));
+
+        String incomingSampleUpdate = incoming.replace(
+                "\"latestSampleMetadata\":{\"primaryId\":\"B\",\"sex\":\"M\"}",
+                "\"latestSampleMetadata\":{\"primaryId\":\"B\",\"sex\":\"F\"}");
+        Assertions.assertNotEquals(incoming, incomingSampleUpdate);
+        Assertions.assertFalse(jsonComparator.isConsistent(existing, incomingSampleUpdate));
+
+        String incomingMissingSample = "{\"igoRequestId\":\"R\",\"smileSampleList\":["
+                + "{\"latestSampleMetadata\":{\"primaryId\":\"A\",\"sex\":\"F\"}}]}";
+        Assertions.assertFalse(jsonComparator.isConsistent(existing, incomingMissingSample));
+    }
+
+    /**
+     * Mismatched sample lists are reported as inconsistent rather than throwing.
+     */
+    @Test
+    public void testMismatchedSampleListsAreInconsistent() throws Exception {
+        String twoSamples = "{\"requestId\":\"R\",\"samples\":[{\"igoId\":\"A\"},{\"igoId\":\"B\"}]}";
+        String oneSample = "{\"requestId\":\"R\",\"samples\":[{\"igoId\":\"A\"}]}";
+        String noSamples = "{\"requestId\":\"R\"}";
+        Assertions.assertFalse(jsonComparator.isConsistent(twoSamples, oneSample));
+        Assertions.assertFalse(jsonComparator.isConsistent(noSamples, oneSample));
+        Assertions.assertFalse(jsonComparator.isConsistentByIgoProperties(twoSamples, oneSample));
     }
 
     private String getErrorMessage(Map<String, String> errorsMap) {

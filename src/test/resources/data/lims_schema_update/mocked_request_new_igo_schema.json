@@ -73,10 +73,6 @@
         "normalizedPatientId": "MRN_REDACTED",
         "recipe": "GENESET101_BAITS"
       },
-      "status": {
-        "validationStatus": true,
-        "validationReport": "{}"
-      },
       "sampleStatus": "IGO sample status PASSED"
     }],
   "pooledNormals": [
